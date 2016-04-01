@@ -1,0 +1,68 @@
+language: objective-c
+
+env:
+  matrix:
+    - TEST_TYPE=web-unit-test
+    - TEST_TYPE=web-integration-test
+    - TEST_TYPE=mobile-unit-test
+    - TEST_TYPE=mobile-integration-test
+  global:
+    - DIRECTORY_WEB=com.placeup.web
+    - DIRECTORY_MOBILE=com.placeup.mobile
+    - PROJECT_MOBILE=Placeup
+
+cache:
+  directories:
+  - com.placeup.mobile/placeup/node_modules
+
+before_install:
+  - brew update
+
+install:
+  - brew reinstall gradle flow watchman xctool
+
+branches:
+  only:
+    - master
+
+script:
+- |
+  if [ "$TEST_TYPE" = web-unit-test ]
+  then
+
+    gradle test
+
+  elif [ "$TEST_TYPE" = web-integration-test ]
+  then
+
+    gradle integrationTest
+
+  elif [ "$TEST_TYPE" = mobile-unit-test ]
+  then
+
+    cd $DIRECTORY_MOBILE/$PROJECT_MOBILE
+    npm install
+    flow check
+    npm test
+
+  elif [ "$TEST_TYPE" = mobile-integration-test ]
+  then
+
+    cd $DIRECTORY_MOBILE
+    npm install $PROJECT_MOBILE
+    (npm start > packager.log 2>&1 &)
+    echo $! > packager.pid
+
+    xctool \
+      -project $PROJECT_MOBILE/$PROJECT_MOBILE.xcodeproj \
+      -scheme $PROJECT_MOBILE -sdk iphonesimulator8.1
+      test
+
+    pkill -9 -F packager.pid
+    cat packager.log
+    rm packager.log packager.pid
+
+  else
+    echo "Unknown test type: $TEST_TYPE"
+    exit 1
+  fi
