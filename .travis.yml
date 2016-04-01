@@ -1,68 +1,40 @@
 language: objective-c
 
-env:
-  matrix:
-    - TEST_TYPE=web-unit-test
-    - TEST_TYPE=web-integration-test
-    - TEST_TYPE=mobile-unit-test
-    - TEST_TYPE=mobile-integration-test
-  global:
-    - DIRECTORY_WEB=com.placeup.web
-    - DIRECTORY_MOBILE=com.placeup.mobile
-    - PROJECT_MOBILE=Placeup
-
-cache:
-  directories:
-  - com.placeup.mobile/placeup/node_modules
-
-before_install:
-  - brew update
+osx_image: xcode7.2
 
 install:
-  - brew reinstall gradle flow watchman xctool
+  - brew reinstall nvm
+  - mkdir -p /Users/travis/build/facebook/.nvm
+  - export NVM_DIR="/Users/travis/build/facebook/.nvm"
+  - source $(brew --prefix nvm)/nvm.sh
+  # testing with npm@2 for diversity, Circle tests with npm@3
+  - nvm install 4.4.0
+  - rm -Rf "${TMPDIR}/jest_preprocess_cache"
+  - npm config set spin=false
+  - npm config set progress=false
+  - npm install
+
+script:
+  - if [[ "$TEST_TYPE" = objc ]]; then travis_retry ./scripts/objc-test.sh; fi
+  - if [[ "$TEST_TYPE" = e2e-objc ]]; then travis_retry ./scripts/e2e-test.sh --ios; fi
+  - if [[ "$TEST_TYPE" = js ]]; then npm run flow check; fi
+  - if [[ "$TEST_TYPE" = js ]]; then npm test -- --maxWorkers=1; fi
+  - if [[ "$TEST_TYPE" = js ]]; then travis_retry ./scripts/e2e-test.sh --packager; fi
+
+env:
+  matrix:
+    - TEST_TYPE=objc
+    - TEST_TYPE=js
+    - TEST_TYPE=e2e-objc
 
 branches:
   only:
     - master
+    - /^.*-stable$/
 
-script:
-- |
-  if [ "$TEST_TYPE" = web-unit-test ]
-  then
-
-    gradle test
-
-  elif [ "$TEST_TYPE" = web-integration-test ]
-  then
-
-    gradle integrationTest
-
-  elif [ "$TEST_TYPE" = mobile-unit-test ]
-  then
-
-    cd $DIRECTORY_MOBILE/$PROJECT_MOBILE
-    npm install
-    flow check
-    npm test
-
-  elif [ "$TEST_TYPE" = mobile-integration-test ]
-  then
-
-    cd $DIRECTORY_MOBILE
-    npm install $PROJECT_MOBILE
-    (npm start > packager.log 2>&1 &)
-    echo $! > packager.pid
-
-    xctool \
-      -project $PROJECT_MOBILE/$PROJECT_MOBILE.xcodeproj \
-      -scheme $PROJECT_MOBILE -sdk iphonesimulator8.1
-      test
-
-    pkill -9 -F packager.pid
-    cat packager.log
-    rm packager.log packager.pid
-
-  else
-    echo "Unknown test type: $TEST_TYPE"
-    exit 1
-  fi
+notifications:
+  email:
+    recipients:
+      - princesadie@gmail.com
+    on_failure: change
+    on_success: change
