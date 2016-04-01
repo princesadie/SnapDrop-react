@@ -21,10 +21,17 @@ import React, {
 
 } from 'react-native';
 
-class Map extends Component {
+var SearchBar = require('react-native-search-bar');
+
+class AppleMap extends Component {
   render() {
     return (
-      <View style={styles.container}>
+
+
+    <View style={styles.container}>
+          <SearchBar
+        placeholder='Search'
+        textFieldBackgroundColor='blue'/>
       <MapView
         style={ styles.map }
         initialRegion={{
@@ -39,8 +46,7 @@ class Map extends Component {
           longitude: -87.637604,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
-        }}
-      />
+        }}/>
       </View>
     );
   }
@@ -63,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = Map;
+module.exports = AppleMap;

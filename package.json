@@ -9,6 +9,7 @@
     "react": "^0.14.8",
     "react-native": "^0.22.2",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
-    "react-native-maps": "^0.3.1"
+    "react-native-maps": "^0.3.1",
+    "react-native-search-bar": "^2.9.0"
   }
 }

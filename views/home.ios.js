@@ -4,8 +4,10 @@
  */
 
 var CameraView = require('./camera.ios')
-var Map = require('./map.ios')
+var AppleMap = require('./appleMap.ios')
+var GoogleMap = require('./googleMap.ios')
 var Profile = require('./profile.ios')
+var SearchBar = require('./searchBar.ios')
 
 import React, {
   Component,
@@ -25,10 +27,26 @@ class Home extends Component {
     })
   }
 
-  goMap() {
+  goSearch() {
     this.props.navigator.push({
-      title: 'Map',
-      component: Map,
+      title: 'SearchBar',
+      component: SearchBar,
+      passProps: {dataToBePassed: 'Some data we passed along!'}
+    })
+  }
+
+  goAppleMap() {
+    this.props.navigator.push({
+      title: 'AppleMap',
+      component: AppleMap,
+      passProps: {dataToBePassed: 'Some other data we passed along!'}
+    })
+  }
+
+  goGoogleMap() {
+    this.props.navigator.push({
+      title: 'GoogleMap',
+      component: GoogleMap,
       passProps: {dataToBePassed: 'Some other data we passed along!'}
     })
   }
@@ -57,14 +75,29 @@ class Home extends Component {
             <TouchableHighlight
               style={styles.button}
               underlayColor='#9FA8DA'
-              onPress={() => this.goMap()}>
-                <Text style={styles.buttonText}>MAP</Text>
+              onPress={() => this.goAppleMap()}>
+                <Text style={styles.buttonText}>Apple MAP</Text>
             </TouchableHighlight>
+
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.goGoogleMap()}>
+                <Text style={styles.buttonText}>GOOGLE MAP</Text>
+            </TouchableHighlight>
+
             <TouchableHighlight
               style={styles.button}
               underlayColor='#9FA8DA'
               onPress={() => this.goProfile()}>
                 <Text style={styles.buttonText}>PROFILE</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.goSearch()}>
+                <Text style={styles.buttonText}>Search Bar Biatch</Text>
             </TouchableHighlight>
           </View>
         </View>
