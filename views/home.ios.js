@@ -28,6 +28,7 @@ class Home extends Component {
   }
 
   goSearch() {
+    console.log('s')
     this.props.navigator.push({
       title: 'SearchBar',
       component: SearchBar,
