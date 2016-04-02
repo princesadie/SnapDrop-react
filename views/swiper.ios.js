@@ -1,7 +1,6 @@
-var Swiper = require('react-native-swiper')
+var Swiper=require('react-native-swiper')
 // es6
 // import Swiper from 'react-native-swiper'
-
 var React = require('react-native');
 
 var {
@@ -45,7 +44,7 @@ var SwiperView = React.createClass({
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture}>[CAPTURE]</Text>
+          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
         </Camera>
       </View>
         <View style={styles.slide1}>

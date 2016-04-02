@@ -5,13 +5,14 @@
 
 
 var Home = require('./views/home.ios')
-var SwiperView = require('./views/swiper.ios')
+// var SwiperView = require('./views/swiper.ios')
 
 import React, {
   AppRegistry,
   Component,
   StyleSheet,
   NavigatorIOS,
+  Firebase
 } from 'react-native';
 
 class SnapDrop extends Component {
@@ -20,8 +21,8 @@ class SnapDrop extends Component {
       <NavigatorIOS
         style={styles.container}
         initialRoute={{
-          title: 'SwiperView',
-          component: SwiperView
+          title: 'Home',
+          component: Home
       }}/>
     );
   }
@@ -31,11 +32,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
-  }
 });
 
 AppRegistry.registerComponent('SnapDrop', () => SnapDrop);
