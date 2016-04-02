@@ -3,13 +3,15 @@
  * https://github.com/facebook/react-native
  */
 
+
 var Home = require('./views/home.ios')
+var SwiperView = require('./views/swiper.ios')
 
 import React, {
   AppRegistry,
   Component,
   StyleSheet,
-  NavigatorIOS
+  NavigatorIOS,
 } from 'react-native';
 
 class SnapDrop extends Component {
@@ -18,8 +20,8 @@ class SnapDrop extends Component {
       <NavigatorIOS
         style={styles.container}
         initialRoute={{
-          title: 'Home',
-          component: Home
+          title: 'SwiperView',
+          component: SwiperView
       }}/>
     );
   }
@@ -29,6 +31,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  }
 });
 
 AppRegistry.registerComponent('SnapDrop', () => SnapDrop);
