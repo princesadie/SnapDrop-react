@@ -35,7 +35,7 @@ var SwiperView = React.createClass({
     return (
       <Swiper style={styles.wrapper} showsButtons={true}>
       <View style={styles.slide2}>
-      <Text style={styles.buttonText}>Hiiiii</Text>
+      <Text style={styles.buttonText}>Swipe right for Camera and left for Map</Text>
       </View>
       <View style={styles.slide3}>
       <Camera
@@ -93,7 +93,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#97CAE5',
+    backgroundColor: 'black',
   },
   preview: {
     flex: 1,

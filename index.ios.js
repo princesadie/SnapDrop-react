@@ -3,6 +3,7 @@
  * https://github.com/facebook/react-native
  */
 
+
 var Home = require('./views/home.ios')
 // var SwiperView = require('./views/swiper.ios')
 
