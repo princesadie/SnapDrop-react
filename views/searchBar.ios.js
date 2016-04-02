@@ -5,8 +5,9 @@
 'use strict';
 
 import React, {
-  AppRegistry,
+  TouchableHighlight,
   Component,
+
   Text,
   TextInput,
   StyleSheet,
@@ -18,9 +19,13 @@ import React, {
 
 var SearchBar = React.createClass({
 
+  goLocation: function() {
+    console.log(this.state.text2)
+  },
+
   getInitialState: function() {
     return {
-      text: "",
+      text2: "Chicago as a default",
     };
   },
 
@@ -34,12 +39,19 @@ var SearchBar = React.createClass({
         </Text>
 
         <TextInput style={styles.textEdit}
-          onChangeText={(text) => this.setState({text})}
+          onChangeText={(text2) => this.setState({text2})}
           placeholder="enter a location"/>
 
-        <Text style={styles.instructions}>
-          {this.state.text}
+        <Text style={styles.locationOutput}>
+          {this.state.text2}
         </Text>
+
+        <TouchableHighlight
+          style={styles.button2}
+          underlayColor='#9FA8DA'
+          onPress={() => this.goLocation()}>
+            <Text style={styles.buttonText2}>Go to Location</Text>
+        </TouchableHighlight>
 
       </View>
 
@@ -63,17 +75,36 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginBottom: 5,
   },
-  instructions: {
+  button2: {
+    height: 36,
+    width: 300,
+    marginTop: 20,
+    marginLeft: 42,
+    borderRadius: 10,
+    justifyContent: 'center',
+    backgroundColor: '#7986CB',
+  },
+  buttonText2: {
+    color: 'white',
+    textAlign: 'center',
+    // marginTop: 10,
+    fontWeight: 'bold',
+  },
+  locationOutput: {
+    textAlign: 'center',
     color: 'blue',
     fontSize: 22,
     marginBottom: 5,
+    marginTop: 20,
   },
   textEdit: {
     height: 40,
     borderColor: 'green',
     backgroundColor: 'orange',
-    borderWidth: 1,
+    borderWidth: 2,
+    borderRadius: 5,
+    textAlign: 'center',
   },
 });
-// React.AppRegistry.registerComponent('SearchBar', () => SearchBar);
+
 module.exports = SearchBar;

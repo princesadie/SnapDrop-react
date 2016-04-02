@@ -2,10 +2,10 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-
+// var ImageViewPage = require('./imageViewPage.ios')
 var CameraView = require('./camera.ios')
 var AppleMap = require('./appleMap.ios')
-var GoogleMap = require('./googleMap.ios')
+var NativeImagePicker = require('./nativeImagePicker.ios')
 var Profile = require('./profile.ios')
 var SearchBar = require('./searchBar.ios')
 
@@ -44,10 +44,10 @@ class Home extends Component {
     })
   }
 
-  goGoogleMap() {
+  goNativeImagePicker() {
     this.props.navigator.push({
-      title: 'GoogleMap',
-      component: GoogleMap,
+      title: 'NativeImagePicker',
+      component: NativeImagePicker,
       passProps: {dataToBePassed: 'Some other data we passed along!'}
     })
   }
@@ -83,8 +83,8 @@ class Home extends Component {
             <TouchableHighlight
               style={styles.button}
               underlayColor='#9FA8DA'
-              onPress={() => this.goGoogleMap()}>
-                <Text style={styles.buttonText}>GOOGLE MAP</Text>
+              onPress={() => this.goNativeImagePicker()}>
+                <Text style={styles.buttonText}>IMAGE PICKER</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
