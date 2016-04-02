@@ -1,18 +1,17 @@
-var Swiper=require('react-native-swiper')
+var Swiper = require('react-native-swiper')
 // es6
 // import Swiper from 'react-native-swiper'
-var React = require('react-native');
 
-var {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  MapView,
-  TouchableHighlight,
+import React, {
   Component,
-  Dimensions
-} = React;
+  StyleSheet,
+  View,
+  ListView,
+  MapView,
+  Dimensions,
+  TouchableHighlight,
+  Text
+} from 'react-native';
 
 var markers = [
   {
@@ -25,29 +24,31 @@ var markers = [
 
 import Camera from 'react-native-camera';
 
-var SwiperView = React.createClass({
+class SwiperView extends Component {
   takePicture() {
-    this.camera.capture()
-      // .then((data) => console.log(data))
-      // .catch(err => console.error(err));
-  },
-  render: function() {
-    return (
+    this.camera.capture();
+  }
+
+  render() {
+    return(
       <Swiper style={styles.wrapper} showsButtons={true}>
-      <View style={styles.slide2}>
-      <Text style={styles.buttonText}>Swipe right for Camera and left for Map</Text>
-      </View>
-      <View style={styles.slide3}>
-      <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
-        </Camera>
-      </View>
+
         <View style={styles.slide1}>
+          <Text style={styles.buttonText}>SWIPE RIGHT FOR CAMERA AND LEFT FOR MAP</Text>
+        </View>
+        
+        <View style={styles.slide2}>
+          <Camera
+            ref={(cam) => {
+              this.camera = cam;
+            }}
+            style={styles.preview}
+            aspect={Camera.constants.Aspect.fill}>
+            <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+          </Camera>
+        </View>
+
+        <View style={styles.slide3}>
           <MapView
             style={ styles.map }
             initialRegion={{
@@ -65,13 +66,21 @@ var SwiperView = React.createClass({
             }}
           />
         </View>
-      </Swiper>
-    );
-  }
-});
 
-var styles = StyleSheet.create({
+      </Swiper>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
   wrapper: {
+  },
+  slide3: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#515154',
   },
   slide1: {
     flex: 1,
@@ -118,10 +127,10 @@ var styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   buttonText: {
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     marginTop: 7,
   },
-})
+});
 
 module.exports = SwiperView;
