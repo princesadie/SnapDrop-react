@@ -5,7 +5,7 @@
 
 
 var Home = require('./views/home.ios')
-// var SwiperView = require('./views/swiper.ios')
+var SwiperView = require('./views/swiper.ios')
 
 import React, {
   AppRegistry,

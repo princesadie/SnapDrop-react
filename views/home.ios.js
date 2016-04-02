@@ -6,30 +6,7 @@
 var CameraView = require('./camera.ios')
 var Map = require('./map.ios')
 var Profile = require('./profile.ios')
-
-const rootFireRef = new Firebase("https://snapdrop.firebaseio.com");
-const users = new Firebase("https://snapdrop.firebaseio.com/users")
-const user0Ref = rootFireRef.child('users/0')
-const user0UsernameRef = user0Ref.child('/username')
-const test = 'maybe?'
-
-
-
-rootFireRef.on('value', (snapshot) => {
-  const users = snapshot.val();
-  // console.log(users);
-});
-
-user0Ref.on('value', (snapshot) => {
-  const user0 = snapshot.val();
-  // console.log(user0);
-});
-
-user0UsernameRef.on('value', (snapshot) => {
-  const user0Username = snapshot.val();
-  // console.log(user0Username);
-});
-
+var SwiperView = require('./swiper.ios')
 
 import React, {
   Component,
@@ -102,6 +79,17 @@ class Home extends Component {
     })
   }
 
+  goSwiper() {
+    this.props.navigator.push({
+      title: 'Home with Swipe',
+      component: SwiperView
+    })
+  }
+
+  log() {
+    console.log('I AM CONSOLE LOGGING')
+  }
+
   render() {
     return (
       <View>
@@ -131,10 +119,17 @@ class Home extends Component {
             <TouchableHighlight
               style={styles.button}
               underlayColor='#9FA8DA'
-              onPress={() => this.getUser()}>
-                <Text style={styles.buttonText}>GET USER</Text>
+              onPress={() => this.log()}>
+                <Text style={styles.buttonText}>LOG</Text>
             </TouchableHighlight>
-            <Text style={styles.button}>{this.state.userData.long}</Text>
+
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.goSwiper()}>
+                <Text style={styles.buttonText}>SWIPE VIEW</Text>
+            </TouchableHighlight>
+            <Text style={styles.welcome}>{this.state.userData.long}</Text>
           </View>
         </View>
       </View>
