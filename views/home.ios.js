@@ -12,7 +12,7 @@ import React, {
   StyleSheet,
   View,
   TouchableHighlight,
-  Text
+  Text,
 
 } from 'react-native';
 
@@ -74,6 +74,8 @@ class Home extends Component {
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
