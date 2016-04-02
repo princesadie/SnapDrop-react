@@ -11,7 +11,8 @@ import React, {
   Dimensions,
   View,
   TouchableHighlight,
-  Text
+  Text,
+  Firebase
 
 } from 'react-native';
 

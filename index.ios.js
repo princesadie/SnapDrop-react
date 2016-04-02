@@ -4,12 +4,14 @@
  */
 
 var Home = require('./views/home.ios')
+// var SwiperView = require('./views/swiper.ios')
 
 import React, {
   AppRegistry,
   Component,
   StyleSheet,
-  NavigatorIOS
+  NavigatorIOS,
+  Firebase
 } from 'react-native';
 
 class SnapDrop extends Component {
