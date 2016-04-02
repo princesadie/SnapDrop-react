@@ -13,6 +13,8 @@ import React, {
   Text
 } from 'react-native';
 
+import Firebase from 'firebase';
+
 var markers = [
   {
     latitude: 41.890731,
@@ -25,6 +27,40 @@ var markers = [
 import Camera from 'react-native-camera';
 
 class SwiperView extends Component {
+  //Create the data that we need, prefill it with an empty object {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      userData: {}
+    };
+    this.userRef = this.getRef().child('0');
+  }
+  //Create a new reference to our database directly accessing USERS
+  getRef() {
+    return new Firebase("https://snapdrop.firebaseio.com/users");
+  }
+  //Create listener that'll check in realtime any changes to our USER
+  // and pull data as they happen
+  listenForUser(userRef) {
+    userRef.on('value', (snap) => {
+      var user = {
+        username: snap.val().username,
+        long: snap.val().long,
+        lat: snap.val().lat,
+      }
+  //Our userData is dynamic and so we set its 'state' equal to the data
+  // our listener just pulled
+      this.setState({
+        userData: user
+      });
+
+    });
+  }
+  //Make sure our component mounted and start up our listener
+  componentDidMount() {
+    this.listenForUser(this.userRef);
+  }
+
   takePicture() {
     this.camera.capture();
   }
@@ -36,7 +72,7 @@ class SwiperView extends Component {
         <View style={styles.slide1}>
           <Text style={styles.buttonText}>SWIPE RIGHT FOR CAMERA AND LEFT FOR MAP</Text>
         </View>
-        
+
         <View style={styles.slide2}>
           <Camera
             ref={(cam) => {
@@ -67,6 +103,12 @@ class SwiperView extends Component {
           />
         </View>
 
+        <View style={styles.slide4}>
+          <Text style={styles.row}>USERNAME: {this.state.userData.username}</Text>
+          <Text style={styles.row}>LONG: {this.state.userData.long}</Text>
+          <Text style={styles.row}>LAT: {this.state.userData.lat}</Text>
+        </View>
+
       </Swiper>
     )
   }
@@ -74,6 +116,19 @@ class SwiperView extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  slide4: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#515154',
   },
   slide3: {
     flex: 1,
