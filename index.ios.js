@@ -4,7 +4,7 @@
  */
 
 
-var Home = require('./views/home.ios')
+// var Home = require('./views/home.ios')
 var SwiperView = require('./views/swiper.ios')
 
 import React, {
@@ -22,7 +22,7 @@ class SnapDrop extends Component {
         style={styles.container}
         initialRoute={{
           title: 'Home',
-          component: Home
+          component: SwiperView
       }}/>
     );
   }
