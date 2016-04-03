@@ -4,7 +4,8 @@
  */
 // const Firebase = require('firebase');
 var CameraView = require('./camera.ios')
-var Map = require('./map.ios')
+// var Map = require('./map.ios')
+// var Geolocation = require('./views/geolocation.ios')
 var Profile = require('./profile.ios')
 var SwiperView = require('./swiper.ios')
 
@@ -90,6 +91,14 @@ class Home extends Component {
     console.log('I AM CONSOLE LOGGING')
   }
 
+  updateUser() {
+    console.log("GOT HERE")
+    this.userRef.update({
+      long: 'NEW VALUE',
+      lat: 'DID IT GET HERE?'
+    })
+  }
+
   render() {
     return (
       <View>
@@ -128,6 +137,13 @@ class Home extends Component {
               underlayColor='#9FA8DA'
               onPress={() => this.goSwiper()}>
                 <Text style={styles.buttonText}>SWIPE VIEW</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.updateUser()}>
+                <Text style={styles.buttonText}>UPDATE USER DATA</Text>
             </TouchableHighlight>
             <Text style={styles.welcome}>{this.state.userData.long}</Text>
           </View>
