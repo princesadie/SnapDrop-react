@@ -6,6 +6,7 @@
 
 var Home = require('./views/home.ios')
 var SwiperView = require('./views/swiper.ios')
+var newMap = require('./views/map.ios')
 
 import React, {
   AppRegistry,
@@ -21,7 +22,8 @@ class SnapDrop extends Component {
       <NavigatorIOS
         style={styles.container}
         initialRoute={{
-          component: SwiperView
+          title: 'SnapDrop',
+          component: newMap
       }}/>
     );
   }
