@@ -94,6 +94,7 @@ class SwiperView extends Component {
       });
       this.updateUserFirebase();
 
+      //initialize map with a marker
       var newMarker = [{
         latitude: this.state.lastPosition.lat,
         longitude:  this.state.lastPosition.long,
@@ -109,7 +110,7 @@ class SwiperView extends Component {
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
-
+  
   addMarkers() {
     var newMarker = {
       latitude: 37.795738,

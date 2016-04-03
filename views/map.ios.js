@@ -1,58 +1,93 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
-var markers = [
-  {
-    latitude: 41.890731,
-    longitude: -87.637604,
-    title: 'My Pin',
-    subtitle: 'Sweet Info Here'
-  }
-];
-
-import React, {
-  Component,
+var React = require('react-native');
+var {
   StyleSheet,
+  PropTypes,
   View,
-  TouchableHighlight,
-  MapView
+  Text,
+  Dimensions,
+  TouchableOpacity,
+  AlertIOS,
+} = React;
 
-} from 'react-native';
+var MapView = require('react-native-maps');
 
-class Map extends Component {
+var { width, height } = Dimensions.get('window');
+
+const ASPECT_RATIO = width / height;
+const LATITUDE = 37.78825;
+const LONGITUDE = -122.4324;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+let id = 0;
+
+function randomColor() {
+  return '#'+Math.floor(Math.random()*16777215).toString(16);
+}
+
+var DefaultMarkers = React.createClass({
+  getInitialState() {
+    return {
+      region: {
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      },
+      markers: [],
+    };
+  },
+
+  onMapPress(e) {
+    this.setState({
+      markers: [
+        ...this.state.markers,
+        {
+          coordinate: e.nativeEvent.coordinate,
+          key: id++,
+          color: randomColor(),
+          title: 'PIN',
+          description: 'DESCRIPTION'
+        },
+      ],
+    });
+    console.log(this.state.markers)
+  },
+
   render() {
     return (
       <View style={styles.container}>
-      <MapView
-        style={ styles.map }
-        initialRegion={{
-          latitude: 41.890731,
-          longitude: -87.637604,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        annotations={markers}
-        region={{
-          latitude: 41.890731,
-          longitude: -87.637604,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
+        <MapView
+          style={styles.map}
+          initialRegion={this.state.region}
+          onPress={this.onMapPress}
+        >
+          {this.state.markers.map(marker => (
+            <MapView.Marker
+              key={marker.key}
+              coordinate={marker.coordinate}
+              pinColor={marker.color}
+            />
+          ))}
+        </MapView>
+        <View style={styles.buttonContainer}>
+          <View style={styles.bubble}>
+            <Text>Tap to create a marker of random color</Text>
+          </View>
+        </View>
       </View>
     );
-  }
-}
+  },
+});
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#515154',
   },
   map: {
     position: 'absolute',
@@ -61,6 +96,27 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  bubble: {
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+  latlng: {
+    width: 200,
+    alignItems: 'stretch',
+  },
+  button: {
+    width: 80,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginVertical: 20,
+    backgroundColor: 'transparent',
+  },
 });
 
-module.exports = Map;
+module.exports = DefaultMarkers;
