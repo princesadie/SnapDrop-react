@@ -14,16 +14,6 @@ import React, {
 } from 'react-native';
 
 import Firebase from 'firebase';
-
-var markers = [
-  {
-    latitude: 41.890731,
-    longitude: -87.637604,
-    title: 'My Pin',
-    subtitle: 'Sweet Info Here'
-  }
-];
-
 import Camera from 'react-native-camera';
 
 class SwiperView extends Component {
@@ -32,6 +22,12 @@ class SwiperView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      marker: [{
+        latitude: 37.795738,
+        longitude:  -122.399150,
+        title: 'NEW PIN',
+        subtitle: 'REQUEST HERE'
+      }],
       userData: {},
       initialPosition: 'unknown',
       lastPosition: 'unknown'
@@ -97,6 +93,16 @@ class SwiperView extends Component {
         lastPosition
       });
       this.updateUserFirebase();
+
+      var newMarker = [{
+        latitude: this.state.lastPosition.lat,
+        longitude:  this.state.lastPosition.long,
+        title: "INITIAL PIN",
+        subtitle: 'REQUEST HERE'
+      }]
+      this.setState({
+        marker: newMarker
+      });
     });
   }
 
@@ -104,11 +110,26 @@ class SwiperView extends Component {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
+  addMarkers() {
+    var newMarker = {
+      latitude: 37.795738,
+      longitude:  -122.399150,
+      title: 'APPENDED PIN',
+      subtitle: 'ADDED'
+    }
+    this.state.marker.push(newMarker)
+    console.log(this.state.marker)
+    this.setState({
+      marker: this.state.marker
+    })
+  }
+
   render() {
     return(
       <Swiper style={styles.wrapper} showsButtons={true}>
 
         <View style={styles.slide1}>
+          <Text style={styles.buttonText}>{this.state.userData.username}</Text>
           <Text style={styles.buttonText}>SWIPE RIGHT FOR CAMERA AND LEFT FOR MAP</Text>
         </View>
 
@@ -132,13 +153,7 @@ class SwiperView extends Component {
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
-            annotations={[{
-              latitude: this.state.lastPosition.lat,
-              longitude: this.state.lastPosition.long,
-              title: 'PRINCESADIE',
-              subtitle: 'You are here'
-            }]
-            }
+            annotations={this.state.marker}
             region={{
               latitude: this.state.initialPosition.lat,
               longitude: this.state.initialPosition.long,
@@ -146,6 +161,12 @@ class SwiperView extends Component {
               longitudeDelta: 0.0421,
             }}
           />
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9FA8DA'
+            onPress={() => this.addMarkers()}>
+              <Text style={styles.buttonText}>MARKER</Text>
+          </TouchableHighlight>
         </View>
 
         <View style={styles.slide4}>
@@ -220,16 +241,20 @@ const styles = StyleSheet.create({
     margin: 40
   },
   button: {
-    flex: 1,
     flexDirection: 'row',
-    height: 36,
+    height: 40,
+    width: 200,
+    marginTop: 300,
+    marginLeft: 42,
+    borderRadius: 10,
     justifyContent: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#7986CB',
   },
   buttonText: {
-    color: 'black',
+    color: 'white',
     textAlign: 'center',
-    marginTop: 7,
+    marginTop: 10,
+    fontWeight: 'bold',
   },
 });
 

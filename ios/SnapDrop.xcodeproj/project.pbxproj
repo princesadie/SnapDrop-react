@@ -20,7 +20,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		3552F63E1CB14FAF00DC1E9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3552F63D1CB14FAF00DC1E9C /* LaunchScreen.storyboard */; };
+		3552F63E1CB14FAF00DC1E9C /* ls.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3552F63D1CB14FAF00DC1E9C /* ls.storyboard */; };
+		3552F66A1CB1553100DC1E9C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3552F6691CB1553100DC1E9C /* LaunchScreen.xib */; };
 		69062F1B48274ABE87154F11 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69034E64E8934CC9B4CDF0A7 /* libRCTCamera.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -131,7 +132,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SnapDrop/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SnapDrop/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		3552F63D1CB14FAF00DC1E9C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SnapDrop/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3552F63D1CB14FAF00DC1E9C /* ls.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ls.storyboard; path = SnapDrop/ls.storyboard; sourceTree = "<group>"; };
+		3552F6691CB1553100DC1E9C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = SnapDrop/LaunchScreen.xib; sourceTree = "<group>"; };
 		5E94F6439ECA476DB5A142DB /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		69034E64E8934CC9B4CDF0A7 /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -243,13 +245,14 @@
 		13B07FAE1A68108700A75B9A /* SnapDrop */ = {
 			isa = PBXGroup;
 			children = (
+				3552F6691CB1553100DC1E9C /* LaunchScreen.xib */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				3552F63D1CB14FAF00DC1E9C /* LaunchScreen.storyboard */,
+				3552F63D1CB14FAF00DC1E9C /* ls.storyboard */,
 			);
 			name = SnapDrop;
 			sourceTree = "<group>";
@@ -539,7 +542,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3552F63E1CB14FAF00DC1E9C /* LaunchScreen.storyboard in Resources */,
+				3552F63E1CB14FAF00DC1E9C /* ls.storyboard in Resources */,
+				3552F66A1CB1553100DC1E9C /* LaunchScreen.xib in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
