@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  */
 
-var Map = require('./map.ios')
+var Map = require('./appleMap.ios')
 
 import React, {
   Component,
@@ -19,8 +19,8 @@ import Camera from 'react-native-camera';
 class CameraView extends Component {
   goNext() {
     this.props.navigator.push({
-      title: 'Map',
-      component: Map,
+      title: 'AppleMap',
+      component: AppleMap,
       passProps: {dataToBePassed: "MAP HERE"}
     })
   }

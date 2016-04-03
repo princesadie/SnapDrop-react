@@ -2,12 +2,22 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
+
+// var ImageViewPage = require('./imageViewPage.ios')
+
+// var AppleMap = require('./appleMap.ios')
+var NativeImagePicker = require('./nativeImagePicker.ios')
+
+var SearchBar = require('./searchBar.ios')
+var CreateUser = require('./createUser.ios')
+
 // const Firebase = require('firebase');
 var CameraView = require('./camera.ios')
-// var Map = require('./map.ios')
+var Map = require('./map.ios')
 // var Geolocation = require('./views/geolocation.ios')
 var Profile = require('./profile.ios')
 var SwiperView = require('./swiper.ios')
+
 
 import React, {
   Component,
@@ -63,11 +73,33 @@ class Home extends Component {
       passProps: {dataToBePassed: 'Some data we passed along!'}
     })
   }
+  goCreateUser() {
+    this.props.navigator.push({
+      title: 'Register',
+      component: CreateUser
+    })
+  }
+  goSearch() {
+    console.log('s')
+    this.props.navigator.push({
+      title: 'SearchBar',
+      component: SearchBar,
+      passProps: {dataToBePassed: 'Some data we passed along!'}
+    })
+  }
 
   goMap() {
     this.props.navigator.push({
       title: 'Map',
       component: Map,
+      passProps: {dataToBePassed: 'Some other data we passed along!'}
+    })
+  }
+
+  goNativeImagePicker() {
+    this.props.navigator.push({
+      title: 'Image or Video',
+      component: NativeImagePicker,
       passProps: {dataToBePassed: 'Some other data we passed along!'}
     })
   }
@@ -114,8 +146,23 @@ class Home extends Component {
             <TouchableHighlight
               style={styles.button}
               underlayColor='#9FA8DA'
+              onPress={() => this.goCreateUser()}>
+                <Text style={styles.buttonText}>Register</Text>
+            </TouchableHighlight>
+
+
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
               onPress={() => this.goMap()}>
                 <Text style={styles.buttonText}>MAP</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.goNativeImagePicker()}>
+                <Text style={styles.buttonText}>IMAGE PICKER</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
@@ -128,9 +175,10 @@ class Home extends Component {
             <TouchableHighlight
               style={styles.button}
               underlayColor='#9FA8DA'
-              onPress={() => this.log()}>
-                <Text style={styles.buttonText}>LOG</Text>
+              onPress={() => this.goSearch()}>
+                <Text style={styles.buttonText}>Search Bar Biatch</Text>
             </TouchableHighlight>
+
 
             <TouchableHighlight
               style={styles.button}
@@ -145,7 +193,7 @@ class Home extends Component {
               onPress={() => this.updateUser()}>
                 <Text style={styles.buttonText}>UPDATE USER DATA</Text>
             </TouchableHighlight>
-            <Text style={styles.welcome}>{this.state.userData.long}</Text>
+
           </View>
         </View>
       </View>

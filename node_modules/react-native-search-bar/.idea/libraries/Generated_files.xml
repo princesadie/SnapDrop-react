@@ -1,0 +1,41 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/source-map-support/browser-test/script.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/resolve/test/resolver/mug.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/resolve/test/resolver/cup.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native-search-bar/SearchBar.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/resolve/test/resolver/cup.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/js-tokens/regex.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/react-tools/src/modern/class/__tests__/ReactCoffeeScriptClass-test.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/resolve/test/resolver/mug.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/detective/node_modules/escodegen/node_modules/esutils/test/keyword.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/browser-resolve/node_modules/resolve/test/resolver/mug.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/detective/node_modules/escodegen/node_modules/esutils/test/code.js" />
+        <item url="file://$PROJECT_DIR$/SearchBar.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/browser-resolve/node_modules/resolve/test/resolver/cup.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/source-map-support/amd-test/script.js" />
+        <item url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/source-map-support/header-test/script.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/source-map-support/browser-test/script.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/resolve/test/resolver/mug.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/resolve/test/resolver/cup.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native-search-bar/SearchBar.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/resolve/test/resolver/cup.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/js-tokens/regex.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/react-tools/src/modern/class/__tests__/ReactCoffeeScriptClass-test.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/resolve/test/resolver/mug.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/detective/node_modules/escodegen/node_modules/esutils/test/keyword.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/browser-resolve/node_modules/resolve/test/resolver/mug.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/detective/node_modules/escodegen/node_modules/esutils/test/code.js" />
+      <root url="file://$PROJECT_DIR$/SearchBar.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/module-deps/node_modules/browser-resolve/node_modules/resolve/test/resolver/cup.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/source-map-support/amd-test/script.js" />
+      <root url="file://$PROJECT_DIR$/SearchBarExample/node_modules/react-native/node_modules/babel-core/node_modules/source-map-support/header-test/script.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

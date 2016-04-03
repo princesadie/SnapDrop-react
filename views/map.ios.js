@@ -183,6 +183,7 @@ var MapDisplay = React.createClass({
             <Text>MOVE</Text>
           </TouchableOpacity>
         </View>
+
       </View>
     );
   },
@@ -229,3 +230,4 @@ var styles = StyleSheet.create({
 });
 
 module.exports = MapDisplay;
+
