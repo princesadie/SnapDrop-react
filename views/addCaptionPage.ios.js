@@ -1,7 +1,6 @@
-var NativeImagePicker = require('./nativeImagePicker.ios')
+// THIS IS NO LONGER IN USE
 var React = require('react-native');
-var AddCaptionPage = require('./addCaptionPage.ios')
-
+'use strict'
 var {
   View,
   NativeImagePicker,
@@ -20,51 +19,42 @@ var {
   }
 } = React;
 
-var currentView = 'start'
-class ImageViewPage extends Component {
+// var currentView = 'start'
+class addCaptionPage extends Component {
 
-  sendImage() {
-    //send to backend
-    //go to profile
-
-  }
-  cancelImage() {
-    this.props.navigator.popN(1);
-  }
   constructor(props) {
     super(props)
     this.state = {
-      captionText: ''
+      text3: ''
     };
+  }
+
+  sendImage() {
+
   }
 
   render() {
     console.log('------------------------------------------')
-    console.log('entered Image View Page')
+    console.log('entered Caption View Page')
     console.log(this.props.imageData)
-    console.log(this.props.cat)
     console.log('------------------------------------------')
+
     return (
       <View style={styles.container}>
 
         <View style={styles.avatar}>
           <Image style={styles.avatar} source={this.props.sourceIm} />
         </View>
+
         <View style={styles.captionContainer}>
-          <TextInput style={styles.textEdit} placeholder="add a caption" onChangeText={(captionText) => this.setState({captionText})}/>
-        </View>
-        <View style={styles.buttonContainer3}>
-          <TouchableHighlight
-            style={styles.button3}
-            underlayColor='#9FA8DA'
-            onPress={() => this.sendImage()}>
-            <Text style={styles.buttonText3}>Send</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button3}
-            underlayColor='#9FA8DA'
-            onPress={() => this.cancelImage()}>
-            <Text style={styles.buttonText3}>Cancel</Text>
+          <TextInput style={styles.textEdit} placeholder="enter a location" onChangeText={(text3) => this.setState({text3})}/>
+
+          <Text style={styles.locationOutput}>
+            {this.state.text3}
+          </Text>
+
+          <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.sendImage()}>
+              <Text style={styles.buttonText}>Send</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -76,35 +66,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 30,
-    backgroundColor: 'pink',
   },
   avatar: {
     borderRadius: 5,
-    flex: 1
+    width: 350,
+    height: 350
   },
-  button3: {
+  button: {
     flex: 1,
+    height: 30,
     width: 150,
-    height: 40,
+    marginTop: 20,
+    marginLeft: 42,
     borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     backgroundColor: '#7986CB',
   },
-  buttonText3: {
+  buttonText: {
     color: 'white',
-    justifyContent: 'center',
     textAlign: 'center',
+    marginTop: 10,
     fontWeight: 'bold',
   },
-  buttonContainer3:{
-    flexDirection:'row',
+  buttonContainer:{
+    marginTop: 60,
+    paddingTop:30,
+    paddingBottom:10,
+    flexDirection:'column',
     backgroundColor: '#fff',
-    marginTop: 0
   },
   textEdit: {
     height: 40,
-    marginBottom: 0,
     borderColor: 'green',
     backgroundColor: 'orange',
     borderWidth: 2,
@@ -113,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = ImageViewPage;
+module.exports = addCaptionPage;

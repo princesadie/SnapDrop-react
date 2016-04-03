@@ -8,6 +8,7 @@ var AppleMap = require('./appleMap.ios')
 var NativeImagePicker = require('./nativeImagePicker.ios')
 var Profile = require('./profile.ios')
 var SearchBar = require('./searchBar.ios')
+var CreateUser = require('./createUser.ios')
 
 import React, {
   Component,
@@ -26,7 +27,12 @@ class Home extends Component {
       passProps: {dataToBePassed: 'Some data we passed along!'}
     })
   }
-
+  goCreateUser() {
+    this.props.navigator.push({
+      title: 'Register',
+      component: CreateUser
+    })
+  }
   goSearch() {
     console.log('s')
     this.props.navigator.push({
@@ -46,7 +52,7 @@ class Home extends Component {
 
   goNativeImagePicker() {
     this.props.navigator.push({
-      title: 'NativeImagePicker',
+      title: 'Image or Video',
       component: NativeImagePicker,
       passProps: {dataToBePassed: 'Some other data we passed along!'}
     })
@@ -71,6 +77,13 @@ class Home extends Component {
               underlayColor='#9FA8DA'
               onPress={() => this.goCamera()}>
                 <Text style={styles.buttonText}>CAMERA</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.goCreateUser()}>
+                <Text style={styles.buttonText}>Register</Text>
             </TouchableHighlight>
 
             <TouchableHighlight

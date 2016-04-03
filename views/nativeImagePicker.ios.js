@@ -1,5 +1,6 @@
 import React from 'react-native';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
+var ImageViewPage = require('./imageViewPage.ios')
 
 const {
   StyleSheet,
@@ -20,6 +21,17 @@ class NativeImagePicker extends React.Component {
     videoSource: null
   };
 
+  goNext2(imageData, sourceIm) {
+    console.log('-----------------------------------')
+    console.log('entered goNext2')
+    this.props.navigator.push({
+      title: 'Image Details',
+      component: ImageViewPage,
+      navigationBarHidden: true,
+      passProps: {imageData: imageData.obj, cat: 'cat', sourceIm: sourceIm}
+    })
+  }
+
   selectPhotoTapped() {
     const options = {
       title: 'Photo Picker',
@@ -34,7 +46,7 @@ class NativeImagePicker extends React.Component {
       allowsEditing: true
     };
 
-    ImagePickerManager.showImagePicker(options, (response) => {
+    ImagePickerManager.launchCamera(options, (response) => {
       console.log('Response = ', response);
 
       if (response.didCancel) {
@@ -48,12 +60,36 @@ class NativeImagePicker extends React.Component {
       }
       else {
         // You can display the image using either:
-        //const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
-        const source = {uri: response.uri.replace('file://', ''), isStatic: true};
+        const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+        // const source = {uri: response.uri.replace('file://', ''), isStatic: true};
+        console.log('---------------------------------')
+        // this.setState({
+        //   avatarSource: source
+        // });
 
-        this.setState({
-          avatarSource: source
-        });
+        // console.log(response.data)
+        var resData = response.data
+        console.log('response data')
+        console.log(resData)
+
+        var imageData = resData.replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "").replace(/\f/g, "").replace(/=/g, "");
+        console.log('image data')
+        console.log(imageData)
+
+        var imagereplaced = imageData.replace(/=/g, "");
+        console.log('image data replaced')
+        console.log(imagereplaced)
+
+        var obj = "data:image/jpeg;base64," + imagereplaced;
+        console.log('obj')
+        console.log(obj)
+
+        var objJson = JSON.stringify({"obj": obj})
+        console.log('json obj')
+        console.log(objJson)
+        console.log('---------------------------------')
+
+        this.goNext2(objJson, source);
       }
     });
   }
