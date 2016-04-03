@@ -3,13 +3,17 @@
  * https://github.com/facebook/react-native
  */
 
+
 var Home = require('./views/home.ios')
+var SwiperView = require('./views/swiper.ios')
+var newMap = require('./views/map.ios')
 
 import React, {
   AppRegistry,
   Component,
   StyleSheet,
-  NavigatorIOS
+  NavigatorIOS,
+  Firebase
 } from 'react-native';
 
 class SnapDrop extends Component {
@@ -18,8 +22,8 @@ class SnapDrop extends Component {
       <NavigatorIOS
         style={styles.container}
         initialRoute={{
-          title: 'Home',
-          component: Home
+          title: 'SnapDrop',
+          component: newMap
       }}/>
     );
   }

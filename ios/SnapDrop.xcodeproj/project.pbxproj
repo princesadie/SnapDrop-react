@@ -17,14 +17,20 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+<<<<<<< HEAD
 		3230398B1CB0775E00F3E239 /* ImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 323039871CB0775E00F3E239 /* ImagePickerManager.m */; };
 		3AB2F22D2B7141669C0FFA27 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3817D36B0DDF4FC9BF323D68 /* libAirMaps.a */; };
 		69062F1B48274ABE87154F11 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69034E64E8934CC9B4CDF0A7 /* libRCTCamera.a */; };
 		7122F39390544F99AF163D78 /* libRNSearchBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE264D45E1144DE7BD8EAD6E /* libRNSearchBar.a */; };
+=======
+		3552F63E1CB14FAF00DC1E9C /* ls.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3552F63D1CB14FAF00DC1E9C /* ls.storyboard */; };
+		3552F66A1CB1553100DC1E9C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3552F6691CB1553100DC1E9C /* LaunchScreen.xib */; };
+		69062F1B48274ABE87154F11 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69034E64E8934CC9B4CDF0A7 /* libRCTCamera.a */; };
+		6ABE11722F8B4B1DBC67421F /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1100EB3734FD49AC87AFF54A /* libAirMaps.a */; };
+>>>>>>> master
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +98,7 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
+<<<<<<< HEAD
 		3228285D1CAF163500149335 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 67FDD8A401D14D1DA6E62998 /* RNSearchBar.xcodeproj */;
@@ -102,10 +109,16 @@
 		322828621CAF163500149335 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1C1CFC1B15774419823402D8 /* AirMaps.xcodeproj */;
+=======
+		35B9890F1CB17B8E00746EFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFA9167023F84A63B03AE677 /* AirMaps.xcodeproj */;
+>>>>>>> master
 			proxyType = 2;
 			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
 			remoteInfo = AirMaps;
 		};
+<<<<<<< HEAD
 		323039991CB0775E00F3E239 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 323039881CB0775E00F3E239 /* RNImagePicker.xcodeproj */;
@@ -120,6 +133,8 @@
 			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
 			remoteInfo = RNImagePicker;
 		};
+=======
+>>>>>>> master
 		35F72B3F1CAE680E0072B095 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E94F6439ECA476DB5A142DB /* RCTCamera.xcodeproj */;
@@ -153,28 +168,37 @@
 		00E356EE1AD99517003FC87E /* SnapDropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapDropTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SnapDropTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnapDropTests.m; sourceTree = "<group>"; };
+		1100EB3734FD49AC87AFF54A /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SnapDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SnapDrop/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SnapDrop/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SnapDrop/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SnapDrop/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SnapDrop/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		1C1CFC1B15774419823402D8 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		323039861CB0775E00F3E239 /* ImagePickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerManager.h; sourceTree = "<group>"; };
 		323039871CB0775E00F3E239 /* ImagePickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerManager.m; sourceTree = "<group>"; };
 		323039881CB0775E00F3E239 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RNImagePicker.xcodeproj; sourceTree = "<group>"; };
 		329361361CB0667D00E5AC02 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		3817D36B0DDF4FC9BF323D68 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
+=======
+		3552F63D1CB14FAF00DC1E9C /* ls.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ls.storyboard; path = SnapDrop/ls.storyboard; sourceTree = "<group>"; };
+		3552F6691CB1553100DC1E9C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = SnapDrop/LaunchScreen.xib; sourceTree = "<group>"; };
+>>>>>>> master
 		5E94F6439ECA476DB5A142DB /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		67FDD8A401D14D1DA6E62998 /* RNSearchBar.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSearchBar.xcodeproj; path = "../node_modules/react-native-search-bar/RNSearchBar.xcodeproj"; sourceTree = "<group>"; };
 		69034E64E8934CC9B4CDF0A7 /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		FE264D45E1144DE7BD8EAD6E /* libRNSearchBar.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSearchBar.a; sourceTree = "<group>"; };
+=======
+		FFA9167023F84A63B03AE677 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
+>>>>>>> master
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,8 +224,12 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				69062F1B48274ABE87154F11 /* libRCTCamera.a in Frameworks */,
+<<<<<<< HEAD
 				3AB2F22D2B7141669C0FFA27 /* libAirMaps.a in Frameworks */,
 				7122F39390544F99AF163D78 /* libRNSearchBar.a in Frameworks */,
+=======
+				6ABE11722F8B4B1DBC67421F /* libAirMaps.a in Frameworks */,
+>>>>>>> master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,13 +312,14 @@
 		13B07FAE1A68108700A75B9A /* SnapDrop */ = {
 			isa = PBXGroup;
 			children = (
+				3552F6691CB1553100DC1E9C /* LaunchScreen.xib */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				3552F63D1CB14FAF00DC1E9C /* ls.storyboard */,
 			);
 			name = SnapDrop;
 			sourceTree = "<group>";
@@ -303,6 +332,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		3228284F1CAF163500149335 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +372,12 @@
 			isa = PBXGroup;
 			children = (
 				329361471CB0667D00E5AC02 /* libRNImagePicker.a */,
+=======
+		35B9890C1CB17B8E00746EFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				35B989101CB17B8E00746EFC /* libAirMaps.a */,
+>>>>>>> master
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -378,8 +414,12 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				5E94F6439ECA476DB5A142DB /* RCTCamera.xcodeproj */,
+<<<<<<< HEAD
 				1C1CFC1B15774419823402D8 /* AirMaps.xcodeproj */,
 				67FDD8A401D14D1DA6E62998 /* RNSearchBar.xcodeproj */,
+=======
+				FFA9167023F84A63B03AE677 /* AirMaps.xcodeproj */,
+>>>>>>> master
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -483,8 +523,13 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+<<<<<<< HEAD
 					ProductGroup = 3228285F1CAF163500149335 /* Products */;
 					ProjectRef = 1C1CFC1B15774419823402D8 /* AirMaps.xcodeproj */;
+=======
+					ProductGroup = 35B9890C1CB17B8E00746EFC /* Products */;
+					ProjectRef = FFA9167023F84A63B03AE677 /* AirMaps.xcodeproj */;
+>>>>>>> master
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -608,6 +653,7 @@
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+<<<<<<< HEAD
 		3228285E1CAF163500149335 /* libRNSearchBar.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -634,6 +680,13 @@
 			fileType = archive.ar;
 			path = libRNImagePicker.a;
 			remoteRef = 329361461CB0667D00E5AC02 /* PBXContainerItemProxy */;
+=======
+		35B989101CB17B8E00746EFC /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = 35B9890F1CB17B8E00746EFC /* PBXContainerItemProxy */;
+>>>>>>> master
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		35F72B401CAE680E0072B095 /* libRCTCamera.a */ = {
@@ -671,8 +724,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3552F63E1CB14FAF00DC1E9C /* ls.storyboard in Resources */,
+				3552F66A1CB1553100DC1E9C /* LaunchScreen.xib in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,18 +778,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = SnapDrop;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -756,7 +798,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> master
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SnapDrop.app/SnapDrop";
@@ -779,7 +824,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> master
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SnapDrop.app/SnapDrop";
@@ -800,7 +848,10 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-search-bar/**",
+=======
+>>>>>>> master
 				);
 				INFOPLIST_FILE = SnapDrop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -824,7 +875,10 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-search-bar/**",
+=======
+>>>>>>> master
 				);
 				INFOPLIST_FILE = SnapDrop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -875,7 +929,10 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-search-bar/**",
+=======
+>>>>>>> master
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -918,7 +975,10 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-search-bar/**",
+=======
+>>>>>>> master
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
