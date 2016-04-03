@@ -27,11 +27,14 @@ var markers = [
 import Camera from 'react-native-camera';
 
 class SwiperView extends Component {
+  watchID = (null: ?number)
   //Create the data that we need, prefill it with an empty object {}
   constructor(props) {
     super(props);
     this.state = {
-      userData: {}
+      userData: {},
+      initialPosition: 'unknown',
+      lastPosition: 'unknown'
     };
     this.userRef = this.getRef().child('0');
   }
@@ -57,12 +60,48 @@ class SwiperView extends Component {
     });
   }
   //Make sure our component mounted and start up our listener
-  componentDidMount() {
-    this.listenForUser(this.userRef);
-  }
 
   takePicture() {
     this.camera.capture();
+  }
+
+  updateUserFirebase() {
+    var currentUser = this.userRef;
+    currentUser.update({
+      long: this.state.lastPosition.long,
+      lat: this.state.lastPosition.lat
+    });
+  }
+
+  componentDidMount() {
+    this.listenForUser(this.userRef);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var initialPosition = {
+          long: parseFloat(position.coords.longitude),
+          lat: parseFloat(position.coords.latitude)
+        }
+        this.setState({
+          initialPosition
+        })
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      var lastPosition = {
+        long: parseFloat(position.coords.longitude),
+        lat: parseFloat(position.coords.latitude)
+      }
+      this.setState({
+        lastPosition
+      });
+      this.updateUserFirebase();
+    });
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
   }
 
   render() {
@@ -88,15 +127,21 @@ class SwiperView extends Component {
           <MapView
             style={ styles.map }
             initialRegion={{
-              latitude: 41.890731,
-              longitude: -87.637604,
+              latitude: this.state.initialPosition.lat,
+              longitude: this.state.initialPosition.long,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
-            annotations={markers}
+            annotations={[{
+              latitude: this.state.lastPosition.lat,
+              longitude: this.state.lastPosition.long,
+              title: 'PRINCESADIE',
+              subtitle: 'You are here'
+            }]
+            }
             region={{
-              latitude: 41.890731,
-              longitude: -87.637604,
+              latitude: this.state.initialPosition.lat,
+              longitude: this.state.initialPosition.long,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
@@ -105,8 +150,8 @@ class SwiperView extends Component {
 
         <View style={styles.slide4}>
           <Text style={styles.row}>USERNAME: {this.state.userData.username}</Text>
-          <Text style={styles.row}>LONG: {this.state.userData.long}</Text>
-          <Text style={styles.row}>LAT: {this.state.userData.lat}</Text>
+          <Text style={styles.row}>LONG: {this.state.lastPosition.long}</Text>
+          <Text style={styles.row}>LAT: {this.state.lastPosition.lat}</Text>
         </View>
 
       </Swiper>

@@ -4,7 +4,8 @@
  */
 // const Firebase = require('firebase');
 var CameraView = require('./camera.ios')
-var Map = require('./map.ios')
+// var Map = require('./map.ios')
+// var Geolocation = require('./views/geolocation.ios')
 var Profile = require('./profile.ios')
 var SwiperView = require('./swiper.ios')
 

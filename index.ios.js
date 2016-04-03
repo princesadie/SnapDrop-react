@@ -5,8 +5,7 @@
 
 
 var Home = require('./views/home.ios')
-// var SwiperView = require('./views/swiper.ios')
-var Geolocation = require('./views/geolocation.ios')
+var SwiperView = require('./views/swiper.ios')
 
 import React, {
   AppRegistry,
@@ -22,8 +21,7 @@ class SnapDrop extends Component {
       <NavigatorIOS
         style={styles.container}
         initialRoute={{
-          title: 'Home',
-          component: Geolocation
+          component: SwiperView
       }}/>
     );
   }

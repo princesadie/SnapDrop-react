@@ -18,6 +18,14 @@ const usersRef = new Firebase("https://snapdrop.firebaseio.com/users");
 class Geolocation extends Component {
   watchID = (null: ?number)
 
+  updateUserFirebase() {
+    var currentUser = usersRef.child("0");
+    currentUser.update({
+      long: this.state.lastPosition.long,
+      lat: this.state.lastPosition.lat
+    });
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -48,19 +56,12 @@ class Geolocation extends Component {
       this.setState({
         lastPosition
       });
+      this.updateUserFirebase();
     });
   }
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
-  }
-
-  updateUserFirebase() {
-    var currentUser = usersRef.child("0");
-    currentUser.update({
-      long: this.state.lastPosition.long,
-      lat: this.state.lastPosition.lat
-    });
   }
 
   render() {
@@ -90,12 +91,6 @@ class Geolocation extends Component {
           longitudeDelta: 0.0421,
         }}
       />
-      <TouchableHighlight
-        style={styles.button}
-        underlayColor='#9FA8DA'
-        onPress={() => this.updateUserFirebase()}>
-          <Text style={styles.buttonText}>UPDATE</Text>
-      </TouchableHighlight>
       </View>
     )
   }
