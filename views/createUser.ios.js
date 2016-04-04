@@ -1,6 +1,7 @@
 import React from 'react-native';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 import Firebase from 'firebase';
+var UserLogin = require('./userLogin.ios')
 const {
   StyleSheet,
   Text,
@@ -16,10 +17,7 @@ const {
 } = React;
 
 
-
-
 class createUser extends React.Component {
-
   state = {
     email: null,
     password: null
@@ -34,20 +32,7 @@ class createUser extends React.Component {
       if (error) {
         console.log("Error creating user:", error);
       } else {
-        console.log("Successfully created user account with uid:", userData.uid);
-      }
-    })}
-
-  userLogin() {
-    var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
-    ref.authWithPassword({
-      email    : "bobtony@firebase.com",
-      password : "correcthorsebatterystaple"
-    }, function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-        console.log("Authenticated successfully with payload:", authData);
+        console.log("Successfully created user account with uid:", userData.uid)
       }
     })}
 
@@ -60,9 +45,6 @@ class createUser extends React.Component {
           <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.addUser()}>
               <Text style={styles.buttonText}>Register</Text>
           </TouchableHighlight>
-          <Text style={styles.locationOutput}>
-            {this.state.firstName}
-          </Text>
         </View>
       </View>
     );

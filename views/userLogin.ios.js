@@ -1,7 +1,8 @@
 import React from 'react-native';
+import Firebase from 'firebase';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var Profile = require('./profile.ios')
-import Firebase from 'firebase';
+
 const {
   StyleSheet,
   Text,
@@ -11,13 +12,11 @@ const {
   TouchableHighlight,
   TextInput,
   Image,
+  AlertIOS,
   NativeModules: {
     ImagePickerManager
   }
 } = React;
-
-
-
 
 class userLogin extends React.Component {
 
@@ -31,15 +30,16 @@ class userLogin extends React.Component {
     ref.authWithPassword({
       email: this.state.email,
       password: this.state.password
-    },
-    this.props.navigator.push({
-      title: 'Profile Page',
-      component: Profile
-    }), function(error, authData) {
+    }, function(error, authData) {
       if (error) {
         console.log("Login Failed!", error);
+        AlertIOS.prompt("fail",null);
       } else {
-        console.log("Authenticated successfully with payload:", authData);
+        console.log("Authenticated successfully with payload:", authData.password.email),
+        this.props.navigator.push({
+          title: 'Profile Page',
+          component: Profile
+        });
       }
     })}
 
