@@ -8,6 +8,7 @@ var Home = require('./views/home.ios')
 var SwiperView = require('./views/swiper.ios')
 var NewMap = require('./views/map.ios')
 var CreateUser = require('./views/createUser.ios')
+var UserPage = require('./views/userPage.ios')
 
 
 import React, {
@@ -25,7 +26,7 @@ class SnapDrop extends Component {
         style={styles.container}
         initialRoute={{
           title: 'SnapDrop',
-          component: CreateUser
+          component: UserPage
       }}/>
     );
   }

@@ -9,20 +9,38 @@ import React, {
   Dimensions,
   View,
   TouchableHighlight,
-  Text,
-  Firebase
-
+  Text
 } from 'react-native';
+
+import Firebase from 'firebase'
 
 var seed = ['1', '2', '3'];
 
+const fulfillableOrders = new Firebase("https://snapdrop.firebaseio.com/fulfillments");
+
 class FulfillRequest extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      fulfillableData: {}
+    };
+    this.fulfillableRef = this.getRef().child('0');
+  }
+
+  listenForFulfillable(fulfillableRef) {
+    fulfillableRef.on('value'
+  }
 
   render() {
     return(
       <View>
         <View style={styles.container}>
+
+          <View style={styles.content}>
+            <Text>{{}}</Text>
+          </View>
+
           <View style={styles.content}>
             <Text style={styles.welcome}>Fullfill Request</Text>
             <Text style={styles.welcome}>{seed[0]}</Text>
