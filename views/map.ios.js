@@ -14,7 +14,7 @@ import Firebase from 'firebase';
 var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
-var UserPage = require('./profile.ios');
+var UserPage = require('./userPage.ios');
 
 var ref = new Firebase("https://snapdrop.firebaseio.com");
 var authData = ref.getAuth();

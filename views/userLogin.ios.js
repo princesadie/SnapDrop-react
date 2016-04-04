@@ -44,8 +44,8 @@ class userLogin extends React.Component {
         AlertIOS.prompt("fail",null);
       } else {
         that.props.navigator.replace({
-          title: 'Your Profile',
-          component: Profile,
+          title: 'Map',
+          component: Map,
         });
       }
     })}

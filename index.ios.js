@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  */
 // var ProfilePage = require('./views/userPage.ios')
-var Home = require('./views/home.ios')
+// var Home = require('./views/home.ios')
 // var SwiperView = require('./views/swiper.ios')
 // var NewMap = require('./views/map.ios')
 // var CreateUser = require('./views/createUser.ios')

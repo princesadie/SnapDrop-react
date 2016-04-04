@@ -9,7 +9,6 @@ import React, {
   Component,
   StyleSheet,
   Dimensions,
-  Image,
   View,
   Image,
   TouchableHighlight,
@@ -19,20 +18,16 @@ import React, {
 
 } from 'react-native';
 
-import Firebase from 'firebase'
-
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
     }
-    this.email = this.getUserDetails();
+    this.email = this.currentUser().password.email;
   }
-  getUserDetails() {
+  currentUser() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
-    var authData = ref.getAuth();
-
-    return authData.password.email;
+    return ref.getAuth();
   }
 
   goUserRequests() {
@@ -77,20 +72,7 @@ class Profile extends Component {
   }
   //Create listener that'll check in realtime any changes to our USER
   // and pull data as they happen
-  listenForUser(userRef) {
-    userRef.on('value', (snap) => {
-      var user = {
-        username: snap.val().username,
-        long: snap.val().long,
-        lat: snap.val().lat,
-      }
-  //Our userData is dynamic and so we set its 'state' equal to the data
-  // our listener just pulled
-      this.setState({
-        userData: user
-      });
-    });
-  }
+
   //Make sure our component mounted and start up our listener
   componentDidMount() {
     this.listenForUser(this.userRef);
@@ -134,7 +116,7 @@ class Profile extends Component {
             style={styles.button}
             underlayColor='#9FA8DA'
             onPress={() => this.goFulfill()}>
-              <Text style={styles.buttonText}>{this.email}</Text>
+              <Text style={styles.buttonText}>Fulchangequest</Text>
           </TouchableHighlight>
         </View>
 
