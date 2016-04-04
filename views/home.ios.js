@@ -6,6 +6,8 @@
 // var ImageViewPage = require('./imageViewPage.ios')
 
 // var AppleMap = require('./appleMap.ios')
+var UserPage = require('./userPage.ios.js')
+
 var NativeImagePicker = require('./nativeImagePicker.ios')
 
 var SearchBar = require('./searchBar.ios')
@@ -80,7 +82,7 @@ class Home extends Component {
     })
   }
   goSearch() {
-    console.log('s')
+    console.log('swwwww')
     this.props.navigator.push({
       title: 'SearchBar',
       component: SearchBar,
@@ -119,6 +121,12 @@ class Home extends Component {
     })
   }
 
+  goUserPage() {
+    this.props.navigator.push({
+      title: 'User Page',
+      component: UserPage
+    })
+  }
   log() {
     console.log('I AM CONSOLE LOGGING')
   }
@@ -138,58 +146,63 @@ class Home extends Component {
           <View style={styles.buttonContainer}>
             <TouchableHighlight
               style={styles.button}
-              underlayColor='#9FA8DA'
               onPress={() => this.goCamera()}>
                 <Text style={styles.buttonText}>CAMERA</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
               style={styles.button}
-              underlayColor='#9FA8DA'
+              onPress={() => this.goUserPage()}>
+              <Text style={styles.buttonText}>User Page</Text>
+            </TouchableHighlight>
+
+
+            <TouchableHighlight
+              style={styles.button}
               onPress={() => this.goCreateUser()}>
                 <Text style={styles.buttonText}>Register</Text>
             </TouchableHighlight>
 
 
             <TouchableHighlight
-              style={styles.button}
               underlayColor='#9FA8DA'
+              style={styles.button}
               onPress={() => this.goMap()}>
                 <Text style={styles.buttonText}>MAP</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={styles.button}
               underlayColor='#9FA8DA'
+              style={styles.button}
               onPress={() => this.goNativeImagePicker()}>
                 <Text style={styles.buttonText}>IMAGE PICKER</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={styles.button}
               underlayColor='#9FA8DA'
+              style={styles.button}
               onPress={() => this.goProfile()}>
                 <Text style={styles.buttonText}>PROFILE</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={styles.button}
               underlayColor='#9FA8DA'
+              style={styles.button}
               onPress={() => this.goSearch()}>
                 <Text style={styles.buttonText}>Search Bar Biatch</Text>
             </TouchableHighlight>
 
 
             <TouchableHighlight
-              style={styles.button}
               underlayColor='#9FA8DA'
+              style={styles.button}
               onPress={() => this.goSwiper()}>
                 <Text style={styles.buttonText}>SWIPE VIEW</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={styles.button}
               underlayColor='#9FA8DA'
+              style={styles.button}
               onPress={() => this.updateUser()}>
                 <Text style={styles.buttonText}>UPDATE USER DATA</Text>
             </TouchableHighlight>
