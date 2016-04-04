@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'pink'
   },
   avatarContainer: {
     borderColor: '#9B9B9B',
