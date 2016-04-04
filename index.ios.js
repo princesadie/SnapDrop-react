@@ -2,12 +2,12 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-var Home = require('./views/home.ios')
-var SwiperView = require('./views/swiper.ios')
-var NewMap = require('./views/map.ios')
-var CreateUser = require('./views/createUser.ios')
-var Profile = require('./views/profile.ios')
-var RequestMade = require('./views/requestMade.ios')
+// var ProfilePage = require('./views/userPage.ios')
+// var Home = require('./views/home.ios')
+// var SwiperView = require('./views/swiper.ios')
+// var NewMap = require('./views/map.ios')
+// var CreateUser = require('./views/createUser.ios')
+var HomeSplash = require('./views/homeSplash.ios')
 
 import React, {
   AppRegistry,
@@ -25,7 +25,7 @@ class SnapDrop extends Component {
         initialRoute={{
           title: 'SnapDrop',
           navigationBarHidden: true,
-          component: RequestMade
+          component: HomeSplash
       }}/>
     );
   }

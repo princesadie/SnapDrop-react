@@ -1,5 +1,6 @@
 var React = require('react-native');
 var {
+  Image,
   StyleSheet,
   PropTypes,
   View,
@@ -8,11 +9,12 @@ var {
   TouchableOpacity,
   AlertIOS,
 } = React;
+
 import Firebase from 'firebase';
 var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
-var RequestMade = require('./requestMade.ios')
+var UserPage = require('./userPage.ios');
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -161,6 +163,15 @@ var MapDisplay = React.createClass({
       title: 'REQUESTS MADE',
       component: RequestMade,
       navigationBarHidden: true,
+    }
+  }
+
+  goToUserPage() {
+    console.log('cat')
+    this.props.navigator.push({
+      title: 'User Page',
+      navigationBarHidden: true,
+      component: UserPage,
     });
   },
 
@@ -171,6 +182,7 @@ var MapDisplay = React.createClass({
   render() {
     return (
       <View style={styles.container}>
+
         <MapView
           ref="map"
           mapType="terrain"
@@ -197,6 +209,17 @@ var MapDisplay = React.createClass({
           ))}
         </MapView>
 
+        <View style={styles.avatar1}>
+          <TouchableOpacity onPress={this.goToUserPage}>
+            <Image style = {styles.avatar} source = {require('../images/tiger.jpg')} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.avatar2}>
+          <TouchableOpacity onPress={this.goToSnapDropPage}>
+            <Image style = {styles.avatar} source = {require('../images/snapdrop.png')} />
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={this.sendRequest} style={[styles.bubble, styles.button]}>
             <Text style={styles.text}>SEND</Text>
@@ -206,6 +229,8 @@ var MapDisplay = React.createClass({
           </TouchableOpacity>
         </View>
       </View>
+
+
     );
   },
 });
@@ -217,6 +242,7 @@ var styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    marginTop: 20,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -250,6 +276,21 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 20,
     backgroundColor: 'transparent',
+  },
+  avatar1: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+  },
+  avatar2: {
+    position: 'absolute',
+    top: 5,
+    left: 5,
+  },
+  avatar: {
+    borderRadius: 25,
+    width: 50,
+    height: 50
   },
   text: {
     color: 'white',

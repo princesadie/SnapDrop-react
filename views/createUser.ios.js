@@ -4,6 +4,7 @@ var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var UserLogin = require('./userLogin.ios')
 var Map = require('./map.ios')
 
+
 const {
   StyleSheet,
   Text,
@@ -49,6 +50,7 @@ class createUser extends React.Component {
         } else {
           that.props.navigator.replace({
             title: 'Map',
+            navigationBarHidden: true,
             component: Map,
           });
         }
@@ -57,11 +59,13 @@ class createUser extends React.Component {
   }
 
   goUserLogin() {
-    this.props.navigator.replace({
+    this.props.navigator.push({
       title: 'Login',
+      navigationBarHidden: true,
       component: UserLogin
     })
   }
+
 
   selectPhotoTapped() {
      const options = {
