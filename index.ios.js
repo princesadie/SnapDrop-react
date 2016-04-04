@@ -9,6 +9,8 @@
 // var CreateUser = require('./views/createUser.ios')
 var HomeSplash = require('./views/homeSplash.ios')
 var RequestMade = require('./views/requestMade.ios')
+var FulfillRequest = require('./views/fulfillRequest.ios')
+
 
 import React, {
   AppRegistry,
