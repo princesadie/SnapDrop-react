@@ -2,37 +2,61 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-'use strict';
+
 import React, {
   Component,
   StyleSheet,
   Dimensions,
   View,
+  ListView,
   TouchableHighlight,
-  Text
+  Text,
+  AlertIOS,
 } from 'react-native';
 
 import Firebase from 'firebase'
 
 var seed = ['1', '2', '3'];
 
-const fulfillableOrders = new Firebase("https://snapdrop.firebaseio.com/fulfillments");
-
 class FulfillRequest extends Component {
-
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      fulfillableData: {}
+      fulfillments: [],
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      loaded: false
     };
-    this.fulfillableRef = this.getRef().child('0');
   }
 
-  listenForFulfillable(fulfillableRef) {
-    fulfillableRef.on('value'
+  grabFulfillments(inputDescription) {
+    var that = this;
+    var ref = new Firebase("https://snapdrop.firebaseio.com/fulfillments");
+    ref.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var description = childSnapshot.val().description;
+        if (description === inputDescription) {
+          that.state.fulfillments.push(childData);
+          console.log(that.state.fulfillments);
+          that.setState({
+            dataSource: that.state.dataSource.cloneWithRows(that.state.fulfillments), loaded: true
+          })
+        };
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.grabFulfillments("I took this from the Southeast corner");
   }
 
   render() {
+    if (!this.state.loaded) {
+      return this.renderLoadingView();
+    }
+
+    return (
+      <ListView dataSource={this.state.dataSource} renderRow={this.state.renderFullfillments} style={styles.listlistView} />
+    )
     return(
       <View>
         <View style={styles.container}>
