@@ -2,6 +2,7 @@ import React from 'react-native';
 import Firebase from 'firebase';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var Profile = require('./profile.ios')
+var Map = require('./map.ios')
 
 const {
   StyleSheet,
@@ -25,7 +26,8 @@ class userLogin extends React.Component {
     password: null
   };
 
-  userLogin() {
+  userLoginMethod() {
+    var that = this;
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     ref.authWithPassword({
       email: this.state.email,
@@ -35,10 +37,9 @@ class userLogin extends React.Component {
         console.log("Login Failed!", error);
         AlertIOS.prompt("fail",null);
       } else {
-        console.log("Authenticated successfully with payload:", authData.password.email),
-        this.props.navigator.push({
-          title: 'Profile Page',
-          component: Profile
+        that.props.navigator.replace({
+          title: 'Map',
+          component: Map,
         });
       }
     })}
@@ -47,9 +48,9 @@ class userLogin extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.textInputContainer}>
-          <TextInput style={styles.textEdit} placeholder="email" onChangeText={(email) => this.setState({email})}/>
-          <TextInput style={styles.textEdit} placeholder="password" onChangeText={(password) => this.setState({password})}/>
-          <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.userLogin()}>
+          <TextInput style={styles.textEdit} autoCapitalize={'none'} placeholder="email" onChangeText={(email) => this.setState({email})}/>
+          <TextInput style={styles.textEdit} autoCapitalize={'none'} secureTextEntry={true} placeholder="password" onChangeText={(password) => this.setState({password})}/>
+          <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.userLoginMethod()}>
               <Text style={styles.buttonText}>Login</Text>
           </TouchableHighlight>
           <Text style={styles.locationOutput}>
