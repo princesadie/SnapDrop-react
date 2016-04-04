@@ -4,20 +4,27 @@
  */
 
 import React, {
-  AppRegistry,
   Component,
-  Image,
-  ListView,
   StyleSheet,
-  Text,
+  Dimensions,
   View,
+  TouchableHighlight,
+  Text,
+  ListView,
+  AlertIOS,
 } from 'react-native';
+
+
+import Firebase from 'firebase'
+
+var list = ['0','2','3','1','2','3','1','2','3','1','2','3','1','2','9'];
+var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class RequestMade extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userRequests: [],
+      userRequests: null,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
@@ -35,41 +42,13 @@ class RequestMade extends Component {
     ref.once("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         var userUID = childSnapshot.val().userUID;
-        var childData = childSnapshot.val();
+        var childData = childSnapshot.val().description;
         if (userUID === inputUID) {
           that.state.userRequests.push(childData);
           console.log(that.state.userRequests);
-
-          that.setState({
-            dataSource: that.state.dataSource.cloneWithRows(that.state.userRequests),
-            loaded: true,
-          });
-
         };
       });
     });
-  }
-
-  renderLoadingView() {
-    return (
-      <View style={styles.container}>
-        <Text>
-          Loading requests...
-        </Text>
-      </View>
-    );
-  }
-
-  renderMovie(userRequest) {
-    return (
-      <View style={styles.container}>
-        <View style={styles.rightContainer}>
-          <Text style={styles.description}>{userRequest.description}</Text>
-          <Text style={styles.coords}>{userRequest.long}</Text>
-          <Text style={styles.coords}>{userRequest.lat}</Text>
-        </View>
-      </View>
-    );
   }
 
   render() {
@@ -86,6 +65,25 @@ class RequestMade extends Component {
     );
   }
 
+  renderLoadingView() {
+    return (
+      <View style={styles.container}>
+        <Text>
+          Loading requests...
+        </Text>
+      </View>
+    );
+  }
+
+  renderMovie(request) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.rightContainer}>
+          <Text style={styles.title}>{request.description}</Text>
+        </View>
+      </View>
+    );
+  }
 }
 
 var styles = StyleSheet.create({
@@ -94,17 +92,17 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#F5FCFF',
   },
   rightContainer: {
     flex: 1,
   },
-  description: {
+  title: {
     fontSize: 20,
     marginBottom: 8,
     textAlign: 'center',
   },
-  coords: {
+  year: {
     textAlign: 'center',
   },
   thumbnail: {
@@ -113,7 +111,7 @@ var styles = StyleSheet.create({
   },
   listView: {
     paddingTop: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#F5FCFF',
   },
 });
 
