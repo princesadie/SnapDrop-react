@@ -3,9 +3,7 @@
  * https://github.com/facebook/react-native
  */
 import Firebase from 'firebase';
-var Deeper = require('./deeper.ios');
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
-
 
 import React, {
   Component,
@@ -13,12 +11,15 @@ import React, {
   Dimensions,
   Image,
   View,
+  Image,
   TouchableHighlight,
   Text,
   PixelRatio,
   TouchableOpacity,
 
 } from 'react-native';
+
+import Firebase from 'firebase'
 
 class Profile extends Component {
   constructor(props) {
@@ -36,15 +37,23 @@ class Profile extends Component {
 
   goUserRequests() {
     this.props.navigator.push({
-      title: 'Register',
+      title: 'Your Requests',
       component: GoUserRequests
     })
   }
 
   goFulfill() {
     this.props.navigator.push({
-      title: 'Register',
+      title: 'Fulfill Requests',
       component: GoFulfill
+    })
+  }
+
+  makeRequest(){
+    console.log("made a req");
+    this.props.navigator.pop({
+      title: 'Map',
+      component: Map
     })
   }
 
@@ -62,13 +71,45 @@ class Profile extends Component {
        allowsEditing: true
      };
   }
-  goNext() {
-    this.props.navigator.push({
-      title: 'One More Down',
-      component: Deeper,
-      passProps: {dataToBePassed: 'We go one more down the stack', newInformation: this.props.dataToBePassed}
-    })
+  //Create a new reference to our database directly accessing USERS
+  getRef() {
+    return new Firebase("https://snapdrop.firebaseio.com/users");
   }
+  //Create listener that'll check in realtime any changes to our USER
+  // and pull data as they happen
+  listenForUser(userRef) {
+    userRef.on('value', (snap) => {
+      var user = {
+        username: snap.val().username,
+        long: snap.val().long,
+        lat: snap.val().lat,
+      }
+  //Our userData is dynamic and so we set its 'state' equal to the data
+  // our listener just pulled
+      this.setState({
+        userData: user
+      });
+    });
+  }
+  //Make sure our component mounted and start up our listener
+  componentDidMount() {
+    this.listenForUser(this.userRef);
+  }
+
+  grabCertain(inputUID) {
+    var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
+    ref.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var userUID = childSnapshot.val().userUID;
+        var childData = childSnapshot.val();
+        if (userUID === inputUID) {
+          console.log(childData);
+          return true
+        };
+      });
+    });
+  }
+
 
   render() {
     return (
@@ -82,7 +123,6 @@ class Profile extends Component {
             </View>
           </TouchableOpacity>
         </View>
-
         <View style={styles.buttonContainer}>
           <TouchableHighlight
             style={styles.button}

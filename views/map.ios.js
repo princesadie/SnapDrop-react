@@ -1,5 +1,6 @@
 var React = require('react-native');
 var {
+  Image,
   StyleSheet,
   PropTypes,
   View,
@@ -8,10 +9,12 @@ var {
   TouchableOpacity,
   AlertIOS,
 } = React;
+
 import Firebase from 'firebase';
 var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
+var UserPage = require('./userPage.ios');
 
 var ref = new Firebase("https://snapdrop.firebaseio.com");
 var authData = ref.getAuth();
@@ -134,11 +137,15 @@ var MapDisplay = React.createClass({
   },
 
   sendRequestToFireBase() {
-    var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
-    userRef.update({
-      requestDescription: this.state.request.description,
-      requestLat: this.state.markers[0].coordinate.latitude,
-      requestLong: this.state.markers[0].coordinate.longitude
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+
+    var requestsRef = new Firebase("https://snapdrop.firebaseio.com/requests");
+    requestsRef.push({
+      description: this.state.request.description,
+      lat: this.state.markers[0].coordinate.latitude,
+      long: this.state.markers[0].coordinate.longitude,
+      userUID: authData.uid
     })
   },
 
@@ -167,6 +174,26 @@ var MapDisplay = React.createClass({
     });
   },
 
+  sendRequest() {
+    //if no pin we need to make a pop up
+    // if description is empty we should just pass empty string
+    this.sendRequestToFireBase();
+    this.props.navigator.push({
+      title: 'REQUESTS MADE',
+      component: RequestMade,
+      navigationBarHidden: true,
+    }
+  }
+
+  goToUserPage() {
+    console.log('cat')
+    this.props.navigator.push({
+      title: 'User Page',
+      navigationBarHidden: true,
+      component: UserPage,
+    });
+  },
+
   prompt() {
     AlertIOS.prompt('WRITE DESCRIPTION', null, this.saveResponse)
   },
@@ -174,6 +201,7 @@ var MapDisplay = React.createClass({
   render() {
     return (
       <View style={styles.container}>
+
         <MapView
           ref="map"
           mapType="terrain"
@@ -200,15 +228,28 @@ var MapDisplay = React.createClass({
           ))}
         </MapView>
 
+        <View style={styles.avatar1}>
+          <TouchableOpacity onPress={this.goToUserPage}>
+            <Image style = {styles.avatar} source = {require('../images/tiger.jpg')} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.avatar2}>
+          <TouchableOpacity onPress={this.goToSnapDropPage}>
+            <Image style = {styles.avatar} source = {require('../images/snapdrop.png')} />
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this.sendRequestToFireBase} style={[styles.bubble, styles.button]}>
+          <TouchableOpacity onPress={this.sendRequest} style={[styles.bubble, styles.button]}>
             <Text style={styles.text}>SEND</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.animateRandom} style={[styles.bubble, styles.button]}>
-            <Text style={styles.text}>MOVE</Text>
+            <Text style={styles.text}>CENTER</Text>
           </TouchableOpacity>
         </View>
       </View>
+
+
     );
   },
 });
@@ -220,6 +261,7 @@ var styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    marginTop: 20,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -244,7 +286,7 @@ var styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   button: {
-    width: 80,
+    width: 140,
     paddingHorizontal: 12,
     alignItems: 'center',
     marginHorizontal: 10,
@@ -253,6 +295,21 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 20,
     backgroundColor: 'transparent',
+  },
+  avatar1: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+  },
+  avatar2: {
+    position: 'absolute',
+    top: 5,
+    left: 5,
+  },
+  avatar: {
+    borderRadius: 25,
+    width: 50,
+    height: 50
   },
   text: {
     color: 'white',
