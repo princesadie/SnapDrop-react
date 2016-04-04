@@ -12,6 +12,7 @@ import Firebase from 'firebase';
 var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
+var RequestMade = require('./requestMade.ios')
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -115,11 +116,15 @@ var MapDisplay = React.createClass({
   },
 
   sendRequestToFireBase() {
-    var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
-    userRef.update({
-      requestDescription: this.state.request.description,
-      requestLat: this.state.markers[0].coordinate.latitude,
-      requestLong: this.state.markers[0].coordinate.longitude
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+
+    var requestsRef = new Firebase("https://snapdrop.firebaseio.com/requests");
+    requestsRef.push({
+      description: this.state.request.description,
+      lat: this.state.markers[0].coordinate.latitude,
+      long: this.state.markers[0].coordinate.longitude,
+      userUID: authData.uid
     })
   },
 
@@ -145,6 +150,17 @@ var MapDisplay = React.createClass({
         long: this.state.markers[0].coordinate.longitude,
         description: promptValue
       }
+    });
+  },
+
+  sendRequest() {
+    //if no pin we need to make a pop up
+    // if description is empty we should just pass empty string
+    this.sendRequestToFireBase();
+    this.props.navigator.push({
+      title: 'REQUESTS MADE',
+      component: RequestMade,
+      navigationBarHidden: true,
     });
   },
 
@@ -182,11 +198,11 @@ var MapDisplay = React.createClass({
         </MapView>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this.sendRequestToFireBase} style={[styles.bubble, styles.button]}>
+          <TouchableOpacity onPress={this.sendRequest} style={[styles.bubble, styles.button]}>
             <Text style={styles.text}>SEND</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.animateRandom} style={[styles.bubble, styles.button]}>
-            <Text style={styles.text}>MOVE</Text>
+            <Text style={styles.text}>CENTER</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -225,7 +241,7 @@ var styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   button: {
-    width: 80,
+    width: 140,
     paddingHorizontal: 12,
     alignItems: 'center',
     marginHorizontal: 10,

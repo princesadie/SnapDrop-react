@@ -7,6 +7,7 @@
 var Home = require('./views/home.ios')
 var SwiperView = require('./views/swiper.ios')
 var newMap = require('./views/map.ios')
+var RequestMade = require('./views/requestMade.ios')
 
 import React, {
   AppRegistry,
@@ -23,7 +24,8 @@ class SnapDrop extends Component {
         style={styles.container}
         initialRoute={{
           title: 'SnapDrop',
-          component: Home
+          navigationBarHidden: true,
+          component: newMap
       }}/>
     );
   }
@@ -32,6 +34,7 @@ class SnapDrop extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 20,
   },
 });
 
