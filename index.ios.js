@@ -9,7 +9,7 @@
 // var CreateUser = require('./views/createUser.ios')
 var HomeSplash = require('./views/homeSplash.ios')
 var RequestMade = require('./views/requestMade.ios')
-var fulfillRequest = require('./views/fulfillRequest.ios')
+var FulfillRequest = require('./views/fulfillRequest.ios')
 
 
 import React, {
@@ -28,7 +28,7 @@ class SnapDrop extends Component {
         initialRoute={{
           title: 'SnapDrop',
           navigationBarHidden: true,
-          component: fulfillRequest
+          component: FulfillRequest
       }}/>
     );
   }
