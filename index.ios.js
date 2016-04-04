@@ -2,7 +2,6 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-
 // var ProfilePage = require('./views/userPage.ios')
 // var Home = require('./views/home.ios')
 // var SwiperView = require('./views/swiper.ios')
@@ -35,6 +34,7 @@ class SnapDrop extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 20,
   },
 });
 

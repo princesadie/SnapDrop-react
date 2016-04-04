@@ -2,17 +2,11 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-
-// var ImageViewPage = require('./imageViewPage.ios')
-
-// var AppleMap = require('./appleMap.ios')
 var UserPage = require('./userPage.ios.js')
 var NativeImagePicker = require('./nativeImagePicker.ios')
 var CreateUser = require('./createUser.ios')
 var UserLogin = require('./userLogin.ios')
-// const Firebase = require('firebase');
 var CameraView = require('./camera.ios')
-// var Geolocation = require('./views/geolocation.ios')
 var Profile = require('./profile.ios')
 var SwiperView = require('./swiper.ios')
 
