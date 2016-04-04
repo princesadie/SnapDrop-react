@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-// var Map = require('./map.ios.js')
-// var FulfillRequest = require('./fulfillRequest.ios.js')
-
 import React, {
   Component,
   StyleSheet,
@@ -12,10 +5,43 @@ import React, {
   View,
   TouchableHighlight,
   Text,
-  Firebase
 } from 'react-native';
 
+import Firebase from 'firebase';
+
 class UserPage extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      userData: {}
+    };
+  }
+
+  componentDidMount() {
+    this.grabUserRequests(this.currentUser().uid);
+  }
+
+  currentUser() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    return ref.getAuth();
+  }
+
+  grabUserRequests(inputUID) {
+    var that = this;
+    var ref = new Firebase("https://snapdrop.firebaseio.com/users");
+    ref.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var userUID = childSnapshot.val().userUID;
+        var childData = childSnapshot.val();
+        if (userUID === inputUID) {
+          that.setState({
+            userData: childData
+          });
+        };
+      });
+    });
+  }
 
   makeRequest(){
     console.log("made a req");
@@ -38,7 +64,8 @@ class UserPage extends Component {
       <View>
         <View style={styles.container}>
           <View style={styles.content}>
-            <Text style={styles.welcome}>dddddd</Text>
+          <Text style={styles.welcome}>{this.state.userData.firstName}</Text>
+
             <View style={styles.buttonContainer}>
               <TouchableHighlight
                 style={styles.button}

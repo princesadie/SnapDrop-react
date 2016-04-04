@@ -2,7 +2,8 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-var Deeper = require('./deeper.ios')
+import Firebase from 'firebase';
+var ImagePickerManager = require('NativeModules').ImagePickerManager;
 
 import React, {
   Component,
@@ -11,20 +12,59 @@ import React, {
   View,
   Image,
   TouchableHighlight,
-  Text
+  Text,
+  PixelRatio,
+  TouchableOpacity,
 
 } from 'react-native';
-
-import Firebase from 'firebase'
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userData: {}
-    };
-    this.userRef = this.getRef().child('0');
-    this.imageRef = new Firebase("https://snapdrop.firebaseio.com/users/0/requestImage/uri");
+    }
+    this.email = this.currentUser().password.email;
+  }
+  currentUser() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    return ref.getAuth();
+  }
+
+  goUserRequests() {
+    this.props.navigator.push({
+      title: 'Your Requests',
+      component: GoUserRequests
+    })
+  }
+
+  goFulfill() {
+    this.props.navigator.push({
+      title: 'Fulfill Requests',
+      component: GoFulfill
+    })
+  }
+
+  makeRequest(){
+    console.log("made a req");
+    this.props.navigator.pop({
+      title: 'Map',
+      component: Map
+    })
+  }
+
+  selectPhotoTapped() {
+     const options = {
+       title: 'Photo Picker',
+       takePhotoButtonTitle: 'Take Photo...',
+       chooseFromLibraryButtonTitle: 'Choose from Library...',
+       quality: 0.5,
+       maxWidth: 300,
+       maxHeight: 300,
+       storageOptions: {
+         skipBackup: true
+       },
+       allowsEditing: true
+     };
   }
   //Create a new reference to our database directly accessing USERS
   getRef() {
@@ -32,31 +72,10 @@ class Profile extends Component {
   }
   //Create listener that'll check in realtime any changes to our USER
   // and pull data as they happen
-  listenForUser(userRef) {
-    userRef.on('value', (snap) => {
-      var user = {
-        username: snap.val().username,
-        long: snap.val().long,
-        lat: snap.val().lat,
-      }
-  //Our userData is dynamic and so we set its 'state' equal to the data
-  // our listener just pulled
-      this.setState({
-        userData: user
-      });
-    });
-  }
+
   //Make sure our component mounted and start up our listener
   componentDidMount() {
     this.listenForUser(this.userRef);
-  }
-
-  goNext() {
-    this.props.navigator.push({
-      title: 'One More Down',
-      component: Deeper,
-      passProps: {dataToBePassed: 'We go one more down the stack', newInformation: this.props.dataToBePassed}
-    })
   }
 
   grabCertain(inputUID) {
@@ -73,23 +92,34 @@ class Profile extends Component {
     });
   }
 
+
   render() {
     return (
-      <View>
-        <View style={styles.container}>
-          <View style={styles.content}>
-            <Image style={styles.avatar} source={this.props.sourceIm} />
-            <Text style={styles.welcome}>{this.props.dataToBePassed}</Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableHighlight
-              style={styles.button}
-              underlayColor='#9FA8DA'
-              onPress={() => this.grabCertain('6b67698b-3410-4507-ab1f-040b47368b4a')}>
-                <Text style={styles.buttonText}>GO DEEPER</Text>
-            </TouchableHighlight>
-          </View>
+      <View style={styles.container}>
+        <View>
+          <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+            <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
+            { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+              <Image style={styles.avatar} source={this.state.avatarSource} />
+            }
+            </View>
+          </TouchableOpacity>
         </View>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9FA8DA'
+            onPress={() => this.goUserRequests()}>
+              <Text style={styles.buttonText}>View Your Requests</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9FA8DA'
+            onPress={() => this.goFulfill()}>
+              <Text style={styles.buttonText}>Fulchangequest</Text>
+          </TouchableHighlight>
+        </View>
+
       </View>
     );
   }
@@ -98,7 +128,20 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'pink'
+  },
+  avatarContainer: {
+    borderColor: '#9B9B9B',
+    borderWidth: 1 / PixelRatio.get(),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150
   },
   content: {
     flex: 1,

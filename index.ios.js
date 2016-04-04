@@ -26,7 +26,7 @@ class SnapDrop extends Component {
         initialRoute={{
           title: 'SnapDrop',
           navigationBarHidden: true,
-          component: RequestMade
+          component: HomeSplash
       }}/>
     );
   }
