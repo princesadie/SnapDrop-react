@@ -9,7 +9,15 @@
 var UserPage = require('./userPage.ios.js')
 var NativeImagePicker = require('./nativeImagePicker.ios')
 var CreateUser = require('./createUser.ios')
+var UserLogin = require('./userLogin.ios')
+// const Firebase = require('firebase');
+var CameraView = require('./camera.ios')
+// var Geolocation = require('./views/geolocation.ios')
+var Profile = require('./profile.ios')
+var SwiperView = require('./swiper.ios')
+
 var MapView = require('./map.ios')
+
 
 import React, {
   Component,
@@ -63,6 +71,21 @@ class Home extends Component {
     this.props.navigator.push({
       title: 'Register',
       component: CreateUser
+    })
+  }
+
+  goUserLogin() {
+    this.props.navigator.push({
+      title: 'Login',
+      component: UserLogin
+    })
+  }
+  goSearch() {
+    console.log('s')
+    this.props.navigator.push({
+      title: 'SearchBar',
+      component: SearchBar,
+      passProps: {dataToBePassed: 'Some data we passed along!'}
     })
   }
 
@@ -120,6 +143,12 @@ class Home extends Component {
                 <Text style={styles.text}>Register</Text>
             </TouchableHighlight>
 
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.goUserLogin()}>
+                <Text style={styles.buttonText}>Login</Text>
+            </TouchableHighlight>
 
             <TouchableHighlight
               style={[styles.bubble, styles.button]}

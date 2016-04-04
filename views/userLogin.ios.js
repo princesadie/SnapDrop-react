@@ -1,7 +1,8 @@
 import React from 'react-native';
-var ImagePickerManager = require('NativeModules').ImagePickerManager;
 import Firebase from 'firebase';
-var UserLogin = require('./userLogin.ios')
+var ImagePickerManager = require('NativeModules').ImagePickerManager;
+var Profile = require('./profile.ios')
+
 const {
   StyleSheet,
   Text,
@@ -11,28 +12,34 @@ const {
   TouchableHighlight,
   TextInput,
   Image,
+  AlertIOS,
   NativeModules: {
     ImagePickerManager
   }
 } = React;
 
+class userLogin extends React.Component {
 
-class createUser extends React.Component {
   state = {
     email: null,
     password: null
   };
 
-  addUser() {
+  userLogin() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
-    ref.createUser({
+    ref.authWithPassword({
       email: this.state.email,
       password: this.state.password
-    }, function(error, userData) {
+    }, function(error, authData) {
       if (error) {
-        console.log("Error creating user:", error);
+        console.log("Login Failed!", error);
+        AlertIOS.prompt("fail",null);
       } else {
-        console.log("Successfully created user account with uid:", userData.uid)
+        console.log("Authenticated successfully with payload:", authData.password.email),
+        this.props.navigator.push({
+          title: 'Profile Page',
+          component: Profile
+        });
       }
     })}
 
@@ -42,9 +49,12 @@ class createUser extends React.Component {
         <View style={styles.textInputContainer}>
           <TextInput style={styles.textEdit} placeholder="email" onChangeText={(email) => this.setState({email})}/>
           <TextInput style={styles.textEdit} placeholder="password" onChangeText={(password) => this.setState({password})}/>
-          <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.addUser()}>
-              <Text style={styles.buttonText}>Register</Text>
+          <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.userLogin()}>
+              <Text style={styles.buttonText}>Login</Text>
           </TouchableHighlight>
+          <Text style={styles.locationOutput}>
+            {this.state.firstName}
+          </Text>
         </View>
       </View>
     );
@@ -87,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = createUser;
+module.exports = userLogin;
