@@ -13,6 +13,13 @@ var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
 
+var ref = new Firebase("https://snapdrop.firebaseio.com");
+var authData = ref.getAuth();
+
+if (authData) {
+  console.log("Authenticated user with uid:", authData.password.email);
+}
+
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
 const LONGITUDE = -87.637604;
@@ -43,6 +50,17 @@ var MapDisplay = React.createClass({
     })
   },
 
+  getUserDetails() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+
+    if (authData) {
+      console.log("Authenticated user with uid:", authData.password.email);
+      console.log("Authenticated user with uid:", authData.uid);
+    }
+
+  },
+
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -67,6 +85,7 @@ var MapDisplay = React.createClass({
       });
       this.updateUserLocationInFirebase();
     });
+     this.getUserDetails();
   },
 
   componentWillUnmount() {

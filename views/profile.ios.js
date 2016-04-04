@@ -2,20 +2,66 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
+import Firebase from 'firebase';
+var Deeper = require('./deeper.ios');
+var ImagePickerManager = require('NativeModules').ImagePickerManager;
 
-var Deeper = require('./deeper.ios')
 
 import React, {
   Component,
   StyleSheet,
   Dimensions,
+  Image,
   View,
   TouchableHighlight,
-  Text
+  Text,
+  PixelRatio,
+  TouchableOpacity,
 
 } from 'react-native';
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+    this.email = this.getUserDetails();
+  }
+  getUserDetails() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+
+    return authData.password.email;
+  }
+
+  goUserRequests() {
+    this.props.navigator.push({
+      title: 'Register',
+      component: GoUserRequests
+    })
+  }
+
+  goFulfill() {
+    this.props.navigator.push({
+      title: 'Register',
+      component: GoFulfill
+    })
+  }
+
+  selectPhotoTapped() {
+     const options = {
+       title: 'Photo Picker',
+       takePhotoButtonTitle: 'Take Photo...',
+       chooseFromLibraryButtonTitle: 'Choose from Library...',
+       quality: 0.5,
+       maxWidth: 300,
+       maxHeight: 300,
+       storageOptions: {
+         skipBackup: true
+       },
+       allowsEditing: true
+     };
+  }
   goNext() {
     this.props.navigator.push({
       title: 'One More Down',
@@ -26,21 +72,32 @@ class Profile extends Component {
 
   render() {
     return (
-      <View>
-        <View style={styles.container}>
-          <View style={styles.content}>
-            <Image style={styles.avatar} source={this.props.sourceIm} />
-            <Text style={styles.welcome}>{this.props.dataToBePassed}</Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableHighlight
-              style={styles.button}
-              underlayColor='#9FA8DA'
-              onPress={() => this.goNext()}>
-                <Text style={styles.buttonText}>GO DEEPER</Text>
-            </TouchableHighlight>
-          </View>
+      <View style={styles.container}>
+        <View>
+          <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+            <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
+            { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+              <Image style={styles.avatar} source={this.state.avatarSource} />
+            }
+            </View>
+          </TouchableOpacity>
         </View>
+
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9FA8DA'
+            onPress={() => this.goUserRequests()}>
+              <Text style={styles.buttonText}>View Your Requests</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9FA8DA'
+            onPress={() => this.goFulfill()}>
+              <Text style={styles.buttonText}>{this.email}</Text>
+          </TouchableHighlight>
+        </View>
+
       </View>
     );
   }
@@ -49,7 +106,20 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white'
+  },
+  avatarContainer: {
+    borderColor: '#9B9B9B',
+    borderWidth: 1 / PixelRatio.get(),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150
   },
   content: {
     flex: 1,
