@@ -16,8 +16,6 @@ import React, {
 
 import Firebase from 'firebase'
 
-var seed = ['1', '2', '3'];
-
 class FulfillRequest extends Component {
   constructor(props) {
     super(props)

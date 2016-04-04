@@ -4,28 +4,29 @@
  */
 
 import React, {
+  AppRegistry,
   Component,
-  StyleSheet,
-  Dimensions,
-  View,
-  TouchableHighlight,
-  Text,
+  Image,
   ListView,
-  AlertIOS,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
-
-import Firebase from 'firebase'
-
-var list = ['0','2','3','1','2','3','1','2','3','1','2','3','1','2','9'];
-var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class RequestMade extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       userRequests: [],
-      dataSource: ds.cloneWithRows(userRequests)
-    }
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
+      loaded: false,
+    };
+  }
+
+  componentDidMount() {
+    this.grabUserRequests("6b67698b-3410-4507-ab1f-040b47368b4a");
   }
 
   grabUserRequests(inputUID) {
@@ -38,113 +39,81 @@ class RequestMade extends Component {
         if (userUID === inputUID) {
           that.state.userRequests.push(childData);
           console.log(that.state.userRequests);
+
+          that.setState({
+            dataSource: that.state.dataSource.cloneWithRows(that.state.userRequests),
+            loaded: true,
+          });
+
         };
       });
     });
   }
 
-  componentDidMount() {
-    this.grabUserRequests("6b67698b-3410-4507-ab1f-040b47368b4a");
+  renderLoadingView() {
+    return (
+      <View style={styles.container}>
+        <Text>
+          Loading requests...
+        </Text>
+      </View>
+    );
   }
 
-  render() {
-    return(
-      <View>
-        <View style={styles.container}>
-          <View style={styles.navBar}>
-            <Text style={styles.feed}>N</Text>
-            <Text style={styles.profile}>P</Text>
-          </View>
-          <View style={styles.rowContainer}>
-            <ListView
-              dataSource={this.state.dataSource}
-              bounces={true}
-              renderRow={(rowData) =>
-                <View style={styles.row}>
-                  <View>
-                    <Text>{rowData}</Text>
-                  </View>
-                  <View style={styles.buttonContainer}>
-                    <TouchableHighlight
-                      style={styles.button}
-                      underlayColor='black'
-                      onPress={() => this.goNext()}>
-                        <Text>View Request</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                      style={styles.button}
-                      underlayColor='black'
-                      onPress={() => this.goNext()}>
-                        <Text>Complete</Text>
-                    </TouchableHighlight>
-                  </View>
-                </View>
-              }
-            />
-          </View>
+  renderMovie(userRequest) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.rightContainer}>
+          <Text style={styles.description}>{userRequest.description}</Text>
+          <Text style={styles.coords}>{userRequest.long}</Text>
+          <Text style={styles.coords}>{userRequest.lat}</Text>
         </View>
       </View>
     );
   }
+
+  render() {
+    if (!this.state.loaded) {
+      return this.renderLoadingView();
+    }
+
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderMovie}
+        style={styles.listView}
+      />
+    );
+  }
+
 }
-const styles = StyleSheet.create({
+
+var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'rgba(0,0,0,0)',
-  },
-  button: {
-    marginLeft: -100,
-    height: 36,
-    backgroundColor: 'black',
-  },
-  feed: {
-    marginTop: 30,
-    marginLeft: 30,
-  },
-  profile: {
-    marginTop: 30,
-    marginLeft: 290,
-  },
-  navBar: {
-    flex: 1,
     flexDirection: 'row',
-  },
-  rowContainer: {
-    marginTop: 30,
-  },
-  row: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'green',
-    height: 80,
-    margin: 10,
-  },
-  content: {
-    flex: 1,
-    height: 50,
-    flexDirection: 'column',
-    marginTop: 200,
-  },
-  welcome: {
-    marginTop: 20,
-    textAlign: 'center',
-  },
-  button: {
-    marginTop: 10,
     justifyContent: 'center',
-    backgroundColor: '#7986CB',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
-  buttonText: {
-    color: 'white',
+  rightContainer: {
+    flex: 1,
+  },
+  description: {
+    fontSize: 20,
+    marginBottom: 8,
     textAlign: 'center',
-    marginTop: 10,
-    fontWeight: 'bold',
   },
-  buttonContainer:{
-    marginTop: 10,
-    marginLeft: 250,
-    backgroundColor: 'green',
+  coords: {
+    textAlign: 'center',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#fff',
   },
 });
 
