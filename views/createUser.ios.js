@@ -2,6 +2,7 @@ import React from 'react-native';
 import Firebase from 'firebase';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var UserLogin = require('./userLogin.ios')
+var Map = require('./map.ios')
 
 const {
   StyleSheet,
@@ -35,7 +36,8 @@ class createUser extends React.Component {
       console.log(this.setState({errorMessage: 'Your passwords do not match'}));
     }
     else {
-    var ref = new Firebase("https://snapdrop.firebaseio.com");
+      var that = this;
+      var ref = new Firebase("https://snapdrop.firebaseio.com");
       ref.createUser({
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -45,7 +47,10 @@ class createUser extends React.Component {
         if (error) {
           console.log("Error creating user:", error);
         } else {
-          console.log("Successfully created user account with uid:", userData.uid)
+          that.props.navigator.replace({
+            title: 'Map',
+            component: Map,
+          });
         }
       })
     }
