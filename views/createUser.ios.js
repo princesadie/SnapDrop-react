@@ -36,7 +36,9 @@ class createUser extends React.Component {
     }
     else {
       var that = this;
+      var usersRef = new Firebase("https://snapdrop.firebaseio.com/users");
       var ref = new Firebase("https://snapdrop.firebaseio.com");
+
       ref.createUser({
         email: this.state.email,
         password: this.state.password
@@ -44,6 +46,19 @@ class createUser extends React.Component {
         if (error) {
           console.log("Error creating user:", error);
         } else {
+
+          usersRef.push({
+            firstName: that.state.firstName,
+            lastName: that.state.lastName,
+            profileImage: that.state.avatarSource,
+            userUID: userData.uid
+          }),
+
+          ref.authWithPassword({
+            email: that.state.email,
+            password: that.state.password
+          }),
+
           that.props.navigator.replace({
             title: 'Map',
             navigationBarHidden: true,
@@ -90,13 +105,20 @@ class createUser extends React.Component {
          console.log('User tapped custom button: ', response.customButton);
        }
        else {
-         // You can display the image using either:
-         const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
-         // const source = {uri: response.uri.replace('file://', ''), isStatic: true};
-         console.log('---------------------------------')
-         this.setState({
-           avatarSource: source
-         });
+          const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+
+          var resData = response.data
+          console.log('response data')
+          console.log(resData)
+
+          var imageData = resData.replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "").replace(/\f/g, "").replace(/=/g, "");
+          var imagereplaced = imageData.replace(/=/g, "");
+          var obj = "data:image/jpeg;base64," + imagereplaced;
+          var objJson = JSON.stringify({"obj": obj})
+
+          this.setState({
+            avatarSource: objJson
+          });
        }
      });
    }
