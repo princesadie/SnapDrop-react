@@ -2,8 +2,8 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-var Map = require('./map.ios.js')
-var FulfillRequest = require('./fulfillRequest.ios.js')
+// var Map = require('./map.ios.js')
+// var FulfillRequest = require('./fulfillRequest.ios.js')
 
 import React, {
   Component,
@@ -13,14 +13,13 @@ import React, {
   TouchableHighlight,
   Text,
   Firebase
-
 } from 'react-native';
 
 class UserPage extends Component {
 
   makeRequest(){
     console.log("made a req");
-    this.props.navigator.push({
+    this.props.navigator.pop({
       title: 'Map',
       component: Map
     })

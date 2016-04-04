@@ -3,6 +3,7 @@ import Firebase from 'firebase';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var Profile = require('./profile.ios')
 var Map = require('./map.ios')
+var Register = require('./createUser.ios')
 
 const {
   StyleSheet,
@@ -25,6 +26,11 @@ class userLogin extends React.Component {
     email: null,
     password: null
   };
+
+  goRegister() {
+    this.props.navigator.popN(1)
+  }
+
 
   userLoginMethod() {
     var that = this;
@@ -53,9 +59,12 @@ class userLogin extends React.Component {
           <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.userLoginMethod()}>
               <Text style={styles.buttonText}>Login</Text>
           </TouchableHighlight>
-          <Text style={styles.locationOutput}>
-            {this.state.firstName}
-          </Text>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9FA8DA'
+            onPress={() => this.goRegister()}>
+              <Text style={styles.buttonText}>Register</Text>
+          </TouchableHighlight>
         </View>
       </View>
     );
