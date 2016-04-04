@@ -11,8 +11,7 @@ import React, {
   Dimensions,
   View,
   TouchableHighlight,
-  Text,
-  Firebase
+  Text
 
 } from 'react-native';
 
@@ -30,6 +29,7 @@ class Profile extends Component {
       <View>
         <View style={styles.container}>
           <View style={styles.content}>
+            <Image style={styles.avatar} source={this.props.sourceIm} />
             <Text style={styles.welcome}>{this.props.dataToBePassed}</Text>
           </View>
           <View style={styles.buttonContainer}>

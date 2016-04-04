@@ -11,6 +11,7 @@ var {
 import Firebase from 'firebase';
 var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
+var CustomCallout = require('./customCallout.ios');
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -104,7 +105,8 @@ var MapDisplay = React.createClass({
             coordinate: e.nativeEvent.coordinate,
             key: id++,
             title: 'PIN',
-            description: 'DESCRIPTION'
+            description: 'DESCRIPTION',
+            color: 'rgba(236,64,122,1)',
           },
         ],
       });
@@ -127,9 +129,13 @@ var MapDisplay = React.createClass({
         ...this.state.markers[0],
         {
           coordinate: e.nativeEvent.coordinate,
+          key: id++,
+          color: 'rgba(236,64,122,1)',
         },
       ],
     })
+    console.log(this.state.markers[0].key)
+    console.log(this.state.markers)
   },
 
   saveResponse(promptValue) {
@@ -140,6 +146,10 @@ var MapDisplay = React.createClass({
         description: promptValue
       }
     });
+  },
+
+  prompt() {
+    AlertIOS.prompt('WRITE DESCRIPTION', null, this.saveResponse)
   },
 
   render() {
@@ -160,27 +170,23 @@ var MapDisplay = React.createClass({
               coordinate={marker.coordinate}
               pinColor={marker.color}
               onDragEnd={this.updateMarkerCoordinate}
-              onSelect={() => AlertIOS.prompt('WRITE DESCRIPTION', null, this.saveResponse)}
+              // onSelect={() => AlertIOS.prompt('WRITE DESCRIPTION', null, this.saveResponse)}
               draggable>
-                <MapView.Callout>
-                  <View>
-                    <Text>{this.state.markers[0].coordinate.latitude.toPrecision(7)},{this.state.markers[0].coordinate.longitude.toPrecision(7)}</Text>
-                  </View>
+                <MapView.Callout tooltip>
+                  <CustomCallout>
+                    <Text style={styles.text} onPress={this.prompt}>{this.state.markers[0].coordinate.latitude.toPrecision(7)},{this.state.markers[0].coordinate.longitude.toPrecision(7)}</Text>
+                  </CustomCallout>
                 </MapView.Callout>
             </MapView.Marker>
           ))}
         </MapView>
-        <View style={[styles.bubble, styles.latlng]}>
-          <Text style={{ textAlign: 'center'}}>
-            {`${this.state.region.latitude.toPrecision(7)}, ${this.state.region.longitude.toPrecision(7)}`}
-          </Text>
-        </View>
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={this.sendRequestToFireBase} style={[styles.bubble, styles.button]}>
-            <Text>SEND</Text>
+            <Text style={styles.text}>SEND</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.animateRandom} style={[styles.bubble, styles.button]}>
-            <Text>MOVE</Text>
+            <Text style={styles.text}>MOVE</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -205,8 +211,11 @@ var styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  callout: {
+    backgroundColor: 'rgba(236,64,122,0.7)',
+  },
   bubble: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
+    backgroundColor: 'rgba(236,64,122,0.7)',
     paddingHorizontal: 18,
     paddingVertical: 12,
     borderRadius: 20,
@@ -225,6 +234,9 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 20,
     backgroundColor: 'transparent',
+  },
+  text: {
+    color: 'white',
   },
 });
 
