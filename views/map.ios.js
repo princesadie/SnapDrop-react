@@ -14,7 +14,7 @@ import Firebase from 'firebase';
 var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
-var UserPage = require('./userPage.ios');
+var UserPage = require('./profile.ios');
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -163,8 +163,8 @@ var MapDisplay = React.createClass({
       title: 'REQUESTS MADE',
       component: RequestMade,
       navigationBarHidden: true,
-    }
-  }
+    })
+  },
 
   goToUserPage() {
     console.log('cat')
