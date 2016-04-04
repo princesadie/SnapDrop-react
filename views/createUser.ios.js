@@ -51,6 +51,13 @@ class createUser extends React.Component {
     }
   }
 
+  goUserLogin() {
+    this.props.navigator.replace({
+      title: 'Login',
+      component: UserLogin
+    })
+  }
+
   selectPhotoTapped() {
      const options = {
        title: 'Photo Picker',
@@ -104,16 +111,25 @@ class createUser extends React.Component {
 
 
         <View style={styles.textInputContainer}>
-        <TextInput style={styles.textEdit} placeholder="first name" onChangeText={(firstName) => this.setState({firstName})}/>
-        <TextInput style={styles.textEdit} placeholder="last name" onChangeText={(lastName) => this.setState({lastName})}/>
-          <TextInput style={styles.textEdit} placeholder="email" onChangeText={(email) => this.setState({email})}/>
-          <TextInput style={styles.textEdit} secureTextEntry={true} placeholder="password" onChangeText={(password) => this.setState({password})}/>
+          <TextInput style={styles.textEdit} placeholder="first name" onChangeText={(firstName) => this.setState({firstName})}/>
+          <TextInput style={styles.textEdit} placeholder="last name" onChangeText={(lastName) => this.setState({lastName})}/>
+          <TextInput style={styles.textEdit} placeholder="email" autoCapitalize={'none'} onChangeText={(email) => this.setState({email})}/>
+          <TextInput style={styles.textEdit} secureTextEntry={true} autoCapitalize={'none'} placeholder="password" onChangeText={(password) => this.setState({password})}/>
           <TextInput style={styles.textEdit} secureTextEntry={true} placeholder="confirm password" onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
 
           <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.addUser()}>
               <Text style={styles.buttonText}>Register</Text>
           </TouchableHighlight>
+
+          <Text style={styles.text}>Already have an account?</Text>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9FA8DA'
+            onPress={() => this.goUserLogin()}>
+              <Text style={styles.buttonText}>Login</Text>
+          </TouchableHighlight>
         </View>
+
       </View>
     );
   }
@@ -126,6 +142,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white'
+  },
+  bubble: {
+    width: 200,
+    backgroundColor: 'rgba(236,64,122,0.7)',
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20,
+    marginTop: 20,
+    marginLeft: 95,
   },
   avatarContainer: {
     borderColor: '#9B9B9B',
@@ -151,6 +176,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     // marginTop: 10,
     fontWeight: 'bold',
+  },
+  text: {
+    color: 'black'
   },
   textEdit: {
     fontWeight: 'bold',
