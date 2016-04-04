@@ -2,11 +2,11 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-
-
 var Home = require('./views/home.ios')
 var SwiperView = require('./views/swiper.ios')
-var newMap = require('./views/map.ios')
+var NewMap = require('./views/map.ios')
+var CreateUser = require('./views/createUser.ios')
+var Profile = require('./views/profile.ios')
 var RequestMade = require('./views/requestMade.ios')
 
 import React, {
@@ -25,7 +25,7 @@ class SnapDrop extends Component {
         initialRoute={{
           title: 'SnapDrop',
           navigationBarHidden: true,
-          component: newMap
+          component: RequestMade
       }}/>
     );
   }

@@ -2,17 +2,11 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-
-// var ImageViewPage = require('./imageViewPage.ios')
-
-// var AppleMap = require('./appleMap.ios')
 var UserPage = require('./userPage.ios.js')
 var NativeImagePicker = require('./nativeImagePicker.ios')
 var CreateUser = require('./createUser.ios')
 var UserLogin = require('./userLogin.ios')
-// const Firebase = require('firebase');
 var CameraView = require('./camera.ios')
-// var Geolocation = require('./views/geolocation.ios')
 var Profile = require('./profile.ios')
 var SwiperView = require('./swiper.ios')
 
@@ -144,10 +138,10 @@ class Home extends Component {
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={styles.button}
-              underlayColor='#9FA8DA'
+              style={[styles.bubble, styles.button]}
+              underlayColor='#F8BBD0'
               onPress={() => this.goUserLogin()}>
-                <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.text}>Login</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
