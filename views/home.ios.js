@@ -144,10 +144,10 @@ class Home extends Component {
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={styles.button}
-              underlayColor='#9FA8DA'
+              style={[styles.bubble, styles.button]}
+              underlayColor='#F8BBD0'
               onPress={() => this.goUserLogin()}>
-                <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.text}>Login</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
