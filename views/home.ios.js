@@ -2,13 +2,14 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-var NativeImagePicker = require('./nativeImagePicker.ios')
-var SearchBar = require('./searchBar.ios')
-var CreateUser = require('./createUser.ios')
-var CameraView = require('./camera.ios')
-var MapView = require('./map.ios')
-var Profile = require('./profile.ios')
 
+// var ImageViewPage = require('./imageViewPage.ios')
+
+// var AppleMap = require('./appleMap.ios')
+var UserPage = require('./userPage.ios.js')
+var NativeImagePicker = require('./nativeImagePicker.ios')
+var CreateUser = require('./createUser.ios')
+var MapView = require('./map.ios')
 
 import React, {
   Component,
@@ -58,25 +59,10 @@ class Home extends Component {
     this.listenForUser(this.userRef);
   }
 
-  goCamera() {
-    this.props.navigator.push({
-      title: 'Camera',
-      component: CameraView,
-      passProps: {dataToBePassed: 'Some data we passed along!'}
-    })
-  }
   goCreateUser() {
     this.props.navigator.push({
       title: 'Register',
       component: CreateUser
-    })
-  }
-  goSearch() {
-    console.log('s')
-    this.props.navigator.push({
-      title: 'SearchBar',
-      component: SearchBar,
-      passProps: {dataToBePassed: 'Some data we passed along!'}
     })
   }
 
@@ -95,19 +81,37 @@ class Home extends Component {
     })
   }
 
-  goProfile() {
+  goUserPage() {
     this.props.navigator.push({
-      title: 'Profile',
-      component: Profile,
-      passProps: {dataToBePassed: 'NEW INFORMATION THAT WE PASSED'}
+      title: 'User Page',
+      component: UserPage
     })
   }
+  log() {
+    console.log('I AM CONSOLE LOGGING')
+  }
+
+  updateUser() {
+    console.log("GOT HERE")
+    this.userRef.update({
+      long: 'NEW VALUE',
+      lat: 'DID IT GET HERE?'
+    })
+  }
+
 
   render() {
     return (
       <View>
         <View style={styles.container}>
           <View style={styles.buttonContainer}>
+
+            <TouchableHighlight
+              style={[styles.bubble, styles.button]}
+              underlayColor='#F8BBD0'
+              onPress={() => this.goUserPage()}>
+              <Text style={styles.text}>User Page</Text>
+            </TouchableHighlight>
 
             <TouchableHighlight
               style={[styles.bubble, styles.button]}
@@ -130,14 +134,6 @@ class Home extends Component {
               onPress={() => this.goNativeImagePicker()}>
                 <Text style={styles.text}>IMAGE PICKER</Text>
             </TouchableHighlight>
-
-            <TouchableHighlight
-              style={[styles.bubble, styles.button]}
-              underlayColor='#F8BBD0'
-              onPress={() => this.goSearch()}>
-                <Text style={styles.text}>Search Bar Biatch</Text>
-            </TouchableHighlight>
-            <Image style={styles.base64} source={{uri: this.state.userData.requestImage}} />
 
           </View>
         </View>
