@@ -163,7 +163,8 @@ var MapDisplay = React.createClass({
       title: 'REQUESTS MADE',
       component: RequestMade,
       navigationBarHidden: true,
-    })
+    });
+
   },
 
   goToUserPage() {

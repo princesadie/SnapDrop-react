@@ -8,6 +8,7 @@ var Home = require('./views/home.ios')
 // var NewMap = require('./views/map.ios')
 // var CreateUser = require('./views/createUser.ios')
 var HomeSplash = require('./views/homeSplash.ios')
+var RequestMade = require('./views/requestMade.ios')
 
 import React, {
   AppRegistry,
@@ -25,7 +26,7 @@ class SnapDrop extends Component {
         initialRoute={{
           title: 'SnapDrop',
           navigationBarHidden: true,
-          component: HomeSplash
+          component: RequestMade
       }}/>
     );
   }
