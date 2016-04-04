@@ -19,14 +19,33 @@ import Firebase from 'firebase'
 
 var list = ['0','2','3','1','2','3','1','2','3','1','2','3','1','2','9'];
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
 
 class RequestMade extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      dataSource: ds.cloneWithRows(list)
+      userRequests: [],
+      dataSource: ds.cloneWithRows(userRequests)
     }
+  }
+
+  grabUserRequests(inputUID) {
+    var that = this;
+    var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
+    ref.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var userUID = childSnapshot.val().userUID;
+        var childData = childSnapshot.val();
+        if (userUID === inputUID) {
+          that.state.userRequests.push(childData);
+          console.log(that.state.userRequests);
+        };
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.grabUserRequests("6b67698b-3410-4507-ab1f-040b47368b4a");
   }
 
   render() {
