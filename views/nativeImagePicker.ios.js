@@ -15,7 +15,6 @@ const {
 } = React;
 
 class NativeImagePicker extends React.Component {
-
   state = {
     avatarSource: null,
     videoSource: null
@@ -127,7 +126,7 @@ class NativeImagePicker extends React.Component {
       <View style={styles.container}>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
           <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-          { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+          { this.state.avatarSource === null ? <Text style={styles.text}>TAKE PHOTO</Text> :
             <Image style={styles.avatar} source={this.state.avatarSource} />
           }
           </View>
@@ -135,7 +134,7 @@ class NativeImagePicker extends React.Component {
 
         <TouchableOpacity onPress={this.selectVideoTapped.bind(this)}>
           <View style={[styles.avatar, styles.avatarContainer]}>
-            <Text>Select a Video</Text>
+            <Text style={styles.text} >TAKE VIDEO</Text>
           </View>
         </TouchableOpacity>
 
@@ -153,10 +152,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F6F6F6'
   },
   avatarContainer: {
-    borderColor: '#9B9B9B',
+    borderColor: '#EC407A',
     borderWidth: 1 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center'
@@ -165,6 +164,9 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     width: 150,
     height: 150
+  },
+  text: {
+    color: '#EC407A',
   }
 });
 
