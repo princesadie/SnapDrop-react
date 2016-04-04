@@ -27,7 +27,7 @@ class userLogin extends React.Component {
   };
 
   userLogin() {
-    var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
     ref.authWithPassword({
       email: this.state.email,
       password: this.state.password
