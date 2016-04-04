@@ -20,13 +20,17 @@ var {
   }
 } = React;
 
+var Home = require('./home.ios')
 var currentView = 'start'
+
 class ImageViewPage extends Component {
 
   sendImage() {
-    //send to backend
-    //go to profile
-
+    var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
+    userRef.update({
+      requestImage: this.props.sourceIm
+    })
+    this.props.navigator.popN(2);
   }
   cancelImage() {
     this.props.navigator.popN(1);

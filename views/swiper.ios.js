@@ -1,6 +1,9 @@
 var Swiper = require('react-native-swiper')
 // es6
 // import Swiper from 'react-native-swiper'
+var NewMap = require('./map.ios')
+var NativeImagePicker = require('./nativeImagePicker.ios')
+var Home = require('./home.ios')
 
 import React, {
   Component,
@@ -17,20 +20,11 @@ import Firebase from 'firebase';
 import Camera from 'react-native-camera';
 
 class SwiperView extends Component {
-  watchID = (null: ?number)
   //Create the data that we need, prefill it with an empty object {}
   constructor(props) {
     super(props);
     this.state = {
-      marker: [{
-        latitude: 37.795738,
-        longitude:  -122.399150,
-        title: 'NEW PIN',
-        subtitle: 'REQUEST HERE'
-      }],
       userData: {},
-      initialPosition: 'unknown',
-      lastPosition: 'unknown'
     };
     this.userRef = this.getRef().child('0');
   }
@@ -61,119 +55,26 @@ class SwiperView extends Component {
     this.camera.capture();
   }
 
-  updateUserFirebase() {
-    var currentUser = this.userRef;
-    currentUser.update({
-      long: this.state.lastPosition.long,
-      lat: this.state.lastPosition.lat
-    });
-  }
-
   componentDidMount() {
     this.listenForUser(this.userRef);
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var initialPosition = {
-          long: parseFloat(position.coords.longitude),
-          lat: parseFloat(position.coords.latitude)
-        }
-        this.setState({
-          initialPosition
-        })
-      },
-      (error) => alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
-    this.watchID = navigator.geolocation.watchPosition((position) => {
-      var lastPosition = {
-        long: parseFloat(position.coords.longitude),
-        lat: parseFloat(position.coords.latitude)
-      }
-      this.setState({
-        lastPosition
-      });
-      this.updateUserFirebase();
-
-      //initialize map with a marker
-      var newMarker = [{
-        latitude: this.state.lastPosition.lat,
-        longitude:  this.state.lastPosition.long,
-        title: "INITIAL PIN",
-        subtitle: 'REQUEST HERE'
-      }]
-      this.setState({
-        marker: newMarker
-      });
-    });
-  }
-
-  componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchID);
-  }
-  
-  addMarkers() {
-    var newMarker = {
-      latitude: 37.795738,
-      longitude:  -122.399150,
-      title: 'APPENDED PIN',
-      subtitle: 'ADDED'
-    }
-    this.state.marker.push(newMarker)
-    console.log(this.state.marker)
-    this.setState({
-      marker: this.state.marker
-    })
   }
 
   render() {
     return(
-      <Swiper style={styles.wrapper} showsButtons={true}>
-
+      <Swiper style={styles.style} showsButtons={true} autoplay={false}>
         <View style={styles.slide1}>
-          <Text style={styles.buttonText}>{this.state.userData.username}</Text>
-          <Text style={styles.buttonText}>SWIPE RIGHT FOR CAMERA AND LEFT FOR MAP</Text>
+          <NewMap/>
         </View>
-
         <View style={styles.slide2}>
-          <Camera
-            ref={(cam) => {
-              this.camera = cam;
-            }}
-            style={styles.preview}
-            aspect={Camera.constants.Aspect.fill}>
-            <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
-          </Camera>
+          <NativeImagePicker/>
         </View>
 
         <View style={styles.slide3}>
-          <MapView
-            style={ styles.map }
-            initialRegion={{
-              latitude: this.state.initialPosition.lat,
-              longitude: this.state.initialPosition.long,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-            annotations={this.state.marker}
-            region={{
-              latitude: this.state.initialPosition.lat,
-              longitude: this.state.initialPosition.long,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          />
-          <TouchableHighlight
-            style={styles.button}
-            underlayColor='#9FA8DA'
-            onPress={() => this.addMarkers()}>
-              <Text style={styles.buttonText}>MARKER</Text>
-          </TouchableHighlight>
+          <Home/>
         </View>
 
         <View style={styles.slide4}>
-          <Text style={styles.row}>USERNAME: {this.state.userData.username}</Text>
-          <Text style={styles.row}>LONG: {this.state.lastPosition.long}</Text>
-          <Text style={styles.row}>LAT: {this.state.lastPosition.lat}</Text>
+
         </View>
 
       </Swiper>
@@ -182,8 +83,6 @@ class SwiperView extends Component {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-  },
   row: {
     flex: 1,
     flexDirection: 'row',
@@ -192,22 +91,18 @@ const styles = StyleSheet.create({
   },
   slide4: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#515154',
   },
   slide3: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#515154',
+  },
+  slide2: {
+    flex: 1,
+    backgroundColor: '#EC407A',
   },
   slide1: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,0)',
   },
   map: {
@@ -219,12 +114,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
   },
   preview: {
     flex: 1,
@@ -256,6 +145,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     fontWeight: 'bold',
+  },
+  swiper: {
+    color: '#D81B60',
+    fontSize: 80,
   },
 });
 
