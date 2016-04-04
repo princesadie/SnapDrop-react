@@ -10,7 +10,7 @@ var NativeImagePicker = require('./nativeImagePicker.ios')
 
 var SearchBar = require('./searchBar.ios')
 var CreateUser = require('./createUser.ios')
-
+var UserLogin = require('./userLogin.ios')
 // const Firebase = require('firebase');
 var CameraView = require('./camera.ios')
 var Map = require('./map.ios')
@@ -77,6 +77,12 @@ class Home extends Component {
     this.props.navigator.push({
       title: 'Register',
       component: CreateUser
+    })
+  }
+  goUserLogin() {
+    this.props.navigator.push({
+      title: 'Login',
+      component: UserLogin
     })
   }
   goSearch() {
@@ -150,6 +156,12 @@ class Home extends Component {
                 <Text style={styles.buttonText}>Register</Text>
             </TouchableHighlight>
 
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.goUserLogin()}>
+                <Text style={styles.buttonText}>Login</Text>
+            </TouchableHighlight>
 
             <TouchableHighlight
               style={styles.button}

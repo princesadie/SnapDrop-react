@@ -1,5 +1,6 @@
 import React from 'react-native';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
+var Profile = require('./profile.ios')
 import Firebase from 'firebase';
 const {
   StyleSheet,
@@ -18,32 +19,23 @@ const {
 
 
 
-class createUser extends React.Component {
+class userLogin extends React.Component {
 
   state = {
     email: null,
     password: null
   };
 
-  addUser() {
-    var ref = new Firebase("https://snapdrop.firebaseio.com");
-    ref.createUser({
-      email: this.state.email,
-      password: this.state.password
-    }, function(error, userData) {
-      if (error) {
-        console.log("Error creating user:", error);
-      } else {
-        console.log("Successfully created user account with uid:", userData.uid);
-      }
-    })}
-
   userLogin() {
     var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
     ref.authWithPassword({
-      email    : "bobtony@firebase.com",
-      password : "correcthorsebatterystaple"
-    }, function(error, authData) {
+      email: this.state.email,
+      password: this.state.password
+    },
+    this.props.navigator.push({
+      title: 'Profile Page',
+      component: Profile
+    }), function(error, authData) {
       if (error) {
         console.log("Login Failed!", error);
       } else {
@@ -57,8 +49,8 @@ class createUser extends React.Component {
         <View style={styles.textInputContainer}>
           <TextInput style={styles.textEdit} placeholder="email" onChangeText={(email) => this.setState({email})}/>
           <TextInput style={styles.textEdit} placeholder="password" onChangeText={(password) => this.setState({password})}/>
-          <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.addUser()}>
-              <Text style={styles.buttonText}>Register</Text>
+          <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.userLogin()}>
+              <Text style={styles.buttonText}>Login</Text>
           </TouchableHighlight>
           <Text style={styles.locationOutput}>
             {this.state.firstName}
@@ -105,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = createUser;
+module.exports = userLogin;
