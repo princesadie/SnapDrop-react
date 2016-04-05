@@ -8,10 +8,9 @@
 // var NewMap = require('./views/map.ios')
 // var CreateUser = require('./views/createUser.ios')
 var HomeSplash = require('./views/homeSplash.ios')
-var RequestMade = require('./views/requestMade.ios')
-var FulfillRequest = require('./views/fulfillRequest.ios')
-var UserPage = require('./views/userPage.ios')
-
+// var RequestMade = require('./views/requestMade.ios')
+// var FulfillRequest = require('./views/fulfillRequest.ios')
+// var UserPage = require('./views/userPage.ios')
 
 import React, {
   AppRegistry,

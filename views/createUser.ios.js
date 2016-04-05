@@ -1,7 +1,7 @@
 import React from 'react-native';
 import Firebase from 'firebase';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
-var UserLogin = require('./userLogin.ios')
+var UserLogin = require('./userLogin.ios');
 var Map = require('./map.ios')
 
 
@@ -44,27 +44,40 @@ class createUser extends React.Component {
       ref.createUser({
         email: this.state.email,
         password: this.state.password
-      }, function(error, userData) {
+      }, function(error, authData) {
         if (error) {
           console.log("Error creating user:", error);
         } else {
 
           usersRef.push({
-            username: that.state.firstName,
+            username: that.state.username,
             profileImage: that.state.avatarSource,
-            userUID: userData.uid
+            userUID: authData.uid
           }),
 
+          console.log("-------------------created user--------------------");
           ref.authWithPassword({
             email: that.state.email,
             password: that.state.password
+          }, function(error, authData) {
+            if (error) {
+              console.log("Login Failed!", error);
+              AlertIOS.prompt("fail",null);
+            } else {
+              that.props.navigator.push({
+                title: 'Map',
+                navigationBarHidden: true,
+                component: Map
+              });
+            }
           }),
+          console.log("------------------logging in---------------------");
 
-          that.props.navigator.replace({
-            title: 'Map',
-            navigationBarHidden: true,
-            component: Map,
-          });
+          // that.props.navigator.replace({
+          //   title: 'Map',
+          //   navigationBarHidden: true,
+          //   component: Map,
+          // });
         }
       })
     }

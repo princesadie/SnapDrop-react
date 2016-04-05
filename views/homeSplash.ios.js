@@ -1,4 +1,4 @@
-var MapView = require('./map.ios')
+// var MapView = require('./map.ios')
 var CreateUser = require('./createUser.ios')
 
 import React, {

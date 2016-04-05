@@ -12,10 +12,11 @@ import React, {
 
 import Firebase from 'firebase';
 
-var FulfillRequest = require('./fulfillRequest.ios');
-var MadeRequest = require('./requestMade.ios');
-var HomeSplash = require('./homeSplash.ios');
-var RequestMap = require('./requestMap.ios');
+// var FulfillRequest = require('./fulfillRequest.ios');
+// var MadeRequest = require('./requestMade.ios');
+// var HomeSplash = require('./homeSplash.ios');
+// var RequestMap = require('./requestMap.ios');
+var CreateUser = require('./createUser.ios');
 
 class UserPage extends Component {
 
@@ -53,16 +54,17 @@ class UserPage extends Component {
 
   makeRequest(){
     console.log("made a req");
-    this.props.navigator.pop({
-      title: 'Map',
-      navigationBarHidden: true,
-    });
+    // this.props.navigator.pop({
+    //   title: 'Map',
+    //   navigationBarHidden: true,
+    // });
+    this.props.navigator.popN(1)
   }
 
   fulfillRequest(){
-    this.props.navigator.push({
-      component: RequestMap
-    })
+    // this.props.navigator.push({
+    //   component: RequestMap
+    // })
   }
 
   madeRequest(){
@@ -74,11 +76,15 @@ class UserPage extends Component {
   }
 
   logOut(){
-    console.log("fullfill a req");
-    this.props.navigator.popToTop({
-      navigationBarHidden: true,
-      component: HomeSplash
-    })
+    console.log("logging out");
+    var ref = new Firebase("https://snapdrop.firebaseio.com/users");
+    ref.unauth();
+    // this.props.navigator.resetTo({
+    //   title: 'Map',
+    //   navigationBarHidden: true,
+    //   component: CreateUser
+    // });
+    this.props.navigator.popN(2);
   }
 
   render() {

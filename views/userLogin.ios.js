@@ -1,8 +1,8 @@
 import React from 'react-native';
 import Firebase from 'firebase';
-var ImagePickerManager = require('NativeModules').ImagePickerManager;
+// var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var Map = require('./map.ios')
-var Register = require('./createUser.ios')
+// var Register = require('./createUser.ios')
 
 const {
   StyleSheet,
@@ -14,9 +14,9 @@ const {
   TextInput,
   Image,
   AlertIOS,
-  NativeModules: {
-    ImagePickerManager
-  }
+  // NativeModules: {
+  //   ImagePickerManager
+  // }
 } = React;
 
 class userLogin extends React.Component {
@@ -42,13 +42,14 @@ class userLogin extends React.Component {
         console.log("Login Failed!", error);
         AlertIOS.prompt("fail",null);
       } else {
-        that.props.navigator.resetTo({
+        that.props.navigator.push({
           title: 'Map',
           navigationBarHidden: true,
           component: Map
         });
       }
-    })}
+    })
+  }
 
   render() {
     return (
