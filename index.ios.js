@@ -7,9 +7,9 @@
 // var SwiperView = require('./views/swiper.ios')
 // var NewMap = require('./views/map.ios')
 // var CreateUser = require('./views/createUser.ios')
-var HomeSplash = require('./views/homeSplash.ios')
-var RequestsMade = require('./views/requestMade.ios')
-var FulfillRequest = require('./views/fulfillRequest.ios')
+// var HomeSplash = require('./views/homeSplash.ios')
+// var RequestsMade = require('./views/requestMade.ios')
+// var FulfillRequest = require('./views/fulfillRequest.ios')
 var UserPage = require('./views/userPage.ios')
 
 
@@ -29,7 +29,7 @@ class SnapDrop extends Component {
         initialRoute={{
           title: 'SnapDrop',
           navigationBarHidden: true,
-          component: RequestsMade
+          component: UserPage
       }}/>
     );
   }
@@ -38,7 +38,7 @@ class SnapDrop extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 15,
   },
 });
 

@@ -14,8 +14,8 @@ import Firebase from 'firebase';
 var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
-var UserPage = require('./userPage.ios');
-var RequestMade = require('./requestMade.ios')
+// var UserPage = require('./userPage.ios');
+// var RequestMade = require('./requestMade.ios')
 
 
 
@@ -84,7 +84,7 @@ var RequestMapDisplay = React.createClass({
     this.state.fulfillments.forEach(function(fulfillment) {
       console.log("GOT THE FULFILLMENTS IN ARRAY")
       console.log(that.state.fulfillment);
-      console.log(that.state.markers);
+      // console.log(that.state.markers);
     })
   },
 
@@ -182,6 +182,11 @@ var RequestMapDisplay = React.createClass({
     })
     console.log(this.state.markers[0].key)
     console.log(this.state.markers)
+  },
+
+  goToUserPage() {
+
+    this.props.navigator.popN(1)
   },
 
   render() {

@@ -45,7 +45,7 @@ class ImageViewPage extends Component {
   render() {
     console.log('------------------------------------------')
     console.log('entered Image View Page')
-    console.log(this.props.imageData)
+    // console.log(this.props.imageData)
     console.log(this.props.cat)
     console.log('------------------------------------------')
     return (

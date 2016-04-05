@@ -1,10 +1,9 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
+
+var NativeImagePicker = require('./nativeImagePicker.ios')
 
 import React, {
   AppRegistry,
+  TouchableHighlight,
   Component,
   ListView,
   StyleSheet,
@@ -21,15 +20,16 @@ class FulfillRequest extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       loaded: false,
+
     };
   }
 
   componentDidMount() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
-    var authData = ref.getAuth();
+    // var authData = ref.getAuth();
     console.log('-------------ugh damn it-----------')
-    console.log(authData.uid)
-    this.grabFulfillments(authData.uid);
+    // console.log(authData.uid)
+    this.grabFulfillments('514a0a7f-aa21-4126-a698-4d81130fe963');
   }
 
   grabFulfillments(inputID) {
@@ -65,11 +65,27 @@ class FulfillRequest extends Component {
     );
   }
 
+
+
+  goToCam(fulfillment) {
+      this.props.navigator.push({
+        title: 'IMAGE OR VIDEO',
+        component: NativeImagePicker,
+        passProps: {userID: currentuser, description: fulfillment.description, longitude: fulfillment.longitude, latitude: fulfillment.latitude, requestkey: fulfillment.requestkey}
+      });
+  }
+
   renderFulfillment(fulfillment) {
     return (
       <View style={styles.container}>
         <View style={styles.rightContainer}>
           <Text style={styles.description}>{fulfillment.description}</Text>
+          <TouchableHighlight
+            style={[styles.bubble, styles.button]}
+            underlayColor='#F8BBD0'
+            onPress={() => this.goToCam(fulfillment)}>
+            <Text style={styles.text}>Fulfill</Text>
+          </TouchableHighlight>
         </View>
       </View>
     );
@@ -81,9 +97,10 @@ class FulfillRequest extends Component {
     }
 
     return (
+
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderFulfillment}
+        renderRow={this.renderFulfillment.bind(this)}
         style={styles.listView}
       />
     );
@@ -122,6 +139,20 @@ var styles = StyleSheet.create({
   listView: {
     paddingTop: 20,
     backgroundColor: '#fff',
+  },
+    bubble: {
+    width: 200,
+    backgroundColor: 'rgba(236,64,122,0.7)',
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20,
+    marginTop: 20,
+    marginLeft: 95,
+  },
+  button: {
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    marginHorizontal: 10,
   },
 });
 

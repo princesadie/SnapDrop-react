@@ -11,7 +11,6 @@ import React, {
   Image,
   ListView,
   StyleSheet,
-  TouchableOpacity,
   Text,
   View,
 } from 'react-native';
@@ -106,7 +105,7 @@ class RequestMade extends Component {
           <Text style={styles.description}>{userRequest.description}</Text>
           <Text style={styles.coords}>{userRequest.long}</Text>
           <Text style={styles.coords}>{userRequest.lat}</Text>
-          <Text style={styles.coords}>Made by: {this.state.userData.firstName}</Text>
+          <Text style={styles.coords}>Made by:</Text>
         </View>
 
         <View style={styles.buttonContainer}>
@@ -139,7 +138,7 @@ class RequestMade extends Component {
     }
 
     return (
-
+<View>
       <View style={styles.avatar1}>
         <TouchableOpacity onPress={this.goToUserPage}>
           <Image style = {styles.avatar} source = {this.state.userData.profileImage}/>
@@ -158,6 +157,7 @@ class RequestMade extends Component {
         renderRow={this.renderMovie}
         style={styles.listView}
       />
+      </View>
       </View>
     );
   }

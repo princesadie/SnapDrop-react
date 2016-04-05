@@ -16,7 +16,7 @@ import Firebase from 'firebase';
 var FulfillRequest = require('./fulfillRequest.ios');
 var MadeRequest = require('./requestMade.ios');
 var HomeSplash = require('./homeSplash.ios');
-var RequestMap = require('./requestMap.ios');
+var RequestMade = require('./requestMade.ios');
 
 
 class UserPage extends Component {
@@ -29,7 +29,7 @@ class UserPage extends Component {
   }
 
   componentDidMount() {
-    this.grabUserRequests(this.currentUser().uid);
+    this.grabUserRequests('514a0a7f-aa21-4126-a698-4d81130fe963');
   }
 
   currentUser() {
@@ -63,7 +63,8 @@ class UserPage extends Component {
 
   fulfillRequest(){
     this.props.navigator.push({
-      component: RequestMap
+      component: FulfillRequest,
+      navigationBarHidden: true,
     })
   }
 

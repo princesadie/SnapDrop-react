@@ -20,14 +20,14 @@ class NativeImagePicker extends React.Component {
     videoSource: null
   };
 
-  goNext2(imageData, sourceIm) {
+  goNext2(sourceIm) {
     console.log('-----------------------------------')
     console.log('entered goNext2')
     this.props.navigator.push({
       title: 'Image Details',
       component: ImageViewPage,
       navigationBarHidden: true,
-      passProps: {imageData: imageData.obj, cat: 'cat', sourceIm: sourceIm}
+      passProps: {userID: this.props.userID, description: this.props.description, longitude: this.props.longitude, latitude: this.props.latitude, sourceIm: sourceIm}
     })
   }
 
@@ -88,7 +88,7 @@ class NativeImagePicker extends React.Component {
         console.log(objJson)
         console.log('---------------------------------')
 
-        this.goNext2(objJson, source);
+        this.goNext2(source);
       }
     });
   }
