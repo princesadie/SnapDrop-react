@@ -13,11 +13,11 @@ var {
 
 import Firebase from 'firebase';
 
-// var FulfillRequest = require('./fulfillRequest.ios');
-// var MadeRequest = require('./requestMade.ios');
+var FulfillRequest = require('./fulfillRequest.ios');
+var MadeRequest = require('./requestMade.ios');
 // var HomeSplash = require('./homeSplash.ios');
-// var RequestMap = require('./requestMap.ios');
-var CreateUser = require('./createUser.ios');
+var RequestMap = require('./requestMap.ios');
+// var CreateUser = require('./createUser.ios');
 
 class UserPage extends Component {
 
@@ -63,9 +63,9 @@ class UserPage extends Component {
   }
 
   fulfillRequest(){
-    // this.props.navigator.push({
-    //   component: RequestMap
-    // })
+    this.props.navigator.push({
+      component: RequestMap
+    })
   }
 
   madeRequest(){

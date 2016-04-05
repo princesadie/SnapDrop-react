@@ -1,5 +1,5 @@
 import React from 'react-native';
-var userLoginStyles = require('../stylesheets/userLoginStyle.ios');
+// var userLoginStyles = require('../stylesheets/userLoginStyle.ios');
 import Firebase from 'firebase';
 // var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var Map = require('./map.ios')

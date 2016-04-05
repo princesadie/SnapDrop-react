@@ -2,7 +2,7 @@ import React from 'react-native';
 import Firebase from 'firebase';
 
 var Map = require('./map.ios')
-var userAuthenticationStyles = require('../stylesheets/userAuthenticationStyles.ios');
+var userAuthenticationStyles = require('../stylesheets/userAuthenticationStyle.ios');
 
 const {
   Text,
@@ -95,7 +95,7 @@ class UserAuthentication extends React.Component {
                 component: Map
               });
             }
-          }),
+          })
         }
       })
     }
