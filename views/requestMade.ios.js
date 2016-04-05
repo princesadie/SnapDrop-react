@@ -88,11 +88,11 @@ class RequestMade extends Component {
           <Text>PENDING</Text>
           <Text onPress={() => this.goToRequestPage(userRequest)}>VIEW PHOTOS</Text>
         </View>
-        <View style={styles.rightContainer}>
-          <Text style={styles.description}>{userRequest.description}</Text>
-          <Text style={styles.coords}>{userRequest.long}</Text>
-          <Text style={styles.coords}>{userRequest.lat}</Text>
-          <Text style={styles.coords}>{userRequest.requestKey}</Text>
+        <View style={requestMadeStyles.rightContainer}>
+          <Text style={requestMadeStyles.description}>{userRequest.description}</Text>
+          <Text style={requestMadeStyles.coords}>{userRequest.long}</Text>
+          <Text style={requestMadeStyles.coords}>{userRequest.lat}</Text>
+          <Text style={requestMadeStyles.coords}>{userRequest.requestKey}</Text>
         </View>
       </View>
     );
@@ -120,7 +120,7 @@ class RequestMade extends Component {
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderRequest.bind(this)}
-        style={styles.listView}
+        style={requestMadeStyles.listView}
       />
       </View>
     );
