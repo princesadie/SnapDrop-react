@@ -3,11 +3,15 @@ import React, {
   StyleSheet,
   Dimensions,
   View,
+  Image,
   TouchableHighlight,
   Text,
 } from 'react-native';
 
 import Firebase from 'firebase';
+
+var FulfillRequest = require('./fulfillRequest.ios');
+var MadeRequest = require('./requestMade.ios');
 
 class UserPage extends Component {
 
@@ -19,7 +23,8 @@ class UserPage extends Component {
   }
 
   componentDidMount() {
-    this.grabUserRequests(this.currentUser().uid);
+    // this.grabUserRequests(this.currentUser().uid);
+    this.grabUserRequests("77c879e2-a4a2-48a5-9966-dd114066f23d");
   }
 
   currentUser() {
@@ -47,6 +52,7 @@ class UserPage extends Component {
     console.log("made a req");
     this.props.navigator.pop({
       title: 'Map',
+      navigationBarHidden: true,
       component: Map
     })
   }
@@ -55,6 +61,25 @@ class UserPage extends Component {
     console.log("fullfill a req");
     this.props.navigator.push({
       title: 'Fulfill Request',
+      navigationBarHidden: true,
+      component: FulfillRequest
+    })
+  }
+
+  madeRequest(){
+    console.log("fullfill a req");
+    this.props.navigator.push({
+      title: 'Made Requests',
+      navigationBarHidden: true,
+      component: MadeRequest
+    })
+  }
+
+  logOut(){
+    console.log("fullfill a req");
+    this.props.navigator.push({
+      title: 'Fulfill Request',
+      navigationBarHidden: true,
       component: FulfillRequest
     })
   }
@@ -64,21 +89,35 @@ class UserPage extends Component {
       <View>
         <View style={styles.container}>
           <View style={styles.content}>
-          <Text style={styles.welcome}>{this.state.userData.firstName}</Text>
+            <Image style={styles.avatar} source={this.state.userData.profileImage}/>
 
             <View style={styles.buttonContainer}>
               <TouchableHighlight
                 style={styles.button}
-                underlayColor='#9FA8DA'
-                onPress={() => this.makeRequest()}>
-                  <Text style={styles.buttonText}>Make a Request</Text>
+                underlayColor='rgba(236,64,122,0.7)'
+                onPress={() => this.madeRequest()}>
+                  <Text style={styles.buttonText}>MY REQUESTS</Text>
               </TouchableHighlight>
 
               <TouchableHighlight
                 style={styles.button}
-                underlayColor='#9FA8DA'
+                underlayColor='rgba(236,64,122,0.7)'
                 onPress={() => this.fulfillRequest()}>
-                  <Text style={styles.buttonText}>Fulfill a Request</Text>
+                  <Text style={styles.buttonText}>FULFILL REQUESTS</Text>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                style={styles.button}
+                underlayColor='rgba(236,64,122,0.7)'
+                onPress={() => this.makeRequest()}>
+                  <Text style={styles.buttonText}>MAKE A REQUEST</Text>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                style={styles.button}
+                underlayColor='rgba(236,64,122,0.7)'
+                onPress={() => this.logOut()}>
+                  <Text style={styles.buttonText}>LOG OUT</Text>
               </TouchableHighlight>
 
             </View>
@@ -91,43 +130,49 @@ class UserPage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-  content: {
-    flex: 1,
-    height: 50,
-    flexDirection: 'column',
-    marginTop: 200,
-  },
-  welcome: {
-    marginTop: 20,
-    textAlign: 'center',
-  },
-  button: {
-    flex: 1,
-    flexDirection: 'row',
-    height: 36,
-    width: 300,
-    marginTop: 100,
-    marginLeft: 42,
-    borderRadius: 10,
-    justifyContent: 'center',
-    backgroundColor: '#7986CB',
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
-    marginTop: 10,
-    fontWeight: 'bold',
-  },
-  buttonContainer:{
-    marginTop: 60,
-    paddingTop:30,
-    paddingBottom:10,
-    flexDirection:'column',
-    backgroundColor: '#fff',
-  },
+   flex: 1,
+   flexDirection: 'column',
+ },
+ content: {
+   flex: 1,
+   height: 50,
+   flexDirection: 'column',
+   marginTop: 30,
+ },
+ welcome: {
+   marginTop: 20,
+   textAlign: 'center',
+ },
+ button: {
+   flex: 1,
+   flexDirection: 'row',
+   height: 36,
+   width: 300,
+   marginTop: 30,
+   marginLeft: 42,
+   borderRadius: 10,
+   justifyContent: 'center',
+   backgroundColor: 'rgba(236,64,122,1)',
+ },
+ buttonText: {
+   color: 'white',
+   textAlign: 'center',
+   marginTop: 10,
+   fontWeight: 'bold',
+ },
+ buttonContainer:{
+   marginTop: 10,
+   paddingTop:30,
+   paddingBottom:10,
+   flexDirection:'column',
+   backgroundColor: '#fff',
+ },
+ avatar: {
+   borderRadius: 100,
+   width: 200,
+   height: 200,
+   marginLeft: 85,
+ },
 });
 
 module.exports = UserPage;
