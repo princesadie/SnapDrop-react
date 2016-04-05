@@ -24,6 +24,9 @@ class createUser extends React.Component {
 
   state = {
     avatarSource: null,
+    avatarJson: null,
+    firstName: null,
+    lastName: null,
     email: null,
     password: null,
     confirmPassword: null,
@@ -114,10 +117,11 @@ class createUser extends React.Component {
           var imageData = resData.replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "").replace(/\f/g, "").replace(/=/g, "");
           var imagereplaced = imageData.replace(/=/g, "");
           var obj = "data:image/jpeg;base64," + imagereplaced;
-          var objJson = JSON.stringify({"obj": obj})
+          var objJson = JSON.stringify({"obj": imagereplaced})
 
           this.setState({
-            avatarSource: objJson
+            avatarSource: source,
+            avatarJson: objJson,
           });
        }
      });
