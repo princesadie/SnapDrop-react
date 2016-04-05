@@ -1,26 +1,25 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
 import React, {
-  AppRegistry,
   Component,
-  Image,
-  ListView,
   StyleSheet,
-  TouchableOpacity,
-  Text,
+  Dimensions,
   View,
+  Image,
+  PixelRatio,
+  TouchableHighlight,
+  ListView,
+  Navigator,
+  Text,
 } from 'react-native';
 
-var RequestViewPage = require('./requestViewPage.ios')
+import Firebase from 'firebase';
 
-class RequestMade extends Component {
+var ViewImage = require('./viewImage.ios')
+
+class RequestViewPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userRequests: [],
+      requestFulfillments: [],
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
@@ -32,29 +31,26 @@ class RequestMade extends Component {
   componentDidMount() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
-    this.grabUserRequests(authData.uid);
+    this.grabFulfillmentsBelongingToRequest(this.props.requestKey);
   }
 
-  grabUserRequests(inputUID) {
+  grabFulfillmentsBelongingToRequest(inputKey) {
     var that = this;
-    var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
+    var ref = new Firebase("https://snapdrop.firebaseio.com/fulfillments");
     ref.once("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
-        var key = childSnapshot.key();
-        var userUID = childSnapshot.val().userUID;
+        var requestKey = childSnapshot.val().requestKey;
         var childData = childSnapshot.val();
-        if (userUID === inputUID) {
-          var request = {
-            description: childSnapshot.val().description,
-            lat: childSnapshot.val().lat,
-            long: childSnapshot.val().long,
-            userUID: childSnapshot.val().userUID,
-            requestKey: childSnapshot.key(),
+        if (requestKey === inputKey) {
+          var fulfillment = {
+            caption: childSnapshot.val().caption,
+            image: childSnapshot.val().requestImage,
+            fulfillerUID: childSnapshot.val().userUID
           }
-          that.state.userRequests.push(request);
+          that.state.requestFulfillments.push(fulfillment);
 
           that.setState({
-            dataSource: that.state.dataSource.cloneWithRows(that.state.userRequests),
+            dataSource: that.state.dataSource.cloneWithRows(that.state.requestFulfillments),
             loaded: true,
           });
 
@@ -80,18 +76,24 @@ class RequestMade extends Component {
     );
   }
 
-  renderRequest(userRequest) {
+  goToImage(image) {
+    this.props.navigator.push({
+      component: ViewImage,
+      passProps: {image: image}
+    });
+  }
+
+  renderRequest(requestFulfillment) {
     return (
       <View style={styles.container}>
-        <View style={styles.thumbnail}>
-          <Text>PENDING</Text>
-          <Text onPress={() => this.goToRequestPage(userRequest)}>VIEW PHOTOS</Text>
-        </View>
+        <TouchableHighlight onPress={() => this.goToImage(requestFulfillment.image.uri)}>
+        <Image
+          source={{uri: requestFulfillment.image.uri}}
+          style={styles.thumbnail}
+        />
+        </TouchableHighlight>
         <View style={styles.rightContainer}>
-          <Text style={styles.description}>{userRequest.description}</Text>
-          <Text style={styles.coords}>{userRequest.long}</Text>
-          <Text style={styles.coords}>{userRequest.lat}</Text>
-          <Text style={styles.coords}>{userRequest.requestKey}</Text>
+          <Text style={styles.description}>{requestFulfillment.caption}</Text>
         </View>
       </View>
     );
@@ -193,4 +195,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = RequestMade;
+module.exports = RequestViewPage;

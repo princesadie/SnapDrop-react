@@ -16,6 +16,7 @@ var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
 var RequestMade = require('./requestMade.ios')
+var RequestDetail = require('./requestDetail.ios')
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -69,12 +70,6 @@ var RequestMapDisplay = React.createClass({
   getUserDetails() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
-
-    if (authData) {
-      console.log("Authenticated user with uid:", authData.password.email);
-      console.log("Authenticated user with uid:", authData.uid);
-    }
-
   },
 
   grabFulfillments(inputID) {
@@ -93,27 +88,18 @@ var RequestMapDisplay = React.createClass({
               latitude: childData.lat,
               longitude: childData.long,
             },
-            description: childData.description
+            description: childData.description,
+            requestKey: childSnapshot.key(),
           }
-          console.log(marker)
           that.state.markers.push(marker);
-          console.log(that.state.markers)
         };
       });
     });
   },
 
-  dropMarkers(fullfilment) {
-    fulfillments.forEach(function(fulfillment) {
-      console.log("GOT THE FULFILLMENTS IN ARRAY")
-    })
-  },
-
   componentDidMount() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
-    console.log('-------------component fucking mounted-----------')
-    console.log(authData.uid)
     this.grabUserRequests(authData.uid);
     this.grabFulfillments(authData.uid);
 
@@ -162,11 +148,10 @@ var RequestMapDisplay = React.createClass({
   },
 
   goToMarker() {
-    var { markers } = this.state;
+    var { userData } = this.state;
     return {
-      ...this.state.markers[0],
-      latitude: markers[0].coordinate.latitude,
-      longitude: markers[0].coordinate.longitude,
+      latitude: userData.lat,
+      longitude: userData.long,
     };
   },
 
@@ -185,10 +170,11 @@ var RequestMapDisplay = React.createClass({
     console.log(this.state.markers)
   },
 
-  goToRequest() {
+  goToRequest(marker) {
     this.props.navigator.push({
       navigationBarHidden: true,
-      component: RequestDetail
+      component: RequestDetail,
+      passProps: {requestKey: marker.requestKey, requestCoordinate: marker.coordinate, requestDescription: marker.description}
     });
   },
 
@@ -212,7 +198,7 @@ var RequestMapDisplay = React.createClass({
               onDragEnd={this.updateMarkerCoordinate}>
                 <MapView.Callout tooltip>
                   <CustomCallout>
-                    <Text style={styles.text} onPress={this.prompt}>{marker.description}</Text>
+                    <Text style={styles.text} onPress={() => this.goToRequest(marker)}>{marker.description}</Text>
                   </CustomCallout>
                 </MapView.Callout>
             </MapView.Marker>
