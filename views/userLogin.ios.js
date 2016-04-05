@@ -1,7 +1,6 @@
 import React from 'react-native';
 import Firebase from 'firebase';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
-var Profile = require('./profile.ios')
 var Map = require('./map.ios')
 var Register = require('./createUser.ios')
 
