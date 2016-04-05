@@ -25,7 +25,7 @@ class createUser extends React.Component {
   state = {
     avatarSource: null,
     avatarJson: null,
-    userName: null,
+    username: null,
     email: null,
     password: null,
     confirmPassword: null,
@@ -50,8 +50,7 @@ class createUser extends React.Component {
         } else {
 
           usersRef.push({
-            firstName: that.state.firstName,
-            lastName: that.state.lastName,
+            username: that.state.firstName,
             profileImage: that.state.avatarSource,
             userUID: userData.uid
           }),
