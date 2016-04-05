@@ -10,6 +10,7 @@
 var HomeSplash = require('./views/homeSplash.ios')
 var RequestsMade = require('./views/requestMade.ios')
 var FulfillRequest = require('./views/fulfillRequest.ios')
+var UserPage = require('./views/userPage.ios')
 
 
 import React, {

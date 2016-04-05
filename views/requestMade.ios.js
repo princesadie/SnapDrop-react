@@ -11,6 +11,7 @@ import React, {
   Image,
   ListView,
   StyleSheet,
+  TouchableOpacity,
   Text,
   View,
 } from 'react-native';
@@ -31,6 +32,12 @@ class RequestMade extends Component {
   componentDidMount() {
     this.grabUserRequests("6b67698b-3410-4507-ab1f-040b47368b4a");
     this.grabUsers("6b67698b-3410-4507-ab1f-040b47368b4a");
+
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+    console.log('-------------ugh damn it-----------')
+    console.log(authData.uid)
+    // this.grabUserRequests(authData.uid);
   }
 
   grabUserRequests(inputUID) {
@@ -38,6 +45,7 @@ class RequestMade extends Component {
     var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
     ref.once("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
+        var key = childSnapshot.key();
         var userUID = childSnapshot.val().userUID;
         var childData = childSnapshot.val();
         if (userUID === inputUID) {
@@ -91,6 +99,9 @@ class RequestMade extends Component {
   renderMovie(userRequest) {
     return (
       <View style={styles.container}>
+        <View style={styles.thumbnail}>
+          <Text>PENDING</Text>
+        </View>
         <View style={styles.rightContainer}>
           <Text style={styles.description}>{userRequest.description}</Text>
           <Text style={styles.coords}>{userRequest.long}</Text>
@@ -110,13 +121,25 @@ class RequestMade extends Component {
     );
   }
 
+  goToUserPage() {
+    this.props.navigator.pop({
+      title: 'User Page',
+      navigationBarHidden: true,
+      component: UserPage,
+    });
+  }
+
+  goBack() {
+    this.props.navigator.pop();
+  }
+
   render() {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
 
     return (
-      <View>
+
       <View style={styles.avatar1}>
         <TouchableOpacity onPress={this.goToUserPage}>
           <Image style = {styles.avatar} source = {this.state.userData.profileImage}/>
@@ -127,6 +150,8 @@ class RequestMade extends Component {
           <Image style = {styles.avatar} source = {require('../images/snapdrop.png')} />
         </TouchableOpacity>
       </View>
+
+      <View style={styles.main}>
 
       <ListView
         dataSource={this.state.dataSource}
@@ -140,13 +165,17 @@ class RequestMade extends Component {
 }
 
 var styles = StyleSheet.create({
+  main: {
+    backgroundColor: 'rgba(236,64,122,1)',
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'pink',
-    marginBottom: 10,
+    marginTop: 30,
+    backgroundColor: '#C2185B',
+    padding: 10,
   },
   rightContainer: {
     flex: 1,
@@ -160,12 +189,42 @@ var styles = StyleSheet.create({
     textAlign: 'center',
   },
   thumbnail: {
-    width: 53,
-    height: 81,
+    width: 65,
+    height: 80,
   },
   listView: {
+    height: 1000,
     paddingTop: 20,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(236,64,122,1)',
+  },
+  navBar: {
+    flex: 1,
+    height: 60,
+  },
+  avatar1: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+  },
+  avatar2: {
+    position: 'absolute',
+    top: 5,
+    left: 5,
+  },
+  avatar1: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+  },
+  avatar2: {
+    position: 'absolute',
+    top: 5,
+    left: 5,
+  },
+  avatar: {
+    borderRadius: 25,
+    width: 50,
+    height: 50
   },
     bubble: {
     width: 200,

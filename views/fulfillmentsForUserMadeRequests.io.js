@@ -25,23 +25,17 @@ class FulfillRequest extends Component {
   }
 
   componentDidMount() {
-    var ref = new Firebase("https://snapdrop.firebaseio.com");
-    var authData = ref.getAuth();
-    console.log('-------------ugh damn it-----------')
-    console.log(authData.uid)
-    this.grabFulfillments(authData.uid);
+    this.grabFulfillments("0");
   }
 
   grabFulfillments(inputID) {
     var that = this;
-    var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
+    var ref = new Firebase("https://snapdrop.firebaseio.com/fulfillments");
     ref.once("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
-        var key = childSnapshot.key();
-        console.log(key);
-        var userUID = childSnapshot.val().userUID;
+        var requestID = childSnapshot.val().requestID;
         var childData = childSnapshot.val();
-        if (userUID != inputID) {
+        if (requestID === inputID) {
           that.state.fulfillments.push(childData);
           console.log(that.state.fulfillments);
 
