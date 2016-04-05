@@ -1,5 +1,6 @@
 // var MapView = require('./map.ios')
-var CreateUser = require('./createUser.ios')
+// var UserLogin = require('./userLogin.ios')
+var UserAuthentication = require('./userAuthentication.ios')
 
 import React, {
   TouchableHighlight,
@@ -20,7 +21,7 @@ var HomeSplash = React.createClass({
     this.props.navigator.push({
       title: 'User Page',
       navigationBarHidden: true,
-      component: CreateUser,
+      component: UserAuthentication,
     });
   },
 

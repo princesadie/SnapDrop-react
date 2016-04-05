@@ -1,9 +1,7 @@
 import React from 'react-native';
 import Firebase from 'firebase';
-var ImagePickerManager = require('NativeModules').ImagePickerManager;
-var UserLogin = require('./userLogin.ios');
+// var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var Map = require('./map.ios')
-
 
 const {
   StyleSheet,
@@ -14,15 +12,18 @@ const {
   TouchableHighlight,
   TextInput,
   Image,
-  NativeModules: {
-    ImagePickerManager
-  }
+  AlertIOS,
+  // NativeModules: {
+  //   ImagePickerManager
+  // }
 } = React;
-
-
-class createUser extends React.Component {
-
-  state = {
+// <UserLogin loginType={this.state.registerType}/>
+// REg
+class UserAuthentication extends React.Component {
+constructor(props){
+  super(props);
+  this.state = {
+    registerType: 'login',
     avatarSource: null,
     avatarJson: null,
     username: null,
@@ -31,6 +32,41 @@ class createUser extends React.Component {
     confirmPassword: null,
     errorMessage: null
   };
+}
+
+  goRegister(){
+    this.setState({registerType: 'register'})
+    // this.props.navigator.replace({
+    //   title: 'User Login',
+    //   navigationBarHidden: true,
+    //   component: UserLogin
+    // });
+    // return(<View style={styles.container}><Text>sasdsa</Text></View>)
+  }
+
+  goLogin() {
+    this.setState({registerType: 'login'})
+  }
+
+  userLoginMethod() {
+    var that = this;
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    ref.authWithPassword({
+      email: this.state.email,
+      password: this.state.password
+    }, function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+        AlertIOS.prompt("fail",null);
+      } else {
+        that.props.navigator.push({
+          title: 'Map',
+          navigationBarHidden: true,
+          component: Map
+        });
+      }
+    })
+  }
 
   addUser() {
     if (this.state.password !== this.state.confirmPassword ) {
@@ -64,10 +100,11 @@ class createUser extends React.Component {
               console.log("Login Failed!", error);
               AlertIOS.prompt("fail",null);
             } else {
+              that.setState({registerType: 'login'})
               that.props.navigator.push({
-                title: 'User Login',
+                title: 'Map',
                 navigationBarHidden: true,
-                component: UserLogin
+                component: Map
               });
             }
           }),
@@ -75,14 +112,6 @@ class createUser extends React.Component {
         }
       })
     }
-  }
-
-  goUserLogin() {
-    this.props.navigator.push({
-      title: 'Login',
-      navigationBarHidden: true,
-      component: UserLogin
-    })
   }
 
   selectPhotoTapped() {
@@ -130,10 +159,29 @@ class createUser extends React.Component {
        }
      });
    }
-  render() {
-    return (
-      <View style={styles.container}>
 
+  renderLogin() {
+    console.log('-------------login-----------------')
+    return (
+      <View style={styles.textInputContainer}>
+        <TextInput style={styles.textEdit} autoCapitalize={'none'} placeholder="EMAIL" onChangeText={(email) => this.setState({email})}/>
+        <TextInput style={styles.textEdit} autoCapitalize={'none'} secureTextEntry={true} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
+        <TouchableHighlight style={styles.button} underlayColor='#F8BBD0' onPress={() => this.userLoginMethod()}>
+            <Text style={styles.buttonText}>LOGIN</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor='#F8BBD0'
+          onPress={() => this.goRegister()}>
+            <Text style={styles.buttonText}>REGISTER</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+
+  renderRegister() {
+    console.log('-------------register-----------------')
+    return (
       <View>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
           <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
@@ -142,8 +190,6 @@ class createUser extends React.Component {
           }
           </View>
         </TouchableOpacity>
-      </View>
-
 
         <View style={styles.textInputContainer}>
           <TextInput style={styles.textEdit} placeholder="USERNAME" autoCapitalize={'none'} onChangeText={(username) => this.setState({username})}/>
@@ -158,16 +204,30 @@ class createUser extends React.Component {
           <TouchableHighlight
             style={styles.button}
             underlayColor='#F8BBD0'
-            onPress={() => this.goUserLogin()}>
+            onPress={() => this.goLogin()}>
 
               <Text style={styles.buttonText}>LOGIN</Text>
           </TouchableHighlight>
         </View>
-
       </View>
     );
   }
 
+  render() {
+    if(this.state.registerType === 'login') {
+      return (
+        <View style={styles.container}>
+          {this.renderLogin()}
+        </View>
+      )
+    } else {
+      return (
+      <View style={styles.container}>
+        {this.renderRegister()}
+      </View>
+    )
+    }
+  }
 }
 
 const styles = StyleSheet.create({
@@ -185,17 +245,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 20,
     marginLeft: 95,
-  },
-  avatarContainer: {
-    borderColor: '#FFF',
-    borderWidth: 1 / PixelRatio.get(),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150,
   },
   button: {
     height: 36,
@@ -227,6 +276,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignItems: 'center',
   },
+  avatarContainer: {
+    borderColor: '#FFF',
+    borderWidth: 1 / PixelRatio.get(),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150,
+  },
 });
 
-module.exports = createUser;
+module.exports = UserAuthentication;
