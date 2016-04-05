@@ -2,12 +2,12 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
+var fulfillRequestStyles = require('../stylesheets/fulfillRequestStyle.ios')
 
 import React, {
   AppRegistry,
   Component,
   ListView,
-  StyleSheet,
   Text,
   View,
 } from 'react-native';
@@ -57,7 +57,7 @@ class FulfillRequest extends Component {
 
   renderLoadingView() {
     return (
-      <View style={styles.container}>
+      <View style={fulfillRequestStyles.container}>
         <Text>
           Loading fulfillments...
         </Text>
@@ -67,9 +67,9 @@ class FulfillRequest extends Component {
 
   renderFulfillment(fulfillment) {
     return (
-      <View style={styles.container}>
-        <View style={styles.rightContainer}>
-          <Text style={styles.description}>{fulfillment.description}</Text>
+      <View style={fulfillRequestStyles.container}>
+        <View style={fulfillRequestStyles.rightContainer}>
+          <Text style={fulfillRequestStyles.description}>{fulfillment.description}</Text>
         </View>
       </View>
     );
@@ -84,45 +84,11 @@ class FulfillRequest extends Component {
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderFulfillment}
-        style={styles.listView}
+        style={fulfillRequestStyles.listView}
       />
     );
   }
 
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  rightContainer: {
-    flex: 1,
-  },
-  text: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  description: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  coords: {
-    textAlign: 'center',
-  },
-  thumbnail: {
-    width: 53,
-    height: 81,
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#fff',
-  },
-});
 
 module.exports = FulfillRequest;

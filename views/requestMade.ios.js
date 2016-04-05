@@ -3,12 +3,13 @@
  * https://github.com/facebook/react-native
  */
 
+ var requestMadeStyles = require('../stylesheets/requestMadeStyle.ios');
+
 import React, {
   AppRegistry,
   Component,
   Image,
   ListView,
-  StyleSheet,
   TouchableOpacity,
   Text,
   View,
@@ -72,7 +73,7 @@ class RequestMade extends Component {
 
   renderLoadingView() {
     return (
-      <View style={styles.container}>
+      <View style={requestMadeStyles.container}>
         <Text>
           LOADING REQUESTS...
         </Text>
@@ -82,8 +83,8 @@ class RequestMade extends Component {
 
   renderRequest(userRequest) {
     return (
-      <View style={styles.container}>
-        <View style={styles.thumbnail}>
+      <View style={requestMadeStyles.container}>
+        <View style={requestMadeStyles.thumbnail}>
           <Text>PENDING</Text>
           <Text onPress={() => this.goToRequestPage(userRequest)}>VIEW PHOTOS</Text>
         </View>
@@ -115,7 +116,7 @@ class RequestMade extends Component {
     }
 
     return (
-      <View style={styles.main}>
+      <View style={requestMadeStyles.main}>
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderRequest.bind(this)}
@@ -126,71 +127,5 @@ class RequestMade extends Component {
   }
 
 }
-
-var styles = StyleSheet.create({
-  main: {
-    backgroundColor: 'rgba(236,64,122,1)',
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 30,
-    backgroundColor: '#FFF',
-    padding: 10,
-  },
-  rightContainer: {
-    flex: 1,
-  },
-  description: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-    color: 'rgba(236,64,122,1)',
-  },
-  coords: {
-    textAlign: 'center',
-    color: 'rgba(236,64,122,1)',
-  },
-  thumbnail: {
-    width: 65,
-    height: 80,
-  },
-  listView: {
-    height: 1000,
-    paddingTop: 20,
-    backgroundColor: 'rgba(236,64,122,1)',
-  },
-  navBar: {
-    flex: 1,
-    height: 60,
-  },
-  avatar1: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-  },
-  avatar2: {
-    position: 'absolute',
-    top: 5,
-    left: 5,
-  },
-  avatar1: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-  },
-  avatar2: {
-    position: 'absolute',
-    top: 5,
-    left: 5,
-  },
-  avatar: {
-    borderRadius: 25,
-    width: 50,
-    height: 50
-  },
-});
 
 module.exports = RequestMade;
