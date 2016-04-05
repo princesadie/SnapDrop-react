@@ -17,8 +17,6 @@ var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
 var RequestMade = require('./requestMade.ios')
 
-
-
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
 const LONGITUDE = -87.637604;
@@ -38,6 +36,7 @@ var RequestMapDisplay = React.createClass({
       },
       markers: [],
       request: {},
+      test: "FUCK",
       fulfillments: [],
       userData: {},
     };
@@ -59,35 +58,6 @@ var RequestMapDisplay = React.createClass({
     });
   },
 
-  grabFulfillments(inputID) {
-    var that = this;
-    var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
-    ref.once("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var key = childSnapshot.key();
-        var userUID = childSnapshot.val().userUID;
-        var childData = childSnapshot.val();
-        if (userUID != inputID) {
-          that.state.fulfillments.push(childData);
-          console.log(that.state.fulfillments);
-          console.log("===========================")
-        };
-      });
-    });
-  },
-
-  dropMarkers() {
-    console.log("GOT TO DROPMARKERS")
-    var that = this;
-    console.log(this.state.fulfillments)
-    console.log("LOG FULFILLMENTS")
-    this.state.fulfillments.forEach(function(fulfillment) {
-      console.log("GOT THE FULFILLMENTS IN ARRAY")
-      console.log(that.state.fulfillment);
-      console.log(that.state.markers);
-    })
-  },
-
   updateUserLocationInFirebase() {
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
     userRef.update({
@@ -107,6 +77,38 @@ var RequestMapDisplay = React.createClass({
 
   },
 
+  grabFulfillments(inputID) {
+    var that = this;
+    var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
+    ref.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var key = childSnapshot.key();
+        var userUID = childSnapshot.val().userUID;
+        var childData = childSnapshot.val();
+        if (userUID != inputID) {
+          that.state.fulfillments.push(childData);
+          var marker = {
+            key: id++,
+            coordinate:{
+              latitude: childData.lat,
+              longitude: childData.long,
+            },
+            description: childData.description
+          }
+          console.log(marker)
+          that.state.markers.push(marker);
+          console.log(that.state.markers)
+        };
+      });
+    });
+  },
+
+  dropMarkers(fullfilment) {
+    fulfillments.forEach(function(fulfillment) {
+      console.log("GOT THE FULFILLMENTS IN ARRAY")
+    })
+  },
+
   componentDidMount() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
@@ -114,7 +116,6 @@ var RequestMapDisplay = React.createClass({
     console.log(authData.uid)
     this.grabUserRequests(authData.uid);
     this.grabFulfillments(authData.uid);
-    this.dropMarkers();
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -184,6 +185,13 @@ var RequestMapDisplay = React.createClass({
     console.log(this.state.markers)
   },
 
+  goToRequest() {
+    this.props.navigator.push({
+      navigationBarHidden: true,
+      component: RequestDetail
+    });
+  },
+
   render() {
     return (
       <View style={styles.container}>
@@ -204,7 +212,7 @@ var RequestMapDisplay = React.createClass({
               onDragEnd={this.updateMarkerCoordinate}>
                 <MapView.Callout tooltip>
                   <CustomCallout>
-                    <Text style={styles.text} onPress={this.prompt}>{this.state.markers[0].coordinate.latitude.toPrecision(7)},{this.state.markers[0].coordinate.longitude.toPrecision(7)}</Text>
+                    <Text style={styles.text} onPress={this.prompt}>{marker.description}</Text>
                   </CustomCallout>
                 </MapView.Callout>
             </MapView.Marker>
