@@ -26,6 +26,7 @@ class RequestMade extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       loaded: false,
+      userData: {},
       test: 'GOT IT?',
     };
   }
@@ -34,6 +35,7 @@ class RequestMade extends Component {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
     this.grabUserRequests(authData.uid);
+    this.grabUsers(authData.uid);
   }
 
   grabUserRequests(inputUID) {
@@ -62,6 +64,44 @@ class RequestMade extends Component {
         };
       });
     });
+  }
+grabUsers(inputUID) {
+    console.log('------------please god-------------------')
+    var that = this;
+    var userRef = new Firebase("https://snapdrop.firebaseio.com/users");
+    userRef.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var userUID = childSnapshot.val().userUID;
+        var childData = childSnapshot.val();
+        console.log('------------outside-------------------')
+        if (userUID === inputUID) {
+          console.log('-------------------------------')
+          console.log(childData)
+          that.setState({
+            userData: childData
+          });
+        };
+      });
+    });
+  }
+
+  updateUserLocationInFirebase() {
+    var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
+    userRef.update({
+      lat: this.state.lastPosition.lat,
+      long: this.state.lastPosition.long,
+    })
+  }
+  goToUserPage() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+    this.props.navigator.push({
+      title: 'User Page',
+      navigationBarHidden: true,
+      component: UserPage,
+      passProps: {userUID: authData.uid}
+    });
+
   }
 
   goToRequestPage(userRequest) {
@@ -116,13 +156,25 @@ class RequestMade extends Component {
     }
 
     return (
+
       <View style={requestMadeStyles.main}>
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderRequest.bind(this)}
-        style={requestMadeStyles.listView}
-      />
+        <View style={requestMadeStyles.avatar1}>
+          <TouchableOpacity onPress={this.goToUserPage}>
+            <Image style = {requestMadeStyles.avatar} source = {this.state.userData.profileImage}/>
+          </TouchableOpacity>
+        </View>
+        <View style={requestMadeStyles.avatar2}>
+          <TouchableOpacity onPress={this.goToSnapDropPage}>
+            <Image style = {requestMadeStyles.avatar} source = {require('../images/snapdrop.png')} />
+          </TouchableOpacity>
+        </View>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRequest.bind(this)}
+          style={requestMadeStyles.listView}
+        />
       </View>
+
     );
   }
 

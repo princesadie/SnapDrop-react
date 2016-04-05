@@ -1,16 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-// var ProfilePage = require('./views/userPage.ios')
-// var Home = require('./views/home.ios')
-// var NewMap = require('./views/map.ios')
-// var CreateUser = require('./views/createUser.ios')
 var HomeSplash = require('./views/homeSplash.ios')
-var RequestMade = require('./views/requestMade.ios')
-var FulfillRequest = require('./views/fulfillRequest.ios')
-var UserPage = require('./views/userPage.ios')
-
 
 import React, {
   AppRegistry,

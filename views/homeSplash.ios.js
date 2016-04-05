@@ -1,5 +1,4 @@
-var MapView = require('./map.ios')
-var CreateUser = require('./createUser.ios')
+var UserAuthentication = require('./userAuthentication.ios')
 var homeSplashStyles = require('../stylesheets/homeSplashStyle.ios')
 
 import React, {
@@ -12,15 +11,13 @@ import React, {
 
 } from 'react-native';
 
-// var SearchBarTag = require('react-native-search-bar');
-
 var HomeSplash = React.createClass({
 
   selectRoute() {
     this.props.navigator.push({
       title: 'User Page',
       navigationBarHidden: true,
-      component: CreateUser,
+      component: UserAuthentication,
     });
   },
 
@@ -41,5 +38,4 @@ var HomeSplash = React.createClass({
 
 
 });
-
 module.exports = HomeSplash;

@@ -21,6 +21,17 @@ module.exports = StyleSheet.create({
     marginTop: 20,
     marginLeft: 95,
   },
+  avatarContainer: {
+    borderColor: '#FFF',
+    borderWidth: 3 / PixelRatio.get(),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150,
+  },
   button: {
     height: 36,
     width: 300,
@@ -32,6 +43,7 @@ module.exports = StyleSheet.create({
   buttonText: {
     color: 'rgba(236,64,122,1)',
     textAlign: 'center',
+    // marginTop: 10,
     fontWeight: 'bold',
   },
   text: {
