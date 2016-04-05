@@ -279,6 +279,4 @@ var MapDisplay = React.createClass({
   },
 });
 
-
-
 module.exports = MapDisplay;
