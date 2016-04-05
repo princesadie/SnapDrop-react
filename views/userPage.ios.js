@@ -4,7 +4,9 @@ import React, {
   Dimensions,
   View,
   Image,
+  PixelRatio,
   TouchableHighlight,
+  Navigator,
   Text,
 } from 'react-native';
 
@@ -12,6 +14,8 @@ import Firebase from 'firebase';
 
 var FulfillRequest = require('./fulfillRequest.ios');
 var MadeRequest = require('./requestMade.ios');
+var HomeSplash = require('./homeSplash.ios');
+var RequestMap = require('./requestMap.ios');
 
 class UserPage extends Component {
 
@@ -23,8 +27,7 @@ class UserPage extends Component {
   }
 
   componentDidMount() {
-    // this.grabUserRequests(this.currentUser().uid);
-    this.grabUserRequests("77c879e2-a4a2-48a5-9966-dd114066f23d");
+    this.grabUserRequests(this.currentUser().uid);
   }
 
   currentUser() {
@@ -53,40 +56,34 @@ class UserPage extends Component {
     this.props.navigator.pop({
       title: 'Map',
       navigationBarHidden: true,
-      component: Map
-    })
+    });
   }
 
   fulfillRequest(){
-    console.log("fullfill a req");
     this.props.navigator.push({
-      title: 'Fulfill Request',
-      navigationBarHidden: true,
-      component: FulfillRequest
+      component: RequestMap
     })
   }
 
   madeRequest(){
     console.log("fullfill a req");
     this.props.navigator.push({
-      title: 'Made Requests',
-      navigationBarHidden: true,
+      title: 'YOUR REQUESTS',
       component: MadeRequest
     })
   }
 
   logOut(){
     console.log("fullfill a req");
-    this.props.navigator.push({
-      title: 'Fulfill Request',
+    this.props.navigator.popToTop({
       navigationBarHidden: true,
-      component: FulfillRequest
+      component: HomeSplash
     })
   }
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <View style={styles.container}>
           <View style={styles.content}>
             <Image style={styles.avatar} source={this.state.userData.profileImage}/>
@@ -94,28 +91,28 @@ class UserPage extends Component {
             <View style={styles.buttonContainer}>
               <TouchableHighlight
                 style={styles.button}
-                underlayColor='rgba(236,64,122,0.7)'
+                underlayColor='#F8BBD0'
                 onPress={() => this.madeRequest()}>
                   <Text style={styles.buttonText}>MY REQUESTS</Text>
               </TouchableHighlight>
 
               <TouchableHighlight
                 style={styles.button}
-                underlayColor='rgba(236,64,122,0.7)'
+                underlayColor='#F8BBD0'
                 onPress={() => this.fulfillRequest()}>
                   <Text style={styles.buttonText}>FULFILL REQUESTS</Text>
               </TouchableHighlight>
 
               <TouchableHighlight
                 style={styles.button}
-                underlayColor='rgba(236,64,122,0.7)'
+                underlayColor='#F8BBD0'
                 onPress={() => this.makeRequest()}>
                   <Text style={styles.buttonText}>MAKE A REQUEST</Text>
               </TouchableHighlight>
 
               <TouchableHighlight
                 style={styles.button}
-                underlayColor='rgba(236,64,122,0.7)'
+                underlayColor='#F8BBD0'
                 onPress={() => this.logOut()}>
                   <Text style={styles.buttonText}>LOG OUT</Text>
               </TouchableHighlight>
@@ -132,12 +129,14 @@ const styles = StyleSheet.create({
   container: {
    flex: 1,
    flexDirection: 'column',
+   backgroundColor: 'rgba(236,64,122,1)',
  },
  content: {
    flex: 1,
    height: 50,
    flexDirection: 'column',
    marginTop: 30,
+   backgroundColor: 'rgba(236,64,122,1)',
  },
  welcome: {
    marginTop: 20,
@@ -152,10 +151,10 @@ const styles = StyleSheet.create({
    marginLeft: 42,
    borderRadius: 10,
    justifyContent: 'center',
-   backgroundColor: 'rgba(236,64,122,1)',
+   backgroundColor: '#FFF',
  },
  buttonText: {
-   color: 'white',
+   color: 'rgba(236,64,122,1)',
    textAlign: 'center',
    marginTop: 10,
    fontWeight: 'bold',
@@ -165,13 +164,15 @@ const styles = StyleSheet.create({
    paddingTop:30,
    paddingBottom:10,
    flexDirection:'column',
-   backgroundColor: '#fff',
+   backgroundColor: 'rgba(236,64,122,1)',
  },
  avatar: {
    borderRadius: 100,
    width: 200,
    height: 200,
    marginLeft: 85,
+   borderWidth: 3 / PixelRatio.get(),
+   borderColor: '#FFF',
  },
 });
 

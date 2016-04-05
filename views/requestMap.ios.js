@@ -26,7 +26,7 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let id = 0;
 
-var MapDisplay = React.createClass({
+var RequestMapDisplay = React.createClass({
   watchID: (null: ?number),
   getInitialState() {
     return {
@@ -38,28 +38,54 @@ var MapDisplay = React.createClass({
       },
       markers: [],
       request: {},
+      fulfillments: [],
       userData: {},
     };
   },
 
   grabUserRequests(inputUID) {
-    console.log('------------please god-------------------')
     var that = this;
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users");
     userRef.once("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         var userUID = childSnapshot.val().userUID;
         var childData = childSnapshot.val();
-        console.log('------------outside-------------------')
         if (userUID === inputUID) {
-          console.log('-------------------------------')
-          console.log(childData)
           that.setState({
             userData: childData
           });
         };
       });
     });
+  },
+
+  grabFulfillments(inputID) {
+    var that = this;
+    var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
+    ref.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var key = childSnapshot.key();
+        var userUID = childSnapshot.val().userUID;
+        var childData = childSnapshot.val();
+        if (userUID != inputID) {
+          that.state.fulfillments.push(childData);
+          console.log(that.state.fulfillments);
+          console.log("===========================")
+        };
+      });
+    });
+  },
+
+  dropMarkers() {
+    console.log("GOT TO DROPMARKERS")
+    var that = this;
+    console.log(this.state.fulfillments)
+    console.log("LOG FULFILLMENTS")
+    this.state.fulfillments.forEach(function(fulfillment) {
+      console.log("GOT THE FULFILLMENTS IN ARRAY")
+      console.log(that.state.fulfillment);
+      console.log(that.state.markers);
+    })
   },
 
   updateUserLocationInFirebase() {
@@ -87,6 +113,8 @@ var MapDisplay = React.createClass({
     console.log('-------------component fucking mounted-----------')
     console.log(authData.uid)
     this.grabUserRequests(authData.uid);
+    this.grabFulfillments(authData.uid);
+    this.dropMarkers();
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -141,37 +169,6 @@ var MapDisplay = React.createClass({
     };
   },
 
-  onMapPress(e) {
-    if(this.state.markers.length < 1) {
-      this.setState({
-        markers: [
-          ...this.state.markers,
-          {
-            coordinate: e.nativeEvent.coordinate,
-            key: id++,
-            title: 'PIN',
-            description: 'DESCRIPTION',
-            color: 'rgba(236,64,122,1)',
-          },
-        ],
-      });
-      console.log(e.nativeEvent.coordinate)
-    }
-  },
-
-  sendRequestToFireBase() {
-    var ref = new Firebase("https://snapdrop.firebaseio.com");
-    var authData = ref.getAuth();
-
-    var requestsRef = new Firebase("https://snapdrop.firebaseio.com/requests");
-    requestsRef.push({
-      description: this.state.request.description,
-      lat: this.state.markers[0].coordinate.latitude,
-      long: this.state.markers[0].coordinate.longitude,
-      userUID: authData.uid
-    })
-  },
-
   updateMarkerCoordinate(e) {
     this.setState({
       markers: [
@@ -187,42 +184,6 @@ var MapDisplay = React.createClass({
     console.log(this.state.markers)
   },
 
-  saveResponse(promptValue) {
-    this.setState({
-      request: {
-        lat: this.state.markers[0].coordinate.latitude,
-        long: this.state.markers[0].coordinate.longitude,
-        description: promptValue
-      }
-    });
-  },
-
-  sendRequest() {
-    //if no pin we need to make a pop up
-    // if description is empty we should just pass empty string
-    this.sendRequestToFireBase();
-    this.props.navigator.push({
-      title: 'REQUESTS MADE',
-      component: RequestMade
-    });
-
-  },
-
-  goToUserPage() {
-    var ref = new Firebase("https://snapdrop.firebaseio.com");
-    var authData = ref.getAuth();
-    this.props.navigator.push({
-      title: 'User Page',
-      navigationBarHidden: true,
-      component: UserPage,
-      passProps: {userUID: authData.uid}
-    });
-  },
-
-  prompt() {
-    AlertIOS.prompt('WRITE DESCRIPTION', null, this.saveResponse)
-  },
-
   render() {
     return (
       <View style={styles.container}>
@@ -233,7 +194,6 @@ var MapDisplay = React.createClass({
           style={styles.map}
           region={this.state.region}
           onRegionChange={this.onRegionChange}
-          onPress={this.onMapPress}
           showsUserLocation={true}
         >
         {this.state.markers.map(marker => (
@@ -241,9 +201,7 @@ var MapDisplay = React.createClass({
               key={marker.key}
               coordinate={marker.coordinate}
               pinColor={marker.color}
-              onDragEnd={this.updateMarkerCoordinate}
-              // onSelect={() => AlertIOS.prompt('WRITE DESCRIPTION', null, this.saveResponse)}
-              draggable>
+              onDragEnd={this.updateMarkerCoordinate}>
                 <MapView.Callout tooltip>
                   <CustomCallout>
                     <Text style={styles.text} onPress={this.prompt}>{this.state.markers[0].coordinate.latitude.toPrecision(7)},{this.state.markers[0].coordinate.longitude.toPrecision(7)}</Text>
@@ -265,9 +223,6 @@ var MapDisplay = React.createClass({
         </View>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this.sendRequest} style={[styles.bubble, styles.button]}>
-            <Text style={styles.text}>SEND</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={this.animateRandom} style={[styles.bubble, styles.button]}>
             <Text style={styles.text}>CENTER</Text>
           </TouchableOpacity>
@@ -341,4 +296,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = MapDisplay;
+module.exports = RequestMapDisplay;

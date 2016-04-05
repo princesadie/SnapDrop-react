@@ -2,28 +2,30 @@
   "users" : [ {
     "lat" : 37.51869146,
     "long" : -122.35307638,
-    "username" : "ANOTHER NAME"
+    "username" : "M",
+    "userUID" : "593392df-ca86-4f70-9105-c565c23e1952"
   }, {
     "lat" : -88.075010,
     "long" : 41.965100,
-    "username" : "JohnDoe"
+    "username" : "JohnDoe",
+    "userUID" : "b82d48c1-7c73-4062-a637-747e3b746f31"
   }, {
     "lat" : -87.940095,
     "long" : 41.671969,
     "username" : "JaneDoe"
   } ],
   "requests" : [ {
-    "userUID" : "5de9867f-9152-4dbf-9df1-2b357863c147",
+    "userUID" : "593392df-ca86-4f70-9105-c565c23e1952",
     "description" : "I need a photo of the Hotdog place",
     "lat" : -87.940100,
     "long" : 41.671975
   }, {
-    "userUID" : "5de9867f-9152-4dbf-9df1-2b357863c147",
+    "userUID" : "593392df-ca86-4f70-9105-c565c23e1952",
     "description" : "I'd like a photo of the lightpost",
     "lat" : -87.94090,
     "long" : 41.671970
   }, {
-    "userUID" : "5de9867f-9152-4dbf-9df1-2b357863c147",
+    "userUID" : "b82d48c1-7c73-4062-a637-747e3b746f31",
     "description" : "Get me a pic of the ground",
     "lat" : -87.940105,
     "long" : 41.671977
