@@ -72,7 +72,8 @@ class UserPage extends Component {
     console.log("fullfill a req");
     this.props.navigator.push({
       title: 'YOUR REQUESTS',
-      component: MadeRequest
+      component: MadeRequest,
+      navigationBarHidden: true,
     })
   }
 
