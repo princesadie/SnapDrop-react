@@ -1,7 +1,8 @@
 var React = require('react-native');
+var mapStyles = require('../stylesheets/mapStyle.ios');
+
 var {
   Image,
-  StyleSheet,
   PropTypes,
   View,
   Text,
@@ -16,7 +17,6 @@ var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
 var RequestMade = require('./requestMade.ios')
-
 
 
 const ASPECT_RATIO = width / height;
@@ -225,12 +225,12 @@ var MapDisplay = React.createClass({
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={mapStyles.container}>
 
         <MapView
           ref="map"
           mapType="terrain"
-          style={styles.map}
+          style={mapStyles.map}
           region={this.state.region}
           onRegionChange={this.onRegionChange}
           onPress={this.onMapPress}
@@ -246,30 +246,30 @@ var MapDisplay = React.createClass({
               draggable>
                 <MapView.Callout tooltip>
                   <CustomCallout>
-                    <Text style={styles.text} onPress={this.prompt}>{this.state.markers[0].coordinate.latitude.toPrecision(7)},{this.state.markers[0].coordinate.longitude.toPrecision(7)}</Text>
+                    <Text style={mapStyles.text} onPress={this.prompt}>{this.state.markers[0].coordinate.latitude.toPrecision(7)},{this.state.markers[0].coordinate.longitude.toPrecision(7)}</Text>
                   </CustomCallout>
                 </MapView.Callout>
             </MapView.Marker>
           ))}
         </MapView>
 
-        <View style={styles.avatar1}>
+        <View style={mapStyles.avatar1}>
           <TouchableOpacity onPress={this.goToUserPage}>
-            <Image style = {styles.avatar} source = {this.state.userData.profileImage}/>
+            <Image style = {mapStyles.avatar} source = {this.state.userData.profileImage}/>
           </TouchableOpacity>
         </View>
-        <View style={styles.avatar2}>
+        <View style={mapStyles.avatar2}>
           <TouchableOpacity onPress={this.goToSnapDropPage}>
-            <Image style = {styles.avatar} source = {require('../images/snapdrop.png')} />
+            <Image style = {mapStyles.avatar} source = {require('../images/snapdrop.png')} />
           </TouchableOpacity>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this.sendRequest} style={[styles.bubble, styles.button]}>
-            <Text style={styles.text}>SEND</Text>
+        <View style={mapStyles.buttonContainer}>
+          <TouchableOpacity onPress={this.sendRequest} style={[mapStyles.bubble, mapStyles.button]}>
+            <Text style={mapStyles.text}>SEND</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.animateRandom} style={[styles.bubble, styles.button]}>
-            <Text style={styles.text}>CENTER</Text>
+          <TouchableOpacity onPress={this.animateRandom} style={[mapStyles.bubble, mapStyles.button]}>
+            <Text style={mapStyles.text}>CENTER</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -279,66 +279,6 @@ var MapDisplay = React.createClass({
   },
 });
 
-var styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    marginTop: 20,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  callout: {
-    backgroundColor: 'rgba(236,64,122,0.7)',
-  },
-  bubble: {
-    backgroundColor: 'rgba(236,64,122,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  latlng: {
-    width: 200,
-    alignItems: 'stretch',
-  },
-  button: {
-    width: 140,
-    paddingHorizontal: 12,
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    backgroundColor: 'transparent',
-  },
-  avatar1: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-  },
-  avatar2: {
-    position: 'absolute',
-    top: 5,
-    left: 5,
-  },
-  avatar: {
-    borderRadius: 25,
-    width: 50,
-    height: 50
-  },
-  text: {
-    color: 'white',
-  },
-});
+
 
 module.exports = MapDisplay;

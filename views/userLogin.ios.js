@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'rgba(236,64,122,1)',
     textAlign: 'center',
-    // marginTop: 10,
     fontWeight: 'bold',
   },
   text: {
