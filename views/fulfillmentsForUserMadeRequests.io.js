@@ -2,7 +2,7 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-
+var fulfillmentsForUserMadeRequestsStyles = require('../stylsheets/fulfillmentsForUserMadeRequestsStyle.ios')
 import React, {
   AppRegistry,
   Component,
@@ -51,7 +51,7 @@ class FulfillRequest extends Component {
 
   renderLoadingView() {
     return (
-      <View style={styles.container}>
+      <View style={fulfillmentsForUserMadeRequestsStyles.container}>
         <Text>
           Loading fulfillments...
         </Text>
@@ -61,9 +61,9 @@ class FulfillRequest extends Component {
 
   renderFulfillment(fulfillment) {
     return (
-      <View style={styles.container}>
-        <View style={styles.rightContainer}>
-          <Text style={styles.description}>{fulfillment.description}</Text>
+      <View style={fulfillmentsForUserMadeRequestsStyles.container}>
+        <View style={fulfillmentsForUserMadeRequestsStyles.rightContainer}>
+          <Text style={fulfillmentsForUserMadeRequestsStyles.description}>{fulfillment.description}</Text>
         </View>
       </View>
     );
@@ -78,45 +78,11 @@ class FulfillRequest extends Component {
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderFulfillment}
-        style={styles.listView}
+        style={fulfillmentsForUserMadeRequestsStyles.listView}
       />
     );
   }
 
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  rightContainer: {
-    flex: 1,
-  },
-  text: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  description: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  coords: {
-    textAlign: 'center',
-  },
-  thumbnail: {
-    width: 53,
-    height: 81,
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#fff',
-  },
-});
 
 module.exports = FulfillRequest;

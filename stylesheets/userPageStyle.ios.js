@@ -1,35 +1,25 @@
 'use strict'
+const React = require('react-native');
 const { StyleSheet } = React;
 
-import React, {
-  Component,
-  Dimensions,
-  View,
-  Image,
-  PixelRatio,
-  TouchableHighlight,
-  Navigator,
-  Text,
-} from 'react-native';
-
 module.exports = StyleSheet.create({
-  container: {
+  container2: {
    flex: 1,
    flexDirection: 'column',
    backgroundColor: 'rgba(236,64,122,1)',
  },
- content: {
+ content2: {
    flex: 1,
    height: 50,
    flexDirection: 'column',
    marginTop: 30,
    backgroundColor: 'rgba(236,64,122,1)',
  },
- welcome: {
+ welcome2: {
    marginTop: 20,
    textAlign: 'center',
  },
- button: {
+ button2: {
    flex: 1,
    flexDirection: 'row',
    height: 36,
@@ -40,27 +30,25 @@ module.exports = StyleSheet.create({
    justifyContent: 'center',
    backgroundColor: '#FFF',
  },
- buttonText: {
+ buttonText2: {
    color: 'rgba(236,64,122,1)',
    textAlign: 'center',
    marginTop: 10,
    fontWeight: 'bold',
  },
- buttonContainer:{
+ buttonContainer2:{
    marginTop: 10,
    paddingTop:30,
    paddingBottom:10,
    flexDirection:'column',
    backgroundColor: 'rgba(236,64,122,1)',
  },
- avatar: {
+ avatar2: {
    borderRadius: 100,
    width: 200,
    height: 200,
    marginLeft: 85,
-   borderWidth: 3 / PixelRatio.get(),
+  //  borderWidth: 3 / PixelRatio.get(),
    borderColor: '#FFF',
  },
 });
-
-module.exports = StyleSheet;

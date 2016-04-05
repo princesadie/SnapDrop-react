@@ -39,7 +39,7 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 10,
   },
-  buttonContainerMap: {
+  buttonContainer: {
     flexDirection: 'row',
     marginVertical: 20,
     backgroundColor: 'transparent',

@@ -1,9 +1,10 @@
 /* eslint no-console: 0 */
 'use strict';
 
+var geolocationStyles = require('../stylesheets/geolocationStyle.ios')
+
 import React, {
   Component,
-  StyleSheet,
   View,
   MapView,
   TouchableHighlight,
@@ -66,11 +67,11 @@ class Geolocation extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={geolocationStyles.container}>
       <Text>LONG: {this.state.initialPosition.long}</Text>
       <Text>LAT: {this.state.initialPosition.lat}</Text>
       <MapView
-        style={ styles.map }
+        style={ geolocationStyles.map }
         initialRegion={{
           latitude: this.state.initialPosition.lat,
           longitude: this.state.initialPosition.long,
@@ -95,39 +96,5 @@ class Geolocation extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#515154',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  button: {
-    flex: 1,
-    flexDirection: 'row',
-    height: 36,
-    width: 300,
-    marginTop: 20,
-    marginLeft: 42,
-    borderRadius: 10,
-    justifyContent: 'center',
-    backgroundColor: '#7986CB',
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
-    marginTop: 10,
-    fontWeight: 'bold',
-  },
-});
 
 module.exports = Geolocation

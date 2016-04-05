@@ -1,5 +1,6 @@
 var MapView = require('./map.ios')
 var CreateUser = require('./createUser.ios')
+var homeSplashStyles = require('../stylesheets/homeSplashStyle.ios')
 
 import React, {
   TouchableHighlight,
@@ -7,7 +8,6 @@ import React, {
   Component,
   Text,
   TextInput,
-  StyleSheet,
   View
 
 } from 'react-native';
@@ -27,10 +27,10 @@ var HomeSplash = React.createClass({
   render() {
     return (
 
-      <View style = {styles.container}>
-        <Image style = {styles.strech2} source = {require('../images/splash.png')} />
-              <View style = {styles.enterView}>
-        <Text style = {styles.enterText} onPress={() => this.selectRoute()}> [ ENTER ] </Text>
+      <View style = {homeSplashStyles.container}>
+        <Image style = {homeSplashStyles.strech2} source = {require('../images/splash.png')} />
+              <View style = {homeSplashStyles.enterView}>
+        <Text style = {homeSplashStyles.enterText} onPress={() => this.selectRoute()}> [ ENTER ] </Text>
       </View>
       </View>
 
@@ -40,36 +40,6 @@ var HomeSplash = React.createClass({
   }
 
 
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 20,
-    // remove width and height to override fixed static size
-    width: null,
-    height: null,
-  },
-
-  strech2: {
-    flex: 1,
-    // remove width and height to override fixed static size
-    width: null,
-    height: null,
-  },
-
-  enterView: {
-    position: 'absolute',
-    top: 500,
-    left: 90,
-    backgroundColor: 'transparent'
-  },
-
-  enterText: {
-    color: 'white',
-    fontSize: 40,
-    fontWeight: 'bold',
-  }
 });
 
 module.exports = HomeSplash;

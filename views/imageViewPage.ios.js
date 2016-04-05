@@ -1,6 +1,7 @@
 var NativeImagePicker = require('./nativeImagePicker.ios')
 var React = require('react-native');
 var AddCaptionPage = require('./addCaptionPage.ios')
+var imageViewPageStyles = require('../stylesheets/imageViewPageStyle.ios')
 
 var {
   View,
@@ -10,7 +11,6 @@ var {
   Image,
   Alert,
   ListView,
-  StyleSheet,
   ScrollView,
   TouchableHighlight,
   TouchableOpacity,
@@ -49,72 +49,31 @@ class ImageViewPage extends Component {
     console.log(this.props.cat)
     console.log('------------------------------------------')
     return (
-      <View style={styles.container}>
+      <View style={imageViewPageStyles.container}>
 
-        <View style={styles.avatar}>
-          <Image style={styles.avatar} source={this.props.sourceIm} />
+        <View style={imageViewPageStyles.avatar}>
+          <Image style={imageViewPageStyles.avatar} source={this.props.sourceIm} />
         </View>
-        <View style={styles.captionContainer}>
-          <TextInput style={styles.textEdit} placeholder="add a caption" onChangeText={(captionText) => this.setState({captionText})}/>
+        <View style={imageViewPageStyles.captionContainer}>
+          <TextInput style={imageViewPageStyles.textEdit} placeholder="add a caption" onChangeText={(captionText) => this.setState({captionText})}/>
         </View>
-        <View style={styles.buttonContainer3}>
+        <View style={imageViewPageStyles.buttonContainer3}>
           <TouchableHighlight
-            style={styles.button3}
+            style={imageViewPageStyles.button3}
             underlayColor='#9FA8DA'
             onPress={() => this.sendImage()}>
-            <Text style={styles.buttonText3}>Send</Text>
+            <Text style={imageViewPageStyles.buttonText3}>Send</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            style={styles.button3}
+            style={imageViewPageStyles.button3}
             underlayColor='#9FA8DA'
             onPress={() => this.cancelImage()}>
-            <Text style={styles.buttonText3}>Cancel</Text>
+            <Text style={imageViewPageStyles.buttonText3}>Cancel</Text>
           </TouchableHighlight>
         </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 30,
-    backgroundColor: 'pink',
-  },
-  avatar: {
-    borderRadius: 5,
-    flex: 1
-  },
-  button3: {
-    flex: 1,
-    width: 150,
-    height: 40,
-    borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    backgroundColor: '#7986CB',
-  },
-  buttonText3: {
-    color: 'white',
-    justifyContent: 'center',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  buttonContainer3:{
-    flexDirection:'row',
-    backgroundColor: '#fff',
-    marginTop: 0
-  },
-  textEdit: {
-    height: 40,
-    marginBottom: 0,
-    borderColor: 'green',
-    backgroundColor: 'orange',
-    borderWidth: 2,
-    borderRadius: 5,
-    textAlign: 'center',
-  },
-});
 
 module.exports = ImageViewPage;

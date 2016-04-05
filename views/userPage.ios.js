@@ -1,16 +1,16 @@
+var React = require('react-native')
 var userPageStyles = require('../stylesheets/userPageStyle.ios');
 
-import React, {
+var {
   Component,
   Dimensions,
   View,
-  StyleSheet,
   Image,
-  PixelRatio,
+  // PixelRatio,
   TouchableHighlight,
   Navigator,
   Text,
-} from 'react-native';
+} = React;
 
 import Firebase from 'firebase';
 
@@ -85,38 +85,38 @@ class UserPage extends Component {
 
   render() {
     return (
-      <View style={userPageStyles.container}>
-        <View style={userPageStyles.container}>
-          <View style={userPageStyles.content}>
-            <Image style={userPageStyles.avatar} source={this.state.userData.profileImage}/>
+      <View style={userPageStyles.container2}>
+        <View style={userPageStyles.container2}>
+          <View style={userPageStyles.content2}>
+            <Image style={userPageStyles.avatar2} source={this.state.userData.profileImage}/>
 
-            <View style={userPageStyles.buttonContainer}>
+            <View style={userPageStyles.buttonContainer2}>
               <TouchableHighlight
-                style={userPageStyles.button}
+                style={userPageStyles.button2}
                 underlayColor='#F8BBD0'
                 onPress={() => this.madeRequest()}>
-                  <Text style={userPageStyles.buttonText}>MY REQUESTS</Text>
+                  <Text style={userPageStyles.buttonText2}>MY REQUESTS</Text>
               </TouchableHighlight>
 
               <TouchableHighlight
-                style={userPageStyles.button}
+                style={userPageStyles.button2}
                 underlayColor='#F8BBD0'
                 onPress={() => this.fulfillRequest()}>
-                  <Text style={userPageStyles.buttonText}>FULFILL REQUESTS</Text>
+                  <Text style={userPageStyles.buttonText2}>FULFILL REQUESTS</Text>
               </TouchableHighlight>
 
               <TouchableHighlight
-                style={userPageStyles.button}
+                style={userPageStyles.button2}
                 underlayColor='#F8BBD0'
                 onPress={() => this.makeRequest()}>
-                  <Text style={userPageStyles.buttonText}>MAKE A REQUEST</Text>
+                  <Text style={userPageStyles.buttonText2}>MAKE A REQUEST</Text>
               </TouchableHighlight>
 
               <TouchableHighlight
-                style={userPageStyles.button}
+                style={userPageStyles.button2}
                 underlayColor='#F8BBD0'
                 onPress={() => this.logOut()}>
-                  <Text style={userPageStyles.buttonText}>LOG OUT</Text>
+                  <Text style={userPageStyles.buttonText2}>LOG OUT</Text>
               </TouchableHighlight>
 
             </View>

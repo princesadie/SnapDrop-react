@@ -264,7 +264,7 @@ var MapDisplay = React.createClass({
           </TouchableOpacity>
         </View>
 
-        <View style={mapStyles.buttonContainer}>
+        <View style={mapStyles.buttonContainerMap}>
           <TouchableOpacity onPress={this.sendRequest} style={[mapStyles.bubble, mapStyles.button]}>
             <Text style={mapStyles.text}>SEND</Text>
           </TouchableOpacity>

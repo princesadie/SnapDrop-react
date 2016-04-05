@@ -3,13 +3,11 @@ import Firebase from 'firebase';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var UserLogin = require('./userLogin.ios')
 var Map = require('./map.ios')
-
+var createUserStyles = require('../stylesheets/createUserStyle.ios')
 
 const {
-  StyleSheet,
   Text,
   View,
-  PixelRatio,
   TouchableOpacity,
   TouchableHighlight,
   TextInput,
@@ -125,35 +123,35 @@ class createUser extends React.Component {
    }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={createUserStyles.container}>
 
       <View>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-          { this.state.avatarSource === null ? <Text style={styles.text}>SELECT A PHOTO</Text> :
-            <Image style={styles.avatar} source={this.state.avatarSource} />
+          <View style={[createUserStyles.avatar, createUserStyles.avatarContainer, {marginBottom: 20}]}>
+          { this.state.avatarSource === null ? <Text style={createUserStyles.text}>SELECT A PHOTO</Text> :
+            <Image style={createUserStyles.avatar} source={this.state.avatarSource} />
           }
           </View>
         </TouchableOpacity>
       </View>
 
 
-        <View style={styles.textInputContainer}>
-          <TextInput style={styles.textEdit} placeholder="USERNAME" autoCapitalize={'none'} onChangeText={(username) => this.setState({username})}/>
-          <TextInput style={styles.textEdit} placeholder="EMAIL" autoCapitalize={'none'} onChangeText={(email) => this.setState({email})}/>
-          <TextInput style={styles.textEdit} secureTextEntry={true} autoCapitalize={'none'} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
-          <TextInput style={styles.textEdit} secureTextEntry={true} placeholder="CONFIRM PASSWORD" onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
+        <View style={createUserStyles.textInputContainer}>
+          <TextInput style={createUserStyles.textEdit} placeholder="USERNAME" autoCapitalize={'none'} onChangeText={(username) => this.setState({username})}/>
+          <TextInput style={createUserStyles.textEdit} placeholder="EMAIL" autoCapitalize={'none'} onChangeText={(email) => this.setState({email})}/>
+          <TextInput style={createUserStyles.textEdit} secureTextEntry={true} autoCapitalize={'none'} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
+          <TextInput style={createUserStyles.textEdit} secureTextEntry={true} placeholder="CONFIRM PASSWORD" onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
 
-          <TouchableHighlight style={styles.button} underlayColor='#F8BBD0' onPress={() => this.addUser()}>
-              <Text style={styles.buttonText}>REGISTER</Text>
+          <TouchableHighlight style={createUserStyles.button} underlayColor='#F8BBD0' onPress={() => this.addUser()}>
+              <Text style={createUserStyles.buttonText}>REGISTER</Text>
           </TouchableHighlight>
 
           <TouchableHighlight
-            style={styles.button}
+            style={createUserStyles.button}
             underlayColor='#F8BBD0'
             onPress={() => this.goUserLogin()}>
 
-              <Text style={styles.buttonText}>LOGIN</Text>
+              <Text style={createUserStyles.buttonText}>LOGIN</Text>
           </TouchableHighlight>
         </View>
 
@@ -162,64 +160,5 @@ class createUser extends React.Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(236,64,122,1)'
-  },
-  bubble: {
-    width: 200,
-    backgroundColor: '#FFF',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-    marginTop: 20,
-    marginLeft: 95,
-  },
-  avatarContainer: {
-    borderColor: '#FFF',
-    borderWidth: 1 / PixelRatio.get(),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150,
-  },
-  button: {
-    height: 36,
-    width: 300,
-    marginTop: 20,
-    borderRadius: 10,
-    justifyContent: 'center',
-    backgroundColor: '#FFF',
-  },
-  buttonText: {
-    color: 'rgba(236,64,122,1)',
-    textAlign: 'center',
-    // marginTop: 10,
-    fontWeight: 'bold',
-  },
-  text: {
-    color: '#FFF'
-  },
-  textEdit: {
-    fontWeight: 'bold',
-    height: 40,
-    width: 300,
-    color: 'rgba(236,64,122,1)',
-    borderColor: '#FFF',
-    backgroundColor: '#f6f6f6',
-    borderWidth: 2,
-    borderRadius: 5,
-    marginTop: 10,
-    textAlign: 'center',
-    alignItems: 'center',
-  },
-});
 
 module.exports = createUser;
