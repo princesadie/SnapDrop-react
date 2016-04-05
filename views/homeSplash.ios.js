@@ -45,7 +45,7 @@ var HomeSplash = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 0,
     // remove width and height to override fixed static size
     width: null,
     height: null,

@@ -286,7 +286,7 @@ var styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    marginTop: 20,
+    marginTop: 0,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -323,13 +323,13 @@ var styles = StyleSheet.create({
   },
   avatar1: {
     position: 'absolute',
-    top: 5,
-    right: 5,
+    top: 7,
+    right: 7,
   },
   avatar2: {
     position: 'absolute',
-    top: 5,
-    left: 5,
+    top: 7,
+    left: 7,
   },
   avatar: {
     borderRadius: 25,

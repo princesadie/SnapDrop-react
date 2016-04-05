@@ -92,7 +92,7 @@ class RequestViewPage extends Component {
           style={styles.thumbnail}
         />
         </TouchableHighlight>
-        <View style={styles.rightContainer}>
+        <View style={styles.container}>
           <Text style={styles.description}>{requestFulfillment.caption}</Text>
         </View>
       </View>
@@ -128,6 +128,8 @@ class RequestViewPage extends Component {
   }
 
 }
+var width = Dimensions.get('window').width; //full width
+var height = Dimensions.get('window').height; //full height
 
 var styles = StyleSheet.create({
   main: {
@@ -140,7 +142,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 30,
     backgroundColor: '#FFF',
-    padding: 10,
+    padding: 0,
   },
   rightContainer: {
     flex: 1,
@@ -156,8 +158,8 @@ var styles = StyleSheet.create({
     color: 'rgba(236,64,122,1)',
   },
   thumbnail: {
-    width: 65,
-    height: 80,
+    width: width,
+    height: 300,
   },
   listView: {
     height: 1000,
