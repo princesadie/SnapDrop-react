@@ -9,6 +9,8 @@ import React, {
 
 import Firebase from 'firebase';
 
+var FulfillRequest = require('./fulfillRequest.ios')
+
 class UserPage extends Component {
 
   constructor(props) {
