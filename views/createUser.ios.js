@@ -25,8 +25,7 @@ class createUser extends React.Component {
   state = {
     avatarSource: null,
     avatarJson: null,
-    firstName: null,
-    lastName: null,
+    userName: null,
     email: null,
     password: null,
     confirmPassword: null,
@@ -79,7 +78,6 @@ class createUser extends React.Component {
       component: UserLogin
     })
   }
-
 
   selectPhotoTapped() {
      const options = {
@@ -142,6 +140,7 @@ class createUser extends React.Component {
 
 
         <View style={styles.textInputContainer}>
+          <TextInput style={styles.textEdit} placeholder="USERNAME" autoCapitalize={'none'} onChangeText={(username) => this.setState({username})}/>
           <TextInput style={styles.textEdit} placeholder="EMAIL" autoCapitalize={'none'} onChangeText={(email) => this.setState({email})}/>
           <TextInput style={styles.textEdit} secureTextEntry={true} autoCapitalize={'none'} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
           <TextInput style={styles.textEdit} secureTextEntry={true} placeholder="CONFIRM PASSWORD" onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
