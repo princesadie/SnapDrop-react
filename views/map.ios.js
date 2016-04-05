@@ -16,12 +16,7 @@ var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
 
-var ref = new Firebase("https://snapdrop.firebaseio.com");
-var authData = ref.getAuth();
 
-if (authData) {
-  console.log("Authenticated user with uid:", authData.password.email);
-}
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -42,7 +37,28 @@ var MapDisplay = React.createClass({
       },
       markers: [],
       request: {},
+      userData: {},
     };
+  },
+
+  grabUserRequests(inputUID) {
+    console.log('------------please god-------------------')
+    var that = this;
+    var userRef = new Firebase("https://snapdrop.firebaseio.com/users");
+    userRef.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var userUID = childSnapshot.val().userUID;
+        var childData = childSnapshot.val();
+        console.log('------------outside-------------------')
+        if (userUID === inputUID) {
+          console.log('-------------------------------')
+          console.log(childData)
+          that.setState({
+            userData: childData
+          });
+        };
+      });
+    });
   },
 
   updateUserLocationInFirebase() {
@@ -65,6 +81,12 @@ var MapDisplay = React.createClass({
   },
 
   componentDidMount() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+var authData = ref.getAuth();
+    console.log('-------------component fucking mounted-----------')
+    console.log(authData.uid)
+    this.grabUserRequests(authData.uid);
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         var initialPosition = {
@@ -231,7 +253,7 @@ var MapDisplay = React.createClass({
 
         <View style={styles.avatar1}>
           <TouchableOpacity onPress={this.goToUserPage}>
-            <Image style = {styles.avatar} source = {require('../images/tiger.jpg')} />
+            <Image style = {styles.avatar} source = {this.state.userData.profileImage}/>
           </TouchableOpacity>
         </View>
         <View style={styles.avatar2}>
