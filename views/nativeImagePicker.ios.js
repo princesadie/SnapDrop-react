@@ -7,7 +7,6 @@ var nativeImagePickerStyles = require('../stylesheets/nativeImagePickerStyle.ios
 const {
   Text,
   View,
-  PixelRatio,
   TouchableOpacity,
   Image,
   NativeModules: {

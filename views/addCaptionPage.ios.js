@@ -10,7 +10,6 @@ var {
   Image,
   Alert,
   ListView,
-  StyleSheet,
   ScrollView,
   TouchableHighlight,
   TouchableOpacity,

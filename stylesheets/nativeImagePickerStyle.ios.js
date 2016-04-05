@@ -1,6 +1,9 @@
 'use strict'
 const React = require('react-native');
-const { StyleSheet } = React;
+const {
+  StyleSheet,
+  PixelRatio,
+ } = React;
 
 module.exports = StyleSheet.create({
   container: {
@@ -11,7 +14,7 @@ module.exports = StyleSheet.create({
   },
   avatarContainer: {
     borderColor: '#EC407A',
-    borderWidth: 1 / PixelRatio.get(),
+    borderWidth: 3 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center'
   },

@@ -1,6 +1,9 @@
 'use strict'
 const React = require('react-native');
-const { StyleSheet } = React;
+const {
+  StyleSheet,
+  PixelRatio,
+} = React;
 
 module.exports = StyleSheet.create({
   container: {

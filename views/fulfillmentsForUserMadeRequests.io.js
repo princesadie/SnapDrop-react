@@ -7,7 +7,6 @@ import React, {
   AppRegistry,
   Component,
   ListView,
-  StyleSheet,
   Text,
   View,
 } from 'react-native';

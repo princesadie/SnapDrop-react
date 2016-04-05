@@ -8,7 +8,6 @@ var Register = require('./createUser.ios')
 const {
   Text,
   View,
-  PixelRatio,
   TouchableOpacity,
   TouchableHighlight,
   TextInput,

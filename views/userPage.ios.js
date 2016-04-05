@@ -6,7 +6,6 @@ var {
   Dimensions,
   View,
   Image,
-  // PixelRatio,
   TouchableHighlight,
   Navigator,
   Text,
