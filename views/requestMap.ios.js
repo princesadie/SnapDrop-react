@@ -1,7 +1,8 @@
 var React = require('react-native');
+var requestMapStyles = require('../stylesheets/requestMapStyle.ios');
+
 var {
   Image,
-  StyleSheet,
   PropTypes,
   View,
   Text,
@@ -16,8 +17,6 @@ var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
 var RequestMade = require('./requestMade.ios')
-
-
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -38,6 +37,7 @@ var RequestMapDisplay = React.createClass({
       },
       markers: [],
       request: {},
+      test: "FUCK",
       fulfillments: [],
       userData: {},
     };
@@ -59,35 +59,6 @@ var RequestMapDisplay = React.createClass({
     });
   },
 
-  grabFulfillments(inputID) {
-    var that = this;
-    var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
-    ref.once("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var key = childSnapshot.key();
-        var userUID = childSnapshot.val().userUID;
-        var childData = childSnapshot.val();
-        if (userUID != inputID) {
-          that.state.fulfillments.push(childData);
-          console.log(that.state.fulfillments);
-          console.log("===========================")
-        };
-      });
-    });
-  },
-
-  dropMarkers() {
-    console.log("GOT TO DROPMARKERS")
-    var that = this;
-    console.log(this.state.fulfillments)
-    console.log("LOG FULFILLMENTS")
-    this.state.fulfillments.forEach(function(fulfillment) {
-      console.log("GOT THE FULFILLMENTS IN ARRAY")
-      console.log(that.state.fulfillment);
-      console.log(that.state.markers);
-    })
-  },
-
   updateUserLocationInFirebase() {
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
     userRef.update({
@@ -107,6 +78,38 @@ var RequestMapDisplay = React.createClass({
 
   },
 
+  grabFulfillments(inputID) {
+    var that = this;
+    var ref = new Firebase("https://snapdrop.firebaseio.com/requests");
+    ref.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var key = childSnapshot.key();
+        var userUID = childSnapshot.val().userUID;
+        var childData = childSnapshot.val();
+        if (userUID != inputID) {
+          that.state.fulfillments.push(childData);
+          var marker = {
+            key: id++,
+            coordinate:{
+              latitude: childData.lat,
+              longitude: childData.long,
+            },
+            description: childData.description
+          }
+          console.log(marker)
+          that.state.markers.push(marker);
+          console.log(that.state.markers)
+        };
+      });
+    });
+  },
+
+  dropMarkers(fullfilment) {
+    fulfillments.forEach(function(fulfillment) {
+      console.log("GOT THE FULFILLMENTS IN ARRAY")
+    })
+  },
+
   componentDidMount() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
@@ -114,7 +117,6 @@ var RequestMapDisplay = React.createClass({
     console.log(authData.uid)
     this.grabUserRequests(authData.uid);
     this.grabFulfillments(authData.uid);
-    this.dropMarkers();
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -184,14 +186,21 @@ var RequestMapDisplay = React.createClass({
     console.log(this.state.markers)
   },
 
+  goToRequest() {
+    this.props.navigator.push({
+      navigationBarHidden: true,
+      component: RequestDetail
+    });
+  },
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={requestMapStyles.container}>
 
         <MapView
           ref="map"
           mapType="terrain"
-          style={styles.map}
+          style={requestMapStyles.map}
           region={this.state.region}
           onRegionChange={this.onRegionChange}
           showsUserLocation={true}
@@ -204,95 +213,33 @@ var RequestMapDisplay = React.createClass({
               onDragEnd={this.updateMarkerCoordinate}>
                 <MapView.Callout tooltip>
                   <CustomCallout>
-                    <Text style={styles.text} onPress={this.prompt}>{this.state.markers[0].coordinate.latitude.toPrecision(7)},{this.state.markers[0].coordinate.longitude.toPrecision(7)}</Text>
+                    <Text style={requestMapStyles.text} onPress={this.prompt}>{marker.description}</Text>
                   </CustomCallout>
                 </MapView.Callout>
             </MapView.Marker>
           ))}
         </MapView>
 
-        <View style={styles.avatar1}>
+        <View style={requestMapStyles.avatar1}>
           <TouchableOpacity onPress={this.goToUserPage}>
-            <Image style = {styles.avatar} source = {this.state.userData.profileImage}/>
+            <Image style = {requestMapStyles.avatar} source = {this.state.userData.profileImage}/>
           </TouchableOpacity>
         </View>
-        <View style={styles.avatar2}>
+        <View style={requestMapStyles.avatar2}>
           <TouchableOpacity onPress={this.goToSnapDropPage}>
-            <Image style = {styles.avatar} source = {require('../images/snapdrop.png')} />
+            <Image style = {requestMapStyles.avatar} source = {require('../images/snapdrop.png')} />
           </TouchableOpacity>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this.animateRandom} style={[styles.bubble, styles.button]}>
-            <Text style={styles.text}>CENTER</Text>
+        <View style={requestMapStyles.buttonContainer}>
+          <TouchableOpacity onPress={this.animateRandom} style={[requestMapStyles.bubble, requestMapStyles.button]}>
+            <Text style={requestMapStyles.text}>CENTER</Text>
           </TouchableOpacity>
         </View>
       </View>
 
 
     );
-  },
-});
-
-var styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    marginTop: 20,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  callout: {
-    backgroundColor: 'rgba(236,64,122,0.7)',
-  },
-  bubble: {
-    backgroundColor: 'rgba(236,64,122,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  latlng: {
-    width: 200,
-    alignItems: 'stretch',
-  },
-  button: {
-    width: 140,
-    paddingHorizontal: 12,
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    backgroundColor: 'transparent',
-  },
-  avatar1: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-  },
-  avatar2: {
-    position: 'absolute',
-    top: 5,
-    left: 5,
-  },
-  avatar: {
-    borderRadius: 25,
-    width: 50,
-    height: 50
-  },
-  text: {
-    color: 'white',
   },
 });
 

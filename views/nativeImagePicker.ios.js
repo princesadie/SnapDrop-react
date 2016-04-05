@@ -1,12 +1,12 @@
 import React from 'react-native';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var ImageViewPage = require('./imageViewPage.ios')
+var nativeImagePickerStyles = require('../stylesheets/nativeImagePickerStyle.ios')
+
 
 const {
-  StyleSheet,
   Text,
   View,
-  PixelRatio,
   TouchableOpacity,
   Image,
   NativeModules: {
@@ -123,18 +123,18 @@ class NativeImagePicker extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={nativeImagePickerStyles.container}>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-          { this.state.avatarSource === null ? <Text style={styles.text}>TAKE PHOTO</Text> :
-            <Image style={styles.avatar} source={this.state.avatarSource} />
+          <View style={[nativeImagePickerStyles.avatar, nativeImagePickerStyles.avatarContainer, {marginBottom: 20}]}>
+          { this.state.avatarSource === null ? <Text style={nativeImagePickerStyles.text}>TAKE PHOTO</Text> :
+            <Image style={nativeImagePickerStyles.avatar} source={this.state.avatarSource} />
           }
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.selectVideoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer]}>
-            <Text style={styles.text} >TAKE VIDEO</Text>
+          <View style={[nativeImagePickerStyles.avatar, nativeImagePickerStyles.avatarContainer]}>
+            <Text style={nativeImagePickerStyles.text} >TAKE VIDEO</Text>
           </View>
         </TouchableOpacity>
 
@@ -146,28 +146,5 @@ class NativeImagePicker extends React.Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F6F6F6'
-  },
-  avatarContainer: {
-    borderColor: '#EC407A',
-    borderWidth: 1 / PixelRatio.get(),
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150
-  },
-  text: {
-    color: '#EC407A',
-  }
-});
 
 module.exports = NativeImagePicker;

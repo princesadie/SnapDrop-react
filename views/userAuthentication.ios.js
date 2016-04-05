@@ -1,10 +1,10 @@
 import React from 'react-native';
 import Firebase from 'firebase';
-// var ImagePickerManager = require('NativeModules').ImagePickerManager;
+
 var Map = require('./map.ios')
+var userAuthenticationStyles = require('../stylesheets/userAuthenticationStyles.ios');
 
 const {
-  StyleSheet,
   Text,
   View,
   PixelRatio,
@@ -13,35 +13,24 @@ const {
   TextInput,
   Image,
   AlertIOS,
-  // NativeModules: {
-  //   ImagePickerManager
-  // }
 } = React;
-// <UserLogin loginType={this.state.registerType}/>
-// REg
+
 class UserAuthentication extends React.Component {
-constructor(props){
-  super(props);
-  this.state = {
-    registerType: 'login',
-    avatarSource: null,
-    avatarJson: null,
-    username: null,
-    email: null,
-    password: null,
-    confirmPassword: null,
-    errorMessage: null
-  };
-}
+  constructor(props){
+    super(props);
+    this.state = {
+      registerType: 'login',
+      avatarSource: null,
+      username: null,
+      email: null,
+      password: null,
+      confirmPassword: null,
+      errorMessage: null
+    };
+  }
 
   goRegister(){
     this.setState({registerType: 'register'})
-    // this.props.navigator.replace({
-    //   title: 'User Login',
-    //   navigationBarHidden: true,
-    //   component: UserLogin
-    // });
-    // return(<View style={styles.container}><Text>sasdsa</Text></View>)
   }
 
   goLogin() {
@@ -91,7 +80,6 @@ constructor(props){
             userUID: authData.uid
           }),
 
-          console.log("-------------------created user--------------------");
           ref.authWithPassword({
             email: that.state.email,
             password: that.state.password
@@ -108,7 +96,6 @@ constructor(props){
               });
             }
           }),
-          console.log("------------------logging in---------------------");
         }
       })
     }
@@ -142,71 +129,58 @@ constructor(props){
        }
        else {
           const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
-
-          var resData = response.data
-          console.log('response data')
-          console.log(resData)
-
-          var imageData = resData.replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "").replace(/\f/g, "").replace(/=/g, "");
-          var imagereplaced = imageData.replace(/=/g, "");
-          var obj = "data:image/jpeg;base64," + imagereplaced;
-          var objJson = JSON.stringify({"obj": imagereplaced})
-
           this.setState({
             avatarSource: source,
-            avatarJson: objJson,
           });
        }
      });
    }
 
   renderLogin() {
-    console.log('-------------login-----------------')
     return (
-      <View style={styles.textInputContainer}>
-        <TextInput style={styles.textEdit} autoCapitalize={'none'} placeholder="EMAIL" onChangeText={(email) => this.setState({email})}/>
-        <TextInput style={styles.textEdit} autoCapitalize={'none'} secureTextEntry={true} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
-        <TouchableHighlight style={styles.button} underlayColor='#F8BBD0' onPress={() => this.userLoginMethod()}>
-            <Text style={styles.buttonText}>LOGIN</Text>
+      <View style={userAuthenticationStyles.textInputContainer}>
+        <TextInput style={userAuthenticationStyles.textEdit} autoCapitalize={'none'} placeholder="EMAIL" onChangeText={(email) => this.setState({email})}/>
+        <TextInput style={userAuthenticationStyles.textEdit} autoCapitalize={'none'} secureTextEntry={true} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
+        <TouchableHighlight style={userAuthenticationStyles.button} underlayColor='#F8BBD0' onPress={() => this.userLoginMethod()}>
+            <Text style={userAuthenticationStyles.buttonText}>LOGIN</Text>
         </TouchableHighlight>
         <TouchableHighlight
-          style={styles.button}
+          style={userAuthenticationStyles.button}
           underlayColor='#F8BBD0'
           onPress={() => this.goRegister()}>
-            <Text style={styles.buttonText}>REGISTER</Text>
+            <Text style={userAuthenticationStyles.buttonText}>REGISTER</Text>
         </TouchableHighlight>
       </View>
     );
   }
 
   renderRegister() {
-    console.log('-------------register-----------------')
     return (
       <View>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-          { this.state.avatarSource === null ? <Text style={styles.text}>SELECT A PHOTO</Text> :
-            <Image style={styles.avatar} source={this.state.avatarSource} />
+          <View style={[userAuthenticationStyles.avatar, userAuthenticationStyles.avatarContainer, {marginBottom: 20}]}>
+          { this.state.avatarSource === null ? <Text style={userAuthenticationStyles.text}>SELECT A PHOTO</Text> :
+            <Image style={userAuthenticationStyles.avatar} source={this.state.avatarSource} />
           }
           </View>
         </TouchableOpacity>
 
-        <View style={styles.textInputContainer}>
-          <TextInput style={styles.textEdit} placeholder="USERNAME" autoCapitalize={'none'} onChangeText={(username) => this.setState({username})}/>
-          <TextInput style={styles.textEdit} placeholder="EMAIL" autoCapitalize={'none'} onChangeText={(email) => this.setState({email})}/>
-          <TextInput style={styles.textEdit} secureTextEntry={true} autoCapitalize={'none'} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
-          <TextInput style={styles.textEdit} secureTextEntry={true} placeholder="CONFIRM PASSWORD" onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
+        <View style={userAuthenticationStyles.textInputContainer}>
+          <TextInput style={userAuthenticationStyles.textEdit} placeholder="USERNAME" autoCapitalize={'none'} onChangeText={(username) => this.setState({username})}/>
+          <TextInput style={userAuthenticationStyles.textEdit} placeholder="EMAIL" autoCapitalize={'none'} onChangeText={(email) => this.setState({email})}/>
+          <TextInput style={userAuthenticationStyles.textEdit} secureTextEntry={true} autoCapitalize={'none'} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
+          <TextInput style={userAuthenticationStyles.textEdit} secureTextEntry={true} placeholder="CONFIRM PASSWORD" onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
 
-          <TouchableHighlight style={styles.button} underlayColor='#F8BBD0' onPress={() => this.addUser()}>
-              <Text style={styles.buttonText}>REGISTER</Text>
+          <TouchableHighlight style={userAuthenticationStyles.button} underlayColor='#F8BBD0' onPress={() => this.addUser()}>
+              <Text style={userAuthenticationStyles.buttonText}>REGISTER</Text>
           </TouchableHighlight>
 
           <TouchableHighlight
-            style={styles.button}
+            style={userAuthenticationStyles.button}
             underlayColor='#F8BBD0'
             onPress={() => this.goLogin()}>
 
-              <Text style={styles.buttonText}>LOGIN</Text>
+              <Text style={userAuthenticationStyles.buttonText}>LOGIN</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -216,77 +190,18 @@ constructor(props){
   render() {
     if(this.state.registerType === 'login') {
       return (
-        <View style={styles.container}>
+        <View style={userAuthenticationStyles.container}>
           {this.renderLogin()}
         </View>
       )
     } else {
       return (
-      <View style={styles.container}>
+      <View style={userAuthenticationStyles.container}>
         {this.renderRegister()}
       </View>
     )
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(236,64,122,1)'
-  },
-  bubble: {
-    width: 200,
-    backgroundColor: '#FFF',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-    marginTop: 20,
-    marginLeft: 95,
-  },
-  button: {
-    height: 36,
-    width: 300,
-    marginTop: 20,
-    borderRadius: 10,
-    justifyContent: 'center',
-    backgroundColor: '#FFF',
-  },
-  buttonText: {
-    color: 'rgba(236,64,122,1)',
-    textAlign: 'center',
-    // marginTop: 10,
-    fontWeight: 'bold',
-  },
-  text: {
-    color: '#FFF'
-  },
-  textEdit: {
-    fontWeight: 'bold',
-    height: 40,
-    width: 300,
-    color: 'rgba(236,64,122,1)',
-    borderColor: '#FFF',
-    backgroundColor: '#f6f6f6',
-    borderWidth: 2,
-    borderRadius: 5,
-    marginTop: 10,
-    textAlign: 'center',
-    alignItems: 'center',
-  },
-  avatarContainer: {
-    borderColor: '#FFF',
-    borderWidth: 1 / PixelRatio.get(),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150,
-  },
-});
 
 module.exports = UserAuthentication;
