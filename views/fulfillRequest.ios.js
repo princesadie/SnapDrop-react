@@ -2,86 +2,119 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-'use strict';
-import React, {
-  Component,
-  StyleSheet,
-  Dimensions,
-  View,
-  TouchableHighlight,
-  Text,
-  Firebase
 
+import React, {
+  AppRegistry,
+  Component,
+  ListView,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 
-var seed = ['1', '2', '3'];
-
 class FulfillRequest extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fulfillments: [],
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
+      loaded: false,
+    };
+  }
 
+  componentDidMount() {
+    this.grabFulfillments("0");
+  }
 
-  render() {
-    return(
-      <View>
-        <View style={styles.container}>
-          <View style={styles.content}>
-            <Text style={styles.welcome}>Fullfill Request</Text>
-            <Text style={styles.welcome}>{seed[0]}</Text>
-          </View>
+  grabFulfillments(inputID) {
+    var that = this;
+    var ref = new Firebase("https://snapdrop.firebaseio.com/fulfillments");
+    ref.once("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var requestID = childSnapshot.val().requestID;
+        var childData = childSnapshot.val();
+        if (requestID === inputID) {
+          that.state.fulfillments.push(childData);
+          console.log(that.state.fulfillments);
 
-          <View style={styles.buttonContainer}>
-            {seed.map(function(index) {
-              return (
-                <TouchableHighlight
-                  key={seed[index]}
-                  style={styles.button}
-                  onPress={() => this.goCamera()}>
-                    <Text style={styles.buttonText}>{seed[index]}</Text>
-                </TouchableHighlight>
-              )
-            })}
-          </View>
+          that.setState({
+            dataSource: that.state.dataSource.cloneWithRows(that.state.fulfillments),
+            loaded: true,
+          });
+
+        };
+      });
+    });
+  }
+
+  renderLoadingView() {
+    return (
+      <View style={styles.container}>
+        <Text>
+          Loading fulfillments...
+        </Text>
+      </View>
+    );
+  }
+
+  renderFulfillment(fulfillment) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.rightContainer}>
+          <Text style={styles.description}>{fulfillment.description}</Text>
         </View>
       </View>
     );
   }
+
+  render() {
+    if (!this.state.loaded) {
+      return this.renderLoadingView();
+    }
+
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderFulfillment}
+        style={styles.listView}
+      />
+    );
+  }
+
 }
-const styles = StyleSheet.create({
+
+var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-  },
-  content: {
-    flex: 1,
-    height: 50,
-    flexDirection: 'column',
-    marginTop: 200,
-  },
-  welcome: {
-    marginTop: 20,
-    textAlign: 'center',
-  },
-  button: {
-    flex: 1,
     flexDirection: 'row',
-    height: 36,
-    width: 300,
-    marginTop: 100,
-    marginLeft: 42,
-    borderRadius: 10,
     justifyContent: 'center',
-    backgroundColor: '#7986CB',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
-  buttonText: {
-    color: 'white',
+  rightContainer: {
+    flex: 1,
+  },
+  text: {
+    fontSize: 20,
+    marginBottom: 8,
     textAlign: 'center',
-    marginTop: 10,
-    fontWeight: 'bold',
   },
-  buttonContainer:{
-    marginTop: 60,
-    paddingTop:30,
-    paddingBottom:10,
-    flexDirection:'column',
+  description: {
+    fontSize: 20,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  coords: {
+    textAlign: 'center',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+  listView: {
+    paddingTop: 20,
     backgroundColor: '#fff',
   },
 });

@@ -142,8 +142,6 @@ class createUser extends React.Component {
 
 
         <View style={styles.textInputContainer}>
-          <TextInput style={styles.textEdit} placeholder="first name" onChangeText={(firstName) => this.setState({firstName})}/>
-          <TextInput style={styles.textEdit} placeholder="last name" onChangeText={(lastName) => this.setState({lastName})}/>
           <TextInput style={styles.textEdit} placeholder="email" autoCapitalize={'none'} onChangeText={(email) => this.setState({email})}/>
           <TextInput style={styles.textEdit} secureTextEntry={true} autoCapitalize={'none'} placeholder="password" onChangeText={(password) => this.setState({password})}/>
           <TextInput style={styles.textEdit} secureTextEntry={true} placeholder="confirm password" onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
@@ -157,6 +155,7 @@ class createUser extends React.Component {
             style={styles.button}
             underlayColor='#9FA8DA'
             onPress={() => this.goUserLogin()}>
+
               <Text style={styles.buttonText}>Login</Text>
           </TouchableHighlight>
         </View>
