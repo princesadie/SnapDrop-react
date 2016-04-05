@@ -8,14 +8,13 @@ var CreateUser = require('./createUser.ios')
 var UserLogin = require('./userLogin.ios')
 var CameraView = require('./camera.ios')
 var Profile = require('./profile.ios')
-var SwiperView = require('./swiper.ios')
+var homeStyles = require('../stylesheets/homeStyle.ios')
 
 var MapView = require('./map.ios')
 
 
 import React, {
   Component,
-  StyleSheet,
   Image,
   View,
   ListView,
@@ -120,42 +119,42 @@ class Home extends Component {
   render() {
     return (
       <View>
-        <View style={styles.container}>
-          <View style={styles.buttonContainer}>
+        <View style={homeStyles.container}>
+          <View style={homeStyles.buttonContainer}>
 
             <TouchableHighlight
-              style={[styles.bubble, styles.button]}
+              style={[homeStyles.bubble, homeStyles.button]}
               underlayColor='#F8BBD0'
               onPress={() => this.goUserPage()}>
-              <Text style={styles.text}>User Page</Text>
+              <Text style={homeStyles.text}>User Page</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={[styles.bubble, styles.button]}
+              style={[homeStyles.bubble, homeStyles.button]}
               underlayColor='#F8BBD0'
               onPress={() => this.goCreateUser()}>
-                <Text style={styles.text}>Register</Text>
+                <Text style={homeStyles.text}>Register</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={[styles.bubble, styles.button]}
+              style={[homeStyles.bubble, homeStyles.button]}
               underlayColor='#F8BBD0'
               onPress={() => this.goUserLogin()}>
-                <Text style={styles.text}>Login</Text>
+                <Text style={homeStyles.text}>Login</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={[styles.bubble, styles.button]}
+              style={[homeStyles.bubble, homeStyles.button]}
               underlayColor='#F8BBD0'
               onPress={() => this.goMap()}>
-                <Text style={styles.text}>MAP</Text>
+                <Text style={homeStyles.text}>MAP</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={[styles.bubble, styles.button]}
+              style={[homeStyles.bubble, homeStyles.button]}
               underlayColor='#F8BBD0'
               onPress={() => this.goNativeImagePicker()}>
-                <Text style={styles.text}>IMAGE PICKER</Text>
+                <Text style={homeStyles.text}>IMAGE PICKER</Text>
             </TouchableHighlight>
 
           </View>
@@ -164,58 +163,5 @@ class Home extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-  },
-  base64: {
-    flex: 1,
-    marginTop: 35,
-    height: 380,
-    borderRadius: 1,
-    resizeMode: 'contain',
-  },
-  avatar: {
-    borderRadius: 5,
-    flex: 1
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-  welcome: {
-    textAlign: 'center',
-    color: 'black',
-  },
-  bubble: {
-    width: 200,
-    backgroundColor: 'rgba(236,64,122,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-    marginTop: 20,
-    marginLeft: 95,
-  },
-  button: {
-    paddingHorizontal: 12,
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    backgroundColor: 'transparent',
-  },
-  text: {
-    color: 'white',
-  },
-  buttonContainer:{
-    marginTop: 60,
-    paddingTop:30,
-    paddingBottom:10,
-    flexDirection:'column',
-    backgroundColor: '#fff',
-  },
-});
 
 module.exports = Home;

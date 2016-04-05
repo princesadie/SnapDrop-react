@@ -1,5 +1,6 @@
 // THIS IS NO LONGER IN USE
 var React = require('react-native');
+var addCaptionPageStyles = require('../stylesheets/addCaptionPageStyle.ios')
 'use strict'
 var {
   View,
@@ -9,7 +10,6 @@ var {
   Image,
   Alert,
   ListView,
-  StyleSheet,
   ScrollView,
   TouchableHighlight,
   TouchableOpacity,
@@ -40,70 +40,26 @@ class addCaptionPage extends Component {
     console.log('------------------------------------------')
 
     return (
-      <View style={styles.container}>
+      <View style={addCaptionPageStyles.container}>
 
-        <View style={styles.avatar}>
-          <Image style={styles.avatar} source={this.props.sourceIm} />
+        <View style={addCaptionPageStyles.avatar}>
+          <Image style={addCaptionPageStyles.avatar} source={this.props.sourceIm} />
         </View>
 
-        <View style={styles.captionContainer}>
-          <TextInput style={styles.textEdit} placeholder="enter a location" onChangeText={(text3) => this.setState({text3})}/>
+        <View style={addCaptionPageStyles.captionContainer}>
+          <TextInput style={addCaptionPageStyles.textEdit} placeholder="enter a location" onChangeText={(text3) => this.setState({text3})}/>
 
-          <Text style={styles.locationOutput}>
+          <Text style={addCaptionPageStyles.locationOutput}>
             {this.state.text3}
           </Text>
 
-          <TouchableHighlight style={styles.button} underlayColor='#9FA8DA' onPress={() => this.sendImage()}>
-              <Text style={styles.buttonText}>Send</Text>
+          <TouchableHighlight style={addCaptionPageStyles.button} underlayColor='#9FA8DA' onPress={() => this.sendImage()}>
+              <Text style={addCaptionPageStyles.buttonText}>Send</Text>
           </TouchableHighlight>
         </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 30,
-  },
-  avatar: {
-    borderRadius: 5,
-    width: 350,
-    height: 350
-  },
-  button: {
-    flex: 1,
-    height: 30,
-    width: 150,
-    marginTop: 20,
-    marginLeft: 42,
-    borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    backgroundColor: '#7986CB',
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
-    marginTop: 10,
-    fontWeight: 'bold',
-  },
-  buttonContainer:{
-    marginTop: 60,
-    paddingTop:30,
-    paddingBottom:10,
-    flexDirection:'column',
-    backgroundColor: '#fff',
-  },
-  textEdit: {
-    height: 40,
-    borderColor: 'green',
-    backgroundColor: 'orange',
-    borderWidth: 2,
-    borderRadius: 5,
-    textAlign: 'center',
-  },
-});
 
 module.exports = addCaptionPage;
