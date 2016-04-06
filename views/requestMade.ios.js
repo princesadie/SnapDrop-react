@@ -10,6 +10,7 @@ import React, {
   Component,
   Image,
   ListView,
+  TouchableHighlight,
   TouchableOpacity,
   Text,
   View,
@@ -123,18 +124,20 @@ grabUsers(inputUID) {
 
   renderRequest(userRequest) {
     return (
+      <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
       <View style={requestMadeStyles.container}>
-        <View style={requestMadeStyles.thumbnail}>
-          <Text>PENDING</Text>
-          <Text onPress={() => this.goToRequestPage(userRequest)}>VIEW PHOTOS</Text>
+        <View style={requestMadeStyles.avatar}>
+          <View style={requestMadeStyles.avatar}>
+            <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
+              <Image style = {requestMadeStyles.avatar} source = {require('../images/photoIcon.png')} />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={requestMadeStyles.rightContainer}>
           <Text style={requestMadeStyles.description}>{userRequest.description}</Text>
-          <Text style={requestMadeStyles.coords}>{userRequest.long}</Text>
-          <Text style={requestMadeStyles.coords}>{userRequest.lat}</Text>
-          <Text style={requestMadeStyles.coords}>{userRequest.requestKey}</Text>
         </View>
       </View>
+      </TouchableOpacity>
     );
   }
 
@@ -158,15 +161,17 @@ grabUsers(inputUID) {
     return (
 
       <View style={requestMadeStyles.main}>
-        <View style={requestMadeStyles.avatar1}>
-          <TouchableOpacity onPress={this.goToUserPage}>
-            <Image style = {requestMadeStyles.avatar} source = {this.state.userData.profileImage}/>
-          </TouchableOpacity>
-        </View>
-        <View style={requestMadeStyles.avatar2}>
-          <TouchableOpacity onPress={this.goToSnapDropPage}>
-            <Image style = {requestMadeStyles.avatar} source = {require('../images/snapdrop.png')} />
-          </TouchableOpacity>
+        <View style={requestMadeStyles.navBar}>
+          <View style={requestMadeStyles.avatar1}>
+            <TouchableOpacity onPress={this.goToUserPage}>
+              <Image style = {requestMadeStyles.avatar} source = {this.state.userData.profileImage}/>
+            </TouchableOpacity>
+          </View>
+          <View style={requestMadeStyles.avatar2}>
+            <TouchableOpacity onPress={this.goToSnapDropPage}>
+              <Image style = {requestMadeStyles.avatar} source = {require('../images/snapdrop.png')} />
+            </TouchableOpacity>
+          </View>
         </View>
         <ListView
           dataSource={this.state.dataSource}
@@ -177,7 +182,6 @@ grabUsers(inputUID) {
 
     );
   }
-
 }
 
 module.exports = RequestMade;

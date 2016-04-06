@@ -50,7 +50,9 @@ class createUser extends React.Component {
           usersRef.push({
             username: that.state.username,
             profileImage: that.state.avatarSource,
-            userUID: authData.uid
+            userUID: authData.uid,
+            lat: '0',
+            long: '0',
           }),
 
           console.log("-------------------created user--------------------");

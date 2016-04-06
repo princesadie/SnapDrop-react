@@ -4,21 +4,25 @@ const { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
   main: {
+    flex: 1,
     backgroundColor: 'rgba(236,64,122,1)',
-    // position: 'absolute',
-    // top: 0,
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  navBar: {
+    height: 60,
+    marginBottom: 10,
   },
   container: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-
-    marginTop: 20,
-    backgroundColor: '#C2185B',
+    marginTop: 1,
+    backgroundColor: '#FFF',
     padding: 10,
   },
   rightContainer: {
@@ -38,12 +42,7 @@ module.exports = StyleSheet.create({
   },
   listView: {
     height: 1000,
-    paddingTop: 20,
     backgroundColor: 'rgba(236,64,122,1)',
-  },
-  navBar: {
-    flex: 1,
-    height: 60,
   },
   avatar: {
     borderRadius: 25,
@@ -52,12 +51,12 @@ module.exports = StyleSheet.create({
   },
   avatar1: {
     position: 'absolute',
-    top: 15,
-    right: 5,
+    top: 10,
+    right: 10,
   },
   avatar2: {
     position: 'absolute',
-    top: 15,
-    left: 5,
+    top: 10,
+    left: 10,
   },
 });

@@ -82,11 +82,12 @@ var MapDisplay = React.createClass({
   },
 
   componentDidMount() {
+    // var ref = new Firebase("https://snapdrop.firebaseio.com");
+    // var authData = ref.getAuth();
+    // this.grabUserRequests(authData.uid);
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
-    console.log('-------------component fucking mounted-----------')
-    console.log(authData.uid)
-    this.grabUserRequests(authData.uid);
+    this.grabUserRequests("add76d65-b7ce-4fb9-b832-868a14c287da");
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -150,7 +151,26 @@ var MapDisplay = React.createClass({
             coordinate: e.nativeEvent.coordinate,
             key: id++,
             title: 'PIN',
-            description: 'DESCRIPTION',
+            description: 'YOUR DESCRIPTION',
+            color: 'rgba(236,64,122,1)',
+          },
+        ],
+      });
+      console.log(e.nativeEvent.coordinate)
+    }
+  },
+
+  onMapLongPress(e) {
+    this.state.markers.pop();
+    if(this.state.markers.length < 1) {
+      this.setState({
+        markers: [
+          ...this.state.markers,
+          {
+            coordinate: e.nativeEvent.coordinate,
+            key: id++,
+            title: 'PIN',
+            description: 'FILL YOUR WITH DETAILS',
             color: 'rgba(236,64,122,1)',
           },
         ],
@@ -193,7 +213,16 @@ var MapDisplay = React.createClass({
         lat: this.state.markers[0].coordinate.latitude,
         long: this.state.markers[0].coordinate.longitude,
         description: promptValue
-      }
+      },
+      markers: [
+        ...this.state.markers[0],
+        {
+          key: id++,
+          coordinate: this.state.markers[0].coordinate,
+          description: promptValue,
+          color: 'rgba(236,64,122,1)'
+        }
+      ]
     });
   },
 
@@ -235,6 +264,7 @@ var MapDisplay = React.createClass({
           region={this.state.region}
           onRegionChange={this.onRegionChange}
           onPress={this.onMapPress}
+          onLongPress={this.onMapLongPress}
           showsUserLocation={true}
         >
         {this.state.markers.map(marker => (
@@ -247,7 +277,7 @@ var MapDisplay = React.createClass({
               draggable>
                 <MapView.Callout tooltip>
                   <CustomCallout>
-                    <Text style={mapStyles.text} onPress={this.prompt}>{this.state.markers[0].coordinate.latitude.toPrecision(7)},{this.state.markers[0].coordinate.longitude.toPrecision(7)}</Text>
+                    <Text style={mapStyles.text} onPress={this.prompt}>{this.state.markers[0].description}</Text>
                   </CustomCallout>
                 </MapView.Callout>
             </MapView.Marker>
