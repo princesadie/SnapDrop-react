@@ -3,6 +3,7 @@ import Firebase from 'firebase';
 
 var Map = require('./map.ios')
 var userAuthenticationStyles = require('../stylesheets/userAuthenticationStyle.ios');
+var ImagePickerManager = require('NativeModules').ImagePickerManager;
 
 const {
   Text,

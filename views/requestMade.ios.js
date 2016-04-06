@@ -163,12 +163,12 @@ grabUsers(inputUID) {
       <View style={requestMadeStyles.main}>
         <View style={requestMadeStyles.navBar}>
           <View style={requestMadeStyles.avatar1}>
-            <TouchableOpacity onPress={this.goToUserPage}>
+            <TouchableOpacity onPress={() => this.goBack()}>
               <Image style = {requestMadeStyles.avatar} source = {this.state.userData.profileImage}/>
             </TouchableOpacity>
           </View>
           <View style={requestMadeStyles.avatar2}>
-            <TouchableOpacity onPress={this.goToSnapDropPage}>
+            <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
               <Image style = {requestMadeStyles.avatar} source = {require('../images/snapdrop.png')} />
             </TouchableOpacity>
           </View>

@@ -1,5 +1,4 @@
 var HomeSplash = require('./views/homeSplash.ios')
-var MapView = require('./views/map.ios')
 
 import React, {
   AppRegistry,
@@ -17,7 +16,7 @@ class SnapDrop extends Component {
         initialRoute={{
           title: 'SnapDrop',
           navigationBarHidden: true,
-          component: MapView
+          component: HomeSplash
       }}/>
     );
   }

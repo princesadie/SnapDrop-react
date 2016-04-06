@@ -43,19 +43,21 @@ var MapDisplay = React.createClass({
   },
 
   grabUserRequests(inputUID) {
-    console.log('------------please god-------------------')
     var that = this;
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users");
     userRef.once("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         var userUID = childSnapshot.val().userUID;
         var childData = childSnapshot.val();
-        console.log('------------outside-------------------')
         if (userUID === inputUID) {
-          console.log('-------------------------------')
-          console.log(childData)
+          var user = {
+            profileImage: childSnapshot.val().profileImage,
+            userUID: childSnapshot.val().userUID,
+            username: childSnapshot.val().username,
+            key: childSnapshot.key(),
+          }
           that.setState({
-            userData: childData
+            userData: user
           });
         };
       });
@@ -63,7 +65,7 @@ var MapDisplay = React.createClass({
   },
 
   updateUserLocationInFirebase() {
-    var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
+    var userRef = new Firebase("https://snapdrop.firebaseio.com/users/" + this.state.userData.key)
     userRef.update({
       lat: this.state.lastPosition.lat,
       long: this.state.lastPosition.long,
@@ -300,7 +302,7 @@ var MapDisplay = React.createClass({
             <Text style={mapStyles.text}>SEND</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.animateRandom} style={[mapStyles.bubble, mapStyles.button]}>
-            <Text style={mapStyles.text}>CENTER</Text>
+            <Text style={mapStyles.text}>FIND PIN</Text>
           </TouchableOpacity>
         </View>
       </View>
