@@ -95,7 +95,7 @@ class UserPage extends Component {
         <View style={userPageStyles.container2}>
           <View style={userPageStyles.content2}>
             <Image style={userPageStyles.avatar2} source={this.state.userData.profileImage}/>
-            <Text style={userPageStyles.welcome2}>{this.state.userData.username}</Text>
+            <Text style={userPageStyles.username}>{this.state.userData.username}</Text>
             <View style={userPageStyles.buttonContainer2}>
               <TouchableHighlight
                 style={userPageStyles.button2}

@@ -12,8 +12,11 @@ const {
   TouchableOpacity,
   TouchableHighlight,
   TextInput,
+  ScrollView,
   Image,
   AlertIOS,
+  DeviceEventEmitter,
+  Dimensions,
 } = React;
 
 class UserAuthentication extends React.Component {
@@ -26,8 +29,30 @@ class UserAuthentication extends React.Component {
       email: null,
       password: null,
       confirmPassword: null,
-      errorMessage: null
+      errorMessage: null,
+      visibleHeight: Dimensions.get('window').height,
     };
+  }
+
+  componentDidMount() {
+    let self = this;
+
+    DeviceEventEmitter.addListener('keyboardWillShow', function(e: Event) {
+      self.keyboardWillShow(e);
+    });
+
+    DeviceEventEmitter.addListener('keyboardWillHide', function(e: Event) {
+        self.keyboardWillHide(e);
+    });
+  }
+
+  keyboardWillShow (e) {
+    let newSize = Dimensions.get('window').height - e.endCoordinates.height;
+    this.setState({visibleHeight: newSize});
+  }
+
+  keyboardWillHide (e) {
+    this.setState({visibleHeight: Dimensions.get('window').height});
   }
 
   goRegister(){
@@ -36,6 +61,18 @@ class UserAuthentication extends React.Component {
 
   goLogin() {
     this.setState({registerType: 'login'})
+  }
+
+  // Scroll a component into view. Just pass the component ref string.
+  inputFocused (refName) {
+    setTimeout(() => {
+      let scrollResponder = this.refs.scrollView.getScrollResponder();
+      scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+        React.findNodeHandle(this.refs[refName]),
+        110, //additionalOffset
+        true
+      );
+    }, 50);
   }
 
   userLoginMethod() {
@@ -140,8 +177,8 @@ class UserAuthentication extends React.Component {
   renderLogin() {
     return (
       <View style={userAuthenticationStyles.textInputContainer}>
-        <TextInput style={userAuthenticationStyles.textEdit} autoCapitalize={'none'} placeholder="EMAIL" onChangeText={(email) => this.setState({email})}/>
-        <TextInput style={userAuthenticationStyles.textEdit} autoCapitalize={'none'} secureTextEntry={true} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
+        <TextInput style={userAuthenticationStyles.textEdit} ref='email' onFocus={() => this.inputFocused.bind(this, 'email')} autoCapitalize={'none'} placeholder="EMAIL" onChangeText={(email) => this.setState({email})}/>
+        <TextInput style={userAuthenticationStyles.textEdit} ref='password' onFocus={() => this.inputFocused.bind(this, 'password')} autoCapitalize={'none'} secureTextEntry={true} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
         <TouchableHighlight style={userAuthenticationStyles.button} underlayColor='#F8BBD0' onPress={() => this.userLoginMethod()}>
             <Text style={userAuthenticationStyles.buttonText}>LOGIN</Text>
         </TouchableHighlight>
@@ -167,10 +204,10 @@ class UserAuthentication extends React.Component {
         </TouchableOpacity>
 
         <View style={userAuthenticationStyles.textInputContainer}>
-          <TextInput style={userAuthenticationStyles.textEdit} placeholder="USERNAME" autoCapitalize={'none'} onChangeText={(username) => this.setState({username})}/>
-          <TextInput style={userAuthenticationStyles.textEdit} placeholder="EMAIL" autoCapitalize={'none'} onChangeText={(email) => this.setState({email})}/>
-          <TextInput style={userAuthenticationStyles.textEdit} secureTextEntry={true} autoCapitalize={'none'} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
-          <TextInput style={userAuthenticationStyles.textEdit} secureTextEntry={true} placeholder="CONFIRM PASSWORD" onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
+          <TextInput style={userAuthenticationStyles.textEdit} ref='username' onFocus={() => this.inputFocused.bind(this, 'username')} placeholder="USERNAME" autoCapitalize={'none'} onChangeText={(username) => this.setState({username})}/>
+          <TextInput style={userAuthenticationStyles.textEdit} ref='email' onFocus={() => this.inputFocused.bind(this, 'email')} placeholder="EMAIL" autoCapitalize={'none'} onChangeText={(email) => this.setState({email})}/>
+          <TextInput style={userAuthenticationStyles.textEdit} ref='password' onFocus={() => this.inputFocused.bind(this, 'password')} secureTextEntry={true} autoCapitalize={'none'} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
+          <TextInput style={userAuthenticationStyles.textEdit} ref='pwc' onFocus={() => this.inputFocused.bind(this, 'pwc')} secureTextEntry={true} placeholder="CONFIRM PASSWORD" onChangeText={(confirmPassword) => this.setState({confirmPassword})}/>
 
           <TouchableHighlight style={userAuthenticationStyles.button} underlayColor='#F8BBD0' onPress={() => this.addUser()}>
               <Text style={userAuthenticationStyles.buttonText}>REGISTER</Text>
@@ -191,14 +228,18 @@ class UserAuthentication extends React.Component {
   render() {
     if(this.state.registerType === 'login') {
       return (
-        <View style={userAuthenticationStyles.container}>
-          {this.renderLogin()}
+        <View style={{height: this.state.visibleHeight}}>
+          <View style={userAuthenticationStyles.container}>
+            {this.renderLogin()}
+          </View>
         </View>
       )
     } else {
       return (
-      <View style={userAuthenticationStyles.container}>
-        {this.renderRegister()}
+      <View style={{height: this.state.visibleHeight}}>
+        <View style={userAuthenticationStyles.container}>
+          {this.renderRegister()}
+        </View>
       </View>
     )
     }

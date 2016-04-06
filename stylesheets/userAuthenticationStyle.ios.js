@@ -10,7 +10,7 @@ module.exports = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(236,64,122,1)'
+    backgroundColor: 'rgba(236,64,122,1)',
   },
   bubble: {
     width: 200,

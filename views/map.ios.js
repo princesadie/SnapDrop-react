@@ -16,7 +16,7 @@ var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
-// var RequestMade = require('./requestMade.ios')
+var RequestMade = require('./requestMade.ios')
 
 
 const ASPECT_RATIO = width / height;
@@ -205,8 +205,6 @@ var MapDisplay = React.createClass({
         },
       ],
     })
-    console.log(this.state.markers[0].key)
-    console.log(this.state.markers)
   },
 
   saveResponse(promptValue) {
@@ -229,14 +227,18 @@ var MapDisplay = React.createClass({
   },
 
   sendRequest() {
-    //if no pin we need to make a pop up
-    // if description is empty we should just pass empty string
-    // this.sendRequestToFireBase();
-    // this.props.navigator.push({
-    //   title: 'REQUESTS MADE',
-    //   component: RequestMade
-    // });
-
+    if(this.state.markers.length < 1) {
+      AlertIOS.alert(
+       'NO PINS ON MAP'
+      );
+    } else {
+      this.sendRequestToFireBase();
+      this.state.markers.pop();
+      this.props.navigator.push({
+        title: 'REQUESTS MADE',
+        component: RequestMade
+      });
+    }
   },
 
   goToUserPage() {

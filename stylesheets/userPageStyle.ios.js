@@ -18,9 +18,11 @@ module.exports = StyleSheet.create({
    marginTop: 30,
    backgroundColor: 'rgba(236,64,122,1)',
  },
- welcome2: {
+ username: {
    marginTop: 20,
    textAlign: 'center',
+   color: 'white',
+   fontSize: 32,
  },
  button2: {
    flex: 1,
