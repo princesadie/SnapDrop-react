@@ -58,6 +58,7 @@ class UserAuthentication extends React.Component {
     })
   }
 
+
   addUser() {
     if (this.state.password !== this.state.confirmPassword ) {
       console.log(this.setState({errorMessage: 'Your passwords do not match'}));
