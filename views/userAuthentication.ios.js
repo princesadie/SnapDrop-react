@@ -1,9 +1,11 @@
 import React from 'react-native';
 import Firebase from 'firebase';
-
+import GeoFire from 'geofire';
 var Map = require('./map.ios')
 var userAuthenticationStyles = require('../stylesheets/userAuthenticationStyle.ios');
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
+var firebaseRef = new Firebase("https://snapdrop.firebaseio.com/geofire/");
+var geoFireRef = firebaseRef.child("_geofire");
 
 const {
   Text,
@@ -22,10 +24,10 @@ class UserAuthentication extends React.Component {
     this.state = {
       registerType: 'login',
       avatarSource: null,
-      username: null,
-      email: null,
-      password: null,
-      confirmPassword: null,
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
       errorMessage: null
     };
   }
@@ -39,16 +41,24 @@ class UserAuthentication extends React.Component {
   }
 
   userLoginMethod() {
+    console.log('------------------------------------')
     var that = this;
+    var geoFire = new GeoFire(firebaseRef);
+
     var ref = new Firebase("https://snapdrop.firebaseio.com");
+    console.log("******************______________________--------");
+    console.log(geoFire);
+    console.log();
+    console.log(ref.getAuth());
     ref.authWithPassword({
       email: this.state.email,
       password: this.state.password
     }, function(error, authData) {
       if (error) {
         console.log("Login Failed!", error);
-        AlertIOS.prompt("fail",null);
+        AlertIOS.prompt("login failed",null);
       } else {
+        that.setState({registerType: 'login', email: "", password: ""})
         that.props.navigator.push({
           title: 'Map',
           navigationBarHidden: true,
@@ -60,6 +70,7 @@ class UserAuthentication extends React.Component {
 
   addUser() {
     if (this.state.password !== this.state.confirmPassword ) {
+      AlertIOS.prompt("passwords do not match",null);
       console.log(this.setState({errorMessage: 'Your passwords do not match'}));
     }
     else {
@@ -73,6 +84,7 @@ class UserAuthentication extends React.Component {
       }, function(error, authData) {
         if (error) {
           console.log("Error creating user:", error);
+          AlertIOS.prompt("invalid user data",null);
         } else {
 
           usersRef.push({
@@ -81,22 +93,8 @@ class UserAuthentication extends React.Component {
             userUID: authData.uid
           }),
 
-          ref.authWithPassword({
-            email: that.state.email,
-            password: that.state.password
-          }, function(error, authData) {
-            if (error) {
-              console.log("Login Failed!", error);
-              AlertIOS.prompt("fail",null);
-            } else {
-              that.setState({registerType: 'login'})
-              that.props.navigator.push({
-                title: 'Map',
-                navigationBarHidden: true,
-                component: Map
-              });
-            }
-          })
+          that.userLoginMethod();
+          that.setState({registerType: 'login', email: "", password: ""});
         }
       })
     }

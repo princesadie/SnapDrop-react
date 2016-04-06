@@ -78,9 +78,15 @@ class UserPage extends Component {
   }
 
   logOut(){
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    console.log('----------------------------------')
     console.log("logging out");
-    var ref = new Firebase("https://snapdrop.firebaseio.com/users");
+    console.log(ref.getAuth());
+    console.log('----------------------------------')
     ref.unauth();
+    console.log('----------------------------------')
+    console.log(ref.getAuth());
+    console.log('----------------------------------')
     // this.props.navigator.resetTo({
     //   title: 'Map',
     //   navigationBarHidden: true,

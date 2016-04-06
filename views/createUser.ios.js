@@ -1,5 +1,6 @@
 import React from 'react-native';
 import Firebase from 'firebase';
+import Geofire from 'geofire';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var UserLogin = require('./userLogin.ios');
 var Map = require('./map.ios')
