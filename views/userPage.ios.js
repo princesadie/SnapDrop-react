@@ -64,7 +64,8 @@ class UserPage extends Component {
 
   fulfillRequest(){
     this.props.navigator.push({
-      component: RequestMap
+      component: RequestMap,
+      navigationBarHidden: true,
     })
   }
 

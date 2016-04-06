@@ -65,6 +65,7 @@ var MapDisplay = React.createClass({
   },
 
   updateUserLocationInFirebase() {
+    console.log(this.state.userData.key)
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users/" + this.state.userData.key)
     userRef.update({
       lat: this.state.lastPosition.lat,
@@ -80,7 +81,6 @@ var MapDisplay = React.createClass({
       console.log("Authenticated user with uid:", authData.password.email);
       console.log("Authenticated user with uid:", authData.uid);
     }
-
   },
 
   componentDidMount() {
@@ -89,7 +89,7 @@ var MapDisplay = React.createClass({
     // this.grabUserRequests(authData.uid);
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
-    this.grabUserRequests("add76d65-b7ce-4fb9-b832-868a14c287da");
+    this.grabUserRequests(authData.uid);
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -236,6 +236,7 @@ var MapDisplay = React.createClass({
       this.state.markers.pop();
       this.props.navigator.push({
         title: 'REQUESTS MADE',
+        navigationBarHidden: true,
         component: RequestMade
       });
     }

@@ -52,8 +52,16 @@ var RequestMapDisplay = React.createClass({
         var userUID = childSnapshot.val().userUID;
         var childData = childSnapshot.val();
         if (userUID === inputUID) {
+          var user = {
+            lat: childSnapshot.val().lat,
+            long: childSnapshot.val().long,
+            profileImage: childSnapshot.val().profileImage,
+            userUID: childSnapshot.val().userUID,
+            username: childSnapshot.val().username,
+            key: childSnapshot.key(),
+          }
           that.setState({
-            userData: childData
+            userData: user
           });
         };
       });
@@ -61,7 +69,7 @@ var RequestMapDisplay = React.createClass({
   },
 
   updateUserLocationInFirebase() {
-    var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
+    var userRef = new Firebase("https://snapdrop.firebaseio.com/users/"  + this.state.userData.key)
     userRef.update({
       lat: this.state.lastPosition.lat,
       long: this.state.lastPosition.long,
@@ -138,19 +146,17 @@ var RequestMapDisplay = React.createClass({
     this.setState({ region });
   },
 
-  jumpRandom() {
-    this.setState({ region: this.goToMarker() });
-  },
-
   animateRandom() {
-    if(this.state.markers[0] != null) {
       this.refs.map.animateToRegion(this.goToMarker());
-    }
   },
 
   goToMarker() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+    this.grabUserRequests(authData.uid)
     var { userData } = this.state;
     return {
+      ...this.state.userData,
       latitude: userData.lat,
       longitude: userData.long,
     };
@@ -177,6 +183,10 @@ var RequestMapDisplay = React.createClass({
       component: RequestDetail,
       passProps: {requestKey: marker.requestKey, requestCoordinate: marker.coordinate, requestDescription: marker.description}
     });
+  },
+
+  goBack() {
+    this.props.navigator.pop();
   },
 
   render() {
@@ -207,7 +217,7 @@ var RequestMapDisplay = React.createClass({
         </MapView>
 
         <View style={requestMapStyles.avatar1}>
-          <TouchableOpacity onPress={this.goToUserPage}>
+          <TouchableOpacity onPress={() => this.goBack()}>
             <Image style = {requestMapStyles.avatar} source = {this.state.userData.profileImage}/>
           </TouchableOpacity>
         </View>
@@ -219,7 +229,7 @@ var RequestMapDisplay = React.createClass({
 
         <View style={requestMapStyles.buttonContainer}>
           <TouchableOpacity onPress={this.animateRandom} style={[requestMapStyles.bubble, requestMapStyles.button]}>
-            <Text style={requestMapStyles.text}>CENTER</Text>
+            <Text style={requestMapStyles.text}>FIND ME</Text>
           </TouchableOpacity>
         </View>
       </View>

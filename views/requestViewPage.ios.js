@@ -6,6 +6,7 @@ import React, {
   Image,
   PixelRatio,
   TouchableHighlight,
+  TouchableOpacity,
   ListView,
   Navigator,
   Text,
@@ -67,24 +68,44 @@ class RequestViewPage extends Component {
   };
 
   renderLoadingView() {
-    return (
-      <View style={styles.container}>
-        <Text>
-          LOADING REQUESTS...
-        </Text>
-      </View>
-    );
-  }
+      if(this.state.requestFulfillments.length === 0) {
+        return (
+          <View style={styles.container}>
+              <View style={styles.avatar1}>
+                <TouchableOpacity onPress={() => this.goBack()}>
+                  <Image style = {styles.avatar} source = {require('../images/snapdrop.png')}/>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.avatar2}>
+                <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
+                  <Image style = {styles.avatar} source = {require('../images/snapdrop.png')} />
+                </TouchableOpacity>
+              </View>
+            <Text style={styles.notice}>NO FULFILLMENTS YET</Text>
+          </View>
+        )
+      } else {
+      return (
+          <View style={styles.container}>
+            <Text style={styles.notice}>
+              LOADING FULFILLMENTS...
+            </Text>
+          </View>
+        );
+      }
+    }
 
   goToImage(image) {
     this.props.navigator.push({
       component: ViewImage,
+      navigationBarHidden: true,
       passProps: {image: image}
     });
   }
 
   renderRequest(requestFulfillment) {
     return (
+      <View>
       <View style={styles.container}>
         <TouchableHighlight onPress={() => this.goToImage(requestFulfillment.image.uri)}>
         <Image
@@ -92,9 +113,10 @@ class RequestViewPage extends Component {
           style={styles.thumbnail}
         />
         </TouchableHighlight>
-        <View style={styles.container}>
-          <Text style={styles.description}>{requestFulfillment.caption}</Text>
-        </View>
+      </View>
+      <View style={styles.pad}>
+        <Text style={styles.description}>{requestFulfillment.caption}</Text>
+      </View>
       </View>
     );
   }
@@ -118,11 +140,23 @@ class RequestViewPage extends Component {
 
     return (
       <View style={styles.main}>
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderRequest.bind(this)}
-        style={styles.listView}
-      />
+      <View style={styles.navBar}>
+          <View style={styles.avatar1}>
+            <TouchableOpacity onPress={() => this.goBack()}>
+              <Image style = {styles.avatar} source = {require('../images/snapdrop.png')}/>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.avatar2}>
+            <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
+              <Image style = {styles.avatar} source = {require('../images/snapdrop.png')} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRequest.bind(this)}
+          style={styles.listView}
+        />
       </View>
     );
   }
@@ -133,16 +167,38 @@ var height = Dimensions.get('window').height; //full height
 
 var styles = StyleSheet.create({
   main: {
+    flex: 1,
     backgroundColor: 'rgba(236,64,122,1)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  notice: {
+    fontSize: 32,
+    color: 'white',
+  },
+  pad: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 1,
+    backgroundColor: 'white',
+    padding: 3,
+  },
+  navBar: {
+    height: 60,
+    marginBottom: 10,
   },
   container: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30,
-    backgroundColor: '#FFF',
-    padding: 0,
+    marginTop: 1,
+    backgroundColor: 'white',
   },
   rightContainer: {
     flex: 1,
@@ -155,45 +211,29 @@ var styles = StyleSheet.create({
   },
   coords: {
     textAlign: 'center',
-    color: 'rgba(236,64,122,1)',
   },
   thumbnail: {
-    width: width,
-    height: 300,
+    width: 400,
+    height: 200,
   },
   listView: {
     height: 1000,
-    paddingTop: 20,
     backgroundColor: 'rgba(236,64,122,1)',
-  },
-  navBar: {
-    flex: 1,
-    height: 60,
-  },
-  avatar1: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-  },
-  avatar2: {
-    position: 'absolute',
-    top: 5,
-    left: 5,
-  },
-  avatar1: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-  },
-  avatar2: {
-    position: 'absolute',
-    top: 5,
-    left: 5,
   },
   avatar: {
     borderRadius: 25,
     width: 50,
     height: 50
+  },
+  avatar1: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+  avatar2: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
   },
 });
 

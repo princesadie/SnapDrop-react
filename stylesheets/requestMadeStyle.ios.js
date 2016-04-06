@@ -12,6 +12,10 @@ module.exports = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  notice: {
+    fontSize: 32,
+    color: 'white',
+  },
   navBar: {
     height: 60,
     marginBottom: 10,
@@ -22,7 +26,7 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: 'white',
     padding: 10,
   },
   rightContainer: {
