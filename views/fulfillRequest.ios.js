@@ -27,8 +27,7 @@ class FulfillRequest extends Component {
   componentDidMount() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
-    console.log('-------------ugh damn it-----------')
-    console.log(authData.uid)
+    // console.log(authData.uid)
     this.grabFulfillments(authData.uid);
   }
 
@@ -49,7 +48,6 @@ class FulfillRequest extends Component {
             dataSource: that.state.dataSource.cloneWithRows(that.state.fulfillments),
             loaded: true,
           });
-
         };
       });
     });
@@ -88,7 +86,5 @@ class FulfillRequest extends Component {
       />
     );
   }
-
 }
-
 module.exports = FulfillRequest;

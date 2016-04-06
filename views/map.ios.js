@@ -16,8 +16,6 @@ var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
-// var RequestMade = require('./requestMade.ios')
-
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -80,16 +78,12 @@ var MapDisplay = React.createClass({
       console.log("Authenticated user with uid:", authData.password.email);
       console.log("Authenticated user with uid:", authData.uid);
     }
-
   },
 
   componentDidMount() {
-    // var ref = new Firebase("https://snapdrop.firebaseio.com");
-    // var authData = ref.getAuth();
-    // this.grabUserRequests(authData.uid);
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
-    this.grabUserRequests("add76d65-b7ce-4fb9-b832-868a14c287da");
+    this.grabUserRequests(authData.uid);
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -153,7 +147,7 @@ var MapDisplay = React.createClass({
             coordinate: e.nativeEvent.coordinate,
             key: id++,
             title: 'PIN',
-            description: 'YOUR DESCRIPTION',
+            description: 'ENTER A DESCRIPTION',
             color: 'rgba(236,64,122,1)',
           },
         ],
@@ -172,7 +166,7 @@ var MapDisplay = React.createClass({
             coordinate: e.nativeEvent.coordinate,
             key: id++,
             title: 'PIN',
-            description: 'FILL YOUR WITH DETAILS',
+            description: 'ENTER A DESCRIPTION',
             color: 'rgba(236,64,122,1)',
           },
         ],
@@ -201,6 +195,8 @@ var MapDisplay = React.createClass({
         {
           coordinate: e.nativeEvent.coordinate,
           key: id++,
+          title: 'PIN',
+          description: 'ENTER A DESCRIPTION',
           color: 'rgba(236,64,122,1)',
         },
       ],
@@ -236,7 +232,6 @@ var MapDisplay = React.createClass({
     //   title: 'REQUESTS MADE',
     //   component: RequestMade
     // });
-
   },
 
   goToUserPage() {
@@ -248,7 +243,6 @@ var MapDisplay = React.createClass({
       component: UserPage,
       passProps: {userUID: authData.uid}
     });
-
   },
 
   prompt() {
@@ -306,10 +300,7 @@ var MapDisplay = React.createClass({
           </TouchableOpacity>
         </View>
       </View>
-
-
     );
   },
 });
-
 module.exports = MapDisplay;

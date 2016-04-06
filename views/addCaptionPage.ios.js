@@ -19,7 +19,6 @@ var {
   }
 } = React;
 
-// var currentView = 'start'
 class addCaptionPage extends Component {
 
   constructor(props) {

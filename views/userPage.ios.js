@@ -15,9 +15,7 @@ import Firebase from 'firebase';
 
 var FulfillRequest = require('./fulfillRequest.ios');
 var MadeRequest = require('./requestMade.ios');
-// var HomeSplash = require('./homeSplash.ios');
 var RequestMap = require('./requestMap.ios');
-// var CreateUser = require('./createUser.ios');
 
 class UserPage extends Component {
 
@@ -29,7 +27,7 @@ class UserPage extends Component {
   }
 
   componentDidMount() {
-    this.grabUserRequests(this.currentUser().uid);
+    this.grabUsers(this.currentUser().uid);
   }
 
   currentUser() {
@@ -37,7 +35,7 @@ class UserPage extends Component {
     return ref.getAuth();
   }
 
-  grabUserRequests(inputUID) {
+  grabUsers(inputUID) {
     var that = this;
     var ref = new Firebase("https://snapdrop.firebaseio.com/users");
     ref.once("value", function(snapshot) {
@@ -54,11 +52,6 @@ class UserPage extends Component {
   }
 
   makeRequest(){
-    console.log("made a req");
-    // this.props.navigator.pop({
-    //   title: 'Map',
-    //   navigationBarHidden: true,
-    // });
     this.props.navigator.popN(1)
   }
 
@@ -69,23 +62,15 @@ class UserPage extends Component {
   }
 
   madeRequest(){
-    console.log("fullfill a req");
     this.props.navigator.push({
-      title: 'YOUR REQUESTS',
       component: MadeRequest,
       navigationBarHidden: true,
     })
   }
 
   logOut(){
-    console.log("logging out");
     var ref = new Firebase("https://snapdrop.firebaseio.com/users");
     ref.unauth();
-    // this.props.navigator.resetTo({
-    //   title: 'Map',
-    //   navigationBarHidden: true,
-    //   component: CreateUser
-    // });
     this.props.navigator.popN(2);
   }
 
