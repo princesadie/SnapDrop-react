@@ -47,6 +47,16 @@ module.exports = StyleSheet.create({
     // marginTop: 10,
     fontWeight: 'bold',
   },
+  logQuestion: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    marginLeft: 112
+  },
+  regQuestion: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    marginLeft: 98
+  },
   text: {
     color: '#FFF'
   },
