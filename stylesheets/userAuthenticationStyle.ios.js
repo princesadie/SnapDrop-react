@@ -26,6 +26,7 @@ module.exports = StyleSheet.create({
     borderWidth: 3 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: 75,
   },
   avatar: {
     borderRadius: 75,
