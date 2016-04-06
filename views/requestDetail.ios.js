@@ -25,6 +25,10 @@ class RequestDetail extends Component {
     videoSource: null
   };
 
+  componentDidMount() {
+    this.selectPhotoTapped.bind(this)
+  }
+
   goNext2(imageData, sourceIm) {
     this.props.navigator.push({
       title: 'Image Details',

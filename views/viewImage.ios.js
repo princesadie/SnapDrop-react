@@ -26,7 +26,7 @@ class ViewImage extends Component {
         <View style={styles.navBar}>
           <View style={styles.avatar1}>
             <TouchableOpacity onPress={() => this.goBack()}>
-              <Image style = {styles.avatar} source = {require('../images/snapdrop.png')}/>
+              <Image style = {styles.avatar} source = {require('../images/backArrow.png')}/>
             </TouchableOpacity>
           </View>
           <View style={styles.avatar2}>

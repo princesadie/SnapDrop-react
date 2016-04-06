@@ -1,4 +1,5 @@
 var HomeSplash = require('./views/homeSplash.ios')
+var RequestMade = require('./views/requestMade.ios')
 
 import React, {
   AppRegistry,

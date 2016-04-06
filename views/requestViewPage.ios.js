@@ -68,12 +68,20 @@ class RequestViewPage extends Component {
   };
 
   renderLoadingView() {
-      if(this.state.requestFulfillments.length === 0) {
+      if(this.state.requestFulfillments.length != 0) {
+        return (
+            <View style={styles.container}>
+              <Text style={styles.notice}>
+                LOADING FULFILLMENTS...
+              </Text>
+            </View>
+          );
+      } else {
         return (
           <View style={styles.container}>
               <View style={styles.avatar1}>
                 <TouchableOpacity onPress={() => this.goBack()}>
-                  <Image style = {styles.avatar} source = {require('../images/snapdrop.png')}/>
+                  <Image style = {styles.avatar} source = {require('../images/backArrow.png')}/>
                 </TouchableOpacity>
               </View>
               <View style={styles.avatar2}>
@@ -84,14 +92,6 @@ class RequestViewPage extends Component {
             <Text style={styles.notice}>NO FULFILLMENTS YET</Text>
           </View>
         )
-      } else {
-      return (
-          <View style={styles.container}>
-            <Text style={styles.notice}>
-              LOADING FULFILLMENTS...
-            </Text>
-          </View>
-        );
       }
     }
 
@@ -143,7 +143,7 @@ class RequestViewPage extends Component {
       <View style={styles.navBar}>
           <View style={styles.avatar1}>
             <TouchableOpacity onPress={() => this.goBack()}>
-              <Image style = {styles.avatar} source = {require('../images/snapdrop.png')}/>
+              <Image style = {styles.avatar} source = {require('../images/backArrow.png')}/>
             </TouchableOpacity>
           </View>
           <View style={styles.avatar2}>
@@ -198,7 +198,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#EC407A',
   },
   rightContainer: {
     flex: 1,

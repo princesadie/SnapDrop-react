@@ -33,10 +33,12 @@ class RequestMade extends Component {
   }
 
   componentDidMount() {
-    var ref = new Firebase("https://snapdrop.firebaseio.com");
-    var authData = ref.getAuth();
-    this.grabUserRequests(authData.uid);
-    this.grabUsers(authData.uid);
+    // var ref = new Firebase("https://snapdrop.firebaseio.com");
+    // var authData = ref.getAuth();
+    // this.grabUserRequests(authData.uid);
+    // this.grabUsers(authData.uid);
+    this.grabUserRequests("add76d65-b7ce-4fb9-b832-868a14c287da");
+    this.grabUsers("add76d65-b7ce-4fb9-b832-868a14c287da");
   }
 
   grabUserRequests(inputUID) {
@@ -66,25 +68,22 @@ class RequestMade extends Component {
       });
     });
   }
-grabUsers(inputUID) {
-    console.log('------------please god-------------------')
-    var that = this;
-    var userRef = new Firebase("https://snapdrop.firebaseio.com/users");
-    userRef.once("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var userUID = childSnapshot.val().userUID;
-        var childData = childSnapshot.val();
-        console.log('------------outside-------------------')
-        if (userUID === inputUID) {
-          console.log('-------------------------------')
-          console.log(childData)
-          that.setState({
-            userData: childData
-          });
-        };
+
+  grabUsers(inputUID) {
+      var that = this;
+      var userRef = new Firebase("https://snapdrop.firebaseio.com/users");
+      userRef.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var userUID = childSnapshot.val().userUID;
+          var childData = childSnapshot.val();
+          if (userUID === inputUID) {
+            that.setState({
+              userData: childData
+            });
+          };
+        });
       });
-    });
-  }
+    }
 
   updateUserLocationInFirebase() {
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
@@ -183,7 +182,7 @@ grabUsers(inputUID) {
         <View style={requestMadeStyles.navBar}>
           <View style={requestMadeStyles.avatar1}>
             <TouchableOpacity onPress={() => this.goBack()}>
-              <Image style = {requestMadeStyles.avatar} source = {this.state.userData.profileImage}/>
+              <Image style = {requestMadeStyles.avatar} source = {require('../images/backArrow.png')}/>
             </TouchableOpacity>
           </View>
           <View style={requestMadeStyles.avatar2}>
