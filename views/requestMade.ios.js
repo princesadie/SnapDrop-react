@@ -66,18 +66,14 @@ class RequestMade extends Component {
       });
     });
   }
-grabUsers(inputUID) {
-    console.log('------------please god-------------------')
+  grabUsers(inputUID) {
     var that = this;
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users");
     userRef.once("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         var userUID = childSnapshot.val().userUID;
         var childData = childSnapshot.val();
-        console.log('------------outside-------------------')
         if (userUID === inputUID) {
-          console.log('-------------------------------')
-          console.log(childData)
           that.setState({
             userData: childData
           });
@@ -102,7 +98,6 @@ grabUsers(inputUID) {
       component: UserPage,
       passProps: {userUID: authData.uid}
     });
-
   }
 
   goToRequestPage(userRequest) {
@@ -110,7 +105,7 @@ grabUsers(inputUID) {
       component: RequestViewPage,
       passProps: {description: userRequest.description, long: userRequest.long, lat: userRequest.lat, requestKey: userRequest.requestKey}
     });
-  };
+  }
 
   renderLoadingView() {
     return (
@@ -125,25 +120,24 @@ grabUsers(inputUID) {
   renderRequest(userRequest) {
     return (
       <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
-      <View style={requestMadeStyles.container}>
-        <View style={requestMadeStyles.avatar}>
+        <View style={requestMadeStyles.container}>
           <View style={requestMadeStyles.avatar}>
-            <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
-              <Image style = {requestMadeStyles.avatar} source = {require('../images/photoIcon.png')} />
-            </TouchableOpacity>
+            <View style={requestMadeStyles.avatar}>
+              <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
+                <Image style = {requestMadeStyles.avatar} source = {require('../images/photoIcon.png')} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={requestMadeStyles.rightContainer}>
+            <Text style={requestMadeStyles.description}>{userRequest.description}</Text>
           </View>
         </View>
-        <View style={requestMadeStyles.rightContainer}>
-          <Text style={requestMadeStyles.description}>{userRequest.description}</Text>
-        </View>
-      </View>
       </TouchableOpacity>
     );
   }
 
   goToUserPage() {
     this.props.navigator.pop({
-      title: 'User Page',
       navigationBarHidden: true,
       component: UserPage,
     });
@@ -159,7 +153,6 @@ grabUsers(inputUID) {
     }
 
     return (
-
       <View style={requestMadeStyles.main}>
         <View style={requestMadeStyles.navBar}>
           <View style={requestMadeStyles.avatar1}>
@@ -179,9 +172,7 @@ grabUsers(inputUID) {
           style={requestMadeStyles.listView}
         />
       </View>
-
     );
   }
 }
-
 module.exports = RequestMade;

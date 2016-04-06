@@ -2,15 +2,15 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-var cameraStyles = require('../stylesheets/cameraStyle.ios')
-var Map = require('./map.ios')
+ var cameraStyles = require('../stylesheets/cameraStyle.ios')
+ var Map = require('./map.ios')
 
-import React, {
+ import React, {
   Component,
-  Dimensions,
   View,
-  TouchableHighlight,
-  Text
+  // Dimensions,
+  Text,
+  // TouchableHighlight
 } from 'react-native';
 
 import Camera from 'react-native-camera';
@@ -27,13 +27,13 @@ class CameraView extends Component {
   render() {
     return (
       <View style={cameraStyles.container}>
-      <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          style={cameraStyles.preview}
-          aspect={Camera.constants.Aspect.fill}>
-          <Text style={cameraStyles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+        <Camera
+        ref={(cam) => {
+          this.camera = cam;
+        }}
+        style={cameraStyles.preview}
+        aspect={Camera.constants.Aspect.fill}>
+        <Text style={cameraStyles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
         </Camera>
       </View>
     );
@@ -41,9 +41,6 @@ class CameraView extends Component {
 
   takePicture() {
     this.camera.capture()
-      // .then((data) => console.log(data))
-      // .catch(err => console.error(err));
   }
 }
-
 module.exports = CameraView;
