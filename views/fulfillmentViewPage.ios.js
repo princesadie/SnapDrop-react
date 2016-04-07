@@ -7,6 +7,7 @@ var {
   Text,
   Image,
   Alert,
+  AlertIOS,
   ListView,
   StyleSheet,
   ScrollView,
@@ -36,6 +37,7 @@ class FulfillmentViewPage extends Component {
       caption: this.state.captionText,
       userUID: authData.uid
     })
+    AlertIOS.alert("YOUR PHOTO WAS SENT SUCCESSFULLY!")
     this.props.navigator.popN(2);
   }
 

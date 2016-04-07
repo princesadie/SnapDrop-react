@@ -1,5 +1,6 @@
 var React = require('react-native');
 var mapStyles = require('../stylesheets/mapStyle.ios');
+var snapDropPage = require('./snapDropPage.ios')
 
 var {
   Image,
@@ -39,6 +40,15 @@ var MapDisplay = React.createClass({
       request: {},
       userData: {},
     };
+  },
+
+  goToSnapDropPage() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+    this.props.navigator.push({
+      navigationBarHidden: true,
+      component: snapDropPage,
+    });
   },
 
   grabUserRequests(inputUID) {

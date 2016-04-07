@@ -756,7 +756,11 @@
 				INFOPLIST_FILE = SnapDrop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SnapDrop1992;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SnapDrop7;
+>>>>>>> master
 				PRODUCT_NAME = SnapDrop;
 				PROVISIONING_PROFILE = "";
 			};
@@ -778,7 +782,11 @@
 				INFOPLIST_FILE = SnapDrop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SnapDrop1992;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SnapDrop7;
+>>>>>>> master
 				PRODUCT_NAME = SnapDrop;
 				PROVISIONING_PROFILE = "";
 			};
