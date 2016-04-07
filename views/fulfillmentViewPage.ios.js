@@ -67,8 +67,7 @@ class FulfillmentViewPage extends Component {
     super(props)
     this.state = {
       captionText: '',
-      visibleHeight: Dimensions.get('window').height,
-      image: this.props.sourceIm,
+      visibleHeight: Dimensions.get('window').height
     };
   }
 
@@ -85,41 +84,32 @@ class FulfillmentViewPage extends Component {
 }
 
   render() {
-    console.log('------------------------------------------')
-    console.log('entered Image View Page')
-    console.log(this.props.imageData)
-    console.log(this.props.sourceIm)
-    console.log('------------------------------------------')
-    console.log('------------------------------------------')
-    console.log('------------------------------------------')
-    console.log('------------------------------------------')
-    console.log(this.state.image)
     return (
       <TouchableWithoutFeedback onPress={()=> dismissKeyboard()}>
-      <View style={{height: this.state.visibleHeight}}>
-      <View style={styles.container}>
+          <View style={{height: this.state.visibleHeight}}>
         <View style={styles.container}>
-          <Image style={styles.canvas} source={this.state.image} />
+          <View style={styles.container}>
+            <Image style={styles.canvas} source={this.props.sourceIm} />
+          </View>
+          <View style={styles.captionContainer}>
+            <TextInput style={styles.textEdit} placeholderTextColor={'#FFF'} placeholder="CAPTION" ref='caption' onFocus={() => this.inputFocused.bind(this, 'caption')} onChangeText={(captionText) => this.setState({captionText})}/>
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.sendImage()}>
+              <Text style={styles.buttonText}>SEND</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor='#9FA8DA'
+              onPress={() => this.cancelImage()}>
+              <Text style={styles.buttonText}>CANCEL</Text>
+            </TouchableHighlight>
+          </View>
         </View>
-        <View style={styles.captionContainer}>
-          <TextInput style={styles.textEdit} placeholderTextColor={'#FFF'} placeholder="CAPTION" ref='caption' onFocus={() => this.inputFocused.bind(this, 'caption')} onChangeText={(captionText) => this.setState({captionText})}/>
         </View>
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight
-            style={styles.button}
-            underlayColor='#9FA8DA'
-            onPress={() => this.sendImage()}>
-            <Text style={styles.buttonText}>SEND</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-            underlayColor='#9FA8DA'
-            onPress={() => this.cancelImage()}>
-            <Text style={styles.buttonText}>CANCEL</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
-      </View>
       </TouchableWithoutFeedback>
     );
   }
@@ -133,7 +123,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(236,64,122,1)',
   },
   canvas: {
-    resizeMode: 'cover'
+    height: 800,
+    width: 400,
   },
   buttonContainer: {
     marginBottom: 40,

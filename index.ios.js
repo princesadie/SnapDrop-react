@@ -1,6 +1,5 @@
 var HomeSplash = require('./views/homeSplash.ios')
 var indexStyles = require('./stylesheets/indexStyle.ios')
-var Map = require('./views/map.ios')
 
 import React, {
   AppRegistry,
