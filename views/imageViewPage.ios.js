@@ -15,6 +15,8 @@ var {
   TouchableHighlight,
   TouchableOpacity,
   TextInput,
+  DeviceEventEmitter,
+  Dimensions,
   NativeModules: {
     ImagePickerManager
   }
@@ -35,6 +37,25 @@ class ImageViewPage extends Component {
   cancelImage() {
     this.props.navigator.popN(1);
   }
+  keyboardWillShow (e) {
+    let newSize = Dimensions.get('window').height - e.endCoordinates.height;
+    this.setState({visibleHeight: newSize});
+  }
+
+  keyboardWillHide (e) {
+    this.setState({visibleHeight: Dimensions.get('window').height});
+  }
+  // Scroll a component into view. Just pass the component ref string.
+  inputFocused (refName) {
+    setTimeout(() => {
+      let scrollResponder = this.refs.scrollView.getScrollResponder();
+      scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+        React.findNodeHandle(this.refs[refName]),
+        110, //additionalOffset
+        true
+      );
+    }, 50);
+  }
   constructor(props) {
     super(props)
     this.state = {
@@ -50,25 +71,24 @@ class ImageViewPage extends Component {
     console.log('------------------------------------------')
     return (
       <View style={imageViewPageStyles.container}>
-
         <View style={imageViewPageStyles.avatar}>
           <Image style={imageViewPageStyles.avatar} source={this.props.sourceIm} />
         </View>
         <View style={imageViewPageStyles.captionContainer}>
-          <TextInput style={imageViewPageStyles.textEdit} placeholder="add a caption" onChangeText={(captionText) => this.setState({captionText})}/>
+          <TextInput style={imageViewPageStyles.textEdit} placeholder="CAPTION" ref='caption' onFocus={() => this.inputFocused.bind(this, 'caption')} onChangeText={(captionText) => this.setState({captionText})}/>
         </View>
-        <View style={imageViewPageStyles.buttonContainer3}>
+        <View style={imageViewPageStyles.buttonContainer}>
           <TouchableHighlight
             style={imageViewPageStyles.button3}
             underlayColor='#9FA8DA'
             onPress={() => this.sendImage()}>
-            <Text style={imageViewPageStyles.buttonText3}>Send</Text>
+            <Text style={imageViewPageStyles.buttonText}>SEND</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={imageViewPageStyles.button3}
             underlayColor='#9FA8DA'
             onPress={() => this.cancelImage()}>
-            <Text style={imageViewPageStyles.buttonText3}>Cancel</Text>
+            <Text style={imageViewPageStyles.buttonText}>CANCEL</Text>
           </TouchableHighlight>
         </View>
       </View>

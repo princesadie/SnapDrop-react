@@ -33,12 +33,10 @@ class RequestMade extends Component {
   }
 
   componentDidMount() {
-    // var ref = new Firebase("https://snapdrop.firebaseio.com");
-    // var authData = ref.getAuth();
-    // this.grabUserRequests(authData.uid);
-    // this.grabUsers(authData.uid);
-    this.grabUserRequests("add76d65-b7ce-4fb9-b832-868a14c287da");
-    this.grabUsers("add76d65-b7ce-4fb9-b832-868a14c287da");
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+    this.grabUserRequests(authData.uid);
+    this.grabUsers(authData.uid);
   }
 
   grabUserRequests(inputUID) {

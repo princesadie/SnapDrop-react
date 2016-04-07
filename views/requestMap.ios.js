@@ -1,5 +1,7 @@
 var React = require('react-native');
 var requestMapStyles = require('../stylesheets/requestMapStyle.ios');
+var ImagePickerManager = require('NativeModules').ImagePickerManager;
+var FulfillmentViewPage = require('./fulfillmentViewPage.ios');
 
 var {
   Image,
@@ -42,6 +44,77 @@ var RequestMapDisplay = React.createClass({
       fulfillments: [],
       userData: {},
     };
+  },
+
+  goNext2(imageData, sourceIm, marker) {
+    this.props.navigator.push({
+      title: 'Image Details',
+      component: FulfillmentViewPage,
+      navigationBarHidden: true,
+      passProps: {imageData: imageData.obj, sourceIm: sourceIm, requestKey: marker.requestKey, requestCoordinate: marker.coordinate, requestDescription: marker.description}
+    })
+  },
+
+  selectPhotoTapped(marker) {
+    const options = {
+      title: 'Photo Picker',
+      takePhotoButtonTitle: 'Take Photo...',
+      chooseFromLibraryButtonTitle: 'Choose from Library...',
+      quality: 0.5,
+      maxWidth: 300,
+      maxHeight: 300,
+      storageOptions: {
+        skipBackup: true
+      },
+      allowsEditing: true
+  };
+
+    ImagePickerManager.launchCamera(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      }
+      else if (response.error) {
+        console.log('ImagePickerManager Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        // You can display the image using either:
+        const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+        // const source = {uri: response.uri.replace('file://', ''), isStatic: true};
+        console.log('---------------------------------')
+        // this.setState({
+        //   avatarSource: source
+        // });
+
+        // console.log(response.data)
+        var resData = response.data
+        console.log('response data')
+        console.log(resData)
+
+        var imageData = resData.replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "").replace(/\f/g, "").replace(/=/g, "");
+        console.log('image data')
+        console.log(imageData)
+
+        var imagereplaced = imageData.replace(/=/g, "");
+        console.log('image data replaced')
+        console.log(imagereplaced)
+
+        var obj = "data:image/jpeg;base64," + imagereplaced;
+        console.log('obj')
+        console.log(obj)
+
+        var objJson = JSON.stringify({"obj": obj})
+        console.log('json obj')
+        console.log(objJson)
+        console.log('---------------------------------')
+
+        this.goNext2(objJson, source, marker);
+      }
+    });
   },
 
   grabUserRequests(inputUID) {
@@ -209,7 +282,7 @@ var RequestMapDisplay = React.createClass({
               onDragEnd={this.updateMarkerCoordinate}>
                 <MapView.Callout tooltip>
                   <CustomCallout>
-                    <Text style={requestMapStyles.text} onPress={() => this.goToRequest(marker)}>{marker.description}</Text>
+                    <Text style={requestMapStyles.text} onPress={() => this.selectPhotoTapped(marker)}>{marker.description}</Text>
                   </CustomCallout>
                 </MapView.Callout>
             </MapView.Marker>

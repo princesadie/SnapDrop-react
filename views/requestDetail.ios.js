@@ -50,7 +50,7 @@ class RequestDetail extends Component {
         skipBackup: true
       },
       allowsEditing: true
-    };
+  };
 
     ImagePickerManager.launchCamera(options, (response) => {
       console.log('Response = ', response);

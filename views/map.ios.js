@@ -84,9 +84,6 @@ var MapDisplay = React.createClass({
   },
 
   componentDidMount() {
-    // var ref = new Firebase("https://snapdrop.firebaseio.com");
-    // var authData = ref.getAuth();
-    // this.grabUserRequests(authData.uid);
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
     this.grabUserRequests(authData.uid);
