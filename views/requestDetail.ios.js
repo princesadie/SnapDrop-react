@@ -24,6 +24,10 @@ class RequestDetail extends Component {
     videoSource: null
   };
 
+  componentDidMount() {
+    this.selectPhotoTapped.bind(this)
+  }
+
   goNext2(imageData, sourceIm) {
     this.props.navigator.push({
       title: 'Image Details',
@@ -45,7 +49,7 @@ class RequestDetail extends Component {
         skipBackup: true
       },
       allowsEditing: true
-    };
+  };
 
     ImagePickerManager.launchCamera(options, (response) => {
       console.log('Response = ', response);

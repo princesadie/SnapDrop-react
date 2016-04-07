@@ -50,11 +50,31 @@ class FulfillRequest extends Component {
 
   renderLoadingView() {
     return (
-      <View style={fulfillmentsForUserMadeRequestsStyles.container}>
-        <Text>
-          Loading fulfillments...
-        </Text>
-      </View>
+      if(this.state.fulfillments.length === 0) {
+        return (
+          <View style={fulfillmentsForUserMadeRequestsStyles.container}>
+              <View style={fulfillmentsForUserMadeRequestsStyles.avatar1}>
+                <TouchableOpacity onPress={() => this.goBack()}>
+                  <Image style = {fulfillmentsForUserMadeRequestsStyles.avatar} source = {this.state.userData.profileImage}/>
+                </TouchableOpacity>
+              </View>
+              <View style={fulfillmentsForUserMadeRequestsStyles.avatar2}>
+                <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
+                  <Image style = {fulfillmentsForUserMadeRequestsStyles.avatar} source = {require('../images/snapdrop.png')} />
+                </TouchableOpacity>
+              </View>
+            <Text style={fulfillmentsForUserMadeRequestsStyles.notice}>NO FULFILLMENTS YET :(</Text>
+          </View>
+        )
+      } else {
+      return (
+          <View style={fulfillmentsForUserMadeRequestsStyles.container}>
+            <Text style={fulfillmentsForUserMadeRequestsStyles.notice}>
+              LOADING FULFILLMENTS...
+            </Text>
+          </View>
+        );
+      }
     );
   }
 
