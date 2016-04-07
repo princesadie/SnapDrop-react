@@ -115,12 +115,7 @@ class RequestMade extends Component {
         <View style={requestMadeStyles.container}>
             <View style={requestMadeStyles.avatar1}>
               <TouchableOpacity onPress={() => this.goBack()}>
-                <Image style = {requestMadeStyles.avatar} source = {this.state.userData.profileImage}/>
-              </TouchableOpacity>
-            </View>
-            <View style={requestMadeStyles.avatar2}>
-              <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
-                <Image style = {requestMadeStyles.avatar} source = {require('../images/snapdrop.png')} />
+                <Image style = {requestMadeStyles.avatar} source = {require('../images/backArrow.png')}/>
               </TouchableOpacity>
             </View>
           <Text style={requestMadeStyles.notice}>NO REQUESTS MADE</Text>
@@ -167,6 +162,15 @@ class RequestMade extends Component {
     this.props.navigator.pop();
   }
 
+  goToSnapDropPage() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+    this.props.navigator.push({
+      navigationBarHidden: true,
+      component: snapDropPage,
+    });
+  }
+
   render() {
     if (!this.state.loaded) {
       return this.renderLoadingView();
@@ -178,11 +182,6 @@ class RequestMade extends Component {
           <View style={requestMadeStyles.avatar1}>
             <TouchableOpacity onPress={() => this.goBack()}>
               <Image style = {requestMadeStyles.avatar} source = {require('../images/backArrow.png')}/>
-            </TouchableOpacity>
-          </View>
-          <View style={requestMadeStyles.avatar2}>
-            <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
-              <Image style = {requestMadeStyles.avatar} source = {require('../images/snapdrop.png')} />
             </TouchableOpacity>
           </View>
         </View>

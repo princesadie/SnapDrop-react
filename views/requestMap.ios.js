@@ -2,6 +2,7 @@ var React = require('react-native');
 var requestMapStyles = require('../stylesheets/requestMapStyle.ios');
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var FulfillmentViewPage = require('./fulfillmentViewPage.ios');
+var snapDropPage = require('./snapDropPage.ios')
 
 var {
   Image,
@@ -46,12 +47,21 @@ var RequestMapDisplay = React.createClass({
     };
   },
 
+  goToSnapDropPage() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+    this.props.navigator.push({
+      navigationBarHidden: true,
+      component: snapDropPage,
+    });
+  },
+
   goNext2(imageData, sourceIm, marker) {
     this.props.navigator.push({
       title: 'Image Details',
       component: FulfillmentViewPage,
       navigationBarHidden: true,
-      passProps: {imageData: imageData.obj, sourceIm: sourceIm, requestKey: marker.requestKey, requestCoordinate: marker.coordinate, requestDescription: marker.description}
+      passProps: {imageData: imageData, sourceIm: sourceIm, requestKey: marker.requestKey, requestCoordinate: marker.coordinate, requestDescription: marker.description}
     })
   },
 
@@ -60,14 +70,14 @@ var RequestMapDisplay = React.createClass({
       title: 'Photo Picker',
       takePhotoButtonTitle: 'Take Photo...',
       chooseFromLibraryButtonTitle: 'Choose from Library...',
-      quality: 0.5,
+      quality: 1,
       maxWidth: 300,
       maxHeight: 300,
       storageOptions: {
         skipBackup: true
       },
       allowsEditing: true
-  };
+    };
 
     ImagePickerManager.launchCamera(options, (response) => {
       console.log('Response = ', response);
@@ -85,33 +95,13 @@ var RequestMapDisplay = React.createClass({
         // You can display the image using either:
         const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
         // const source = {uri: response.uri.replace('file://', ''), isStatic: true};
-        console.log('---------------------------------')
-        // this.setState({
-        //   avatarSource: source
-        // });
 
-        // console.log(response.data)
         var resData = response.data
-        console.log('response data')
-        console.log(resData)
-
         var imageData = resData.replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "").replace(/\f/g, "").replace(/=/g, "");
-        console.log('image data')
-        console.log(imageData)
 
         var imagereplaced = imageData.replace(/=/g, "");
-        console.log('image data replaced')
-        console.log(imagereplaced)
-
         var obj = "data:image/jpeg;base64," + imagereplaced;
-        console.log('obj')
-        console.log(obj)
-
         var objJson = JSON.stringify({"obj": obj})
-        console.log('json obj')
-        console.log(objJson)
-        console.log('---------------------------------')
-
         this.goNext2(objJson, source, marker);
       }
     });
@@ -295,7 +285,7 @@ var RequestMapDisplay = React.createClass({
           </TouchableOpacity>
         </View>
         <View style={requestMapStyles.avatar2}>
-          <TouchableOpacity onPress={this.goToSnapDropPage}>
+          <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
             <Image style = {requestMapStyles.avatar} source = {require('../images/snapdrop.png')} />
           </TouchableOpacity>
         </View>

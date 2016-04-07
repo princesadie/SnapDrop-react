@@ -1,6 +1,6 @@
 var HomeSplash = require('./views/homeSplash.ios')
 var indexStyles = require('./stylesheets/indexStyle.ios')
-var Map = require('./views/map.ios')
+var SnapDropPage = require('./views/snapDropPage.ios')
 
 import React, {
   AppRegistry,
@@ -14,7 +14,7 @@ class SnapDrop extends Component {
       <NavigatorIOS
         style={indexStyles.container}
         initialRoute={{
-          title: 'ddd',
+          title: 'SnapDrop',
           navigationBarHidden: true,
           component: HomeSplash
       }}/>
