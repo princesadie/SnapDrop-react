@@ -20,6 +20,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		353A1F5D1CB5811C00D4D559 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 353A1F551CB5811500D4D559 /* libRCTMaterialKit.a */; };
 		3552F63E1CB14FAF00DC1E9C /* ls.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3552F63D1CB14FAF00DC1E9C /* ls.storyboard */; };
 		3552F66A1CB1553100DC1E9C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3552F6691CB1553100DC1E9C /* LaunchScreen.xib */; };
 		69062F1B48274ABE87154F11 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69034E64E8934CC9B4CDF0A7 /* libRCTCamera.a */; };
@@ -91,6 +92,13 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
+		353A1F541CB5811500D4D559 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 353A1F4A1CB5811500D4D559 /* RCTMaterialKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8A1B8E771B22E4E300DB45C2;
+			remoteInfo = RCTMaterialKit;
+		};
 		35B9890F1CB17B8E00746EFC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FFA9167023F84A63B03AE677 /* AirMaps.xcodeproj */;
@@ -148,6 +156,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SnapDrop/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SnapDrop/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		353A1F4A1CB5811500D4D559 /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
 		3552F63D1CB14FAF00DC1E9C /* ls.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ls.storyboard; path = SnapDrop/ls.storyboard; sourceTree = "<group>"; };
 		3552F6691CB1553100DC1E9C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = SnapDrop/LaunchScreen.xib; sourceTree = "<group>"; };
 		35EE9E8A1CB1EB3600B46EA9 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
@@ -170,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				353A1F5D1CB5811C00D4D559 /* libRCTMaterialKit.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -284,6 +294,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		353A1F4B1CB5811500D4D559 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				353A1F551CB5811500D4D559 /* libRCTMaterialKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		35B9890C1CB17B8E00746EFC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +337,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				353A1F4A1CB5811500D4D559 /* RCTMaterialKit.xcodeproj */,
 				35EE9E8A1CB1EB3600B46EA9 /* RNImagePicker.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -460,6 +479,10 @@
 					ProjectRef = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
 				},
 				{
+					ProductGroup = 353A1F4B1CB5811500D4D559 /* Products */;
+					ProjectRef = 353A1F4A1CB5811500D4D559 /* RCTMaterialKit.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
 				},
@@ -551,6 +574,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		353A1F551CB5811500D4D559 /* libRCTMaterialKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTMaterialKit.a;
+			remoteRef = 353A1F541CB5811500D4D559 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		35B989101CB17B8E00746EFC /* libAirMaps.a */ = {
@@ -726,7 +756,7 @@
 				INFOPLIST_FILE = SnapDrop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SnapDrop77;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SnapDrop7;
 				PRODUCT_NAME = SnapDrop;
 				PROVISIONING_PROFILE = "";
 			};
@@ -748,7 +778,7 @@
 				INFOPLIST_FILE = SnapDrop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SnapDrop77;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SnapDrop7;
 				PRODUCT_NAME = SnapDrop;
 				PROVISIONING_PROFILE = "";
 			};

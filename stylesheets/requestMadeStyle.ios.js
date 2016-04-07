@@ -12,6 +12,10 @@ module.exports = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  notice: {
+    fontSize: 32,
+    color: 'white',
+  },
   navBar: {
     height: 60,
     marginBottom: 10,
@@ -21,9 +25,17 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 1,
-    backgroundColor: '#FFF',
+    marginTop: 10,
+    backgroundColor: 'white',
     padding: 10,
+    height: 100,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
   },
   rightContainer: {
     flex: 1,
@@ -32,6 +44,8 @@ module.exports = StyleSheet.create({
     fontSize: 20,
     marginBottom: 8,
     textAlign: 'center',
+    fontFamily: 'Avenir Next',
+    color: '#EC4074',
   },
   coords: {
     textAlign: 'center',

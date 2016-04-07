@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8A3E5F441C2F98A5002AC89C /* TickViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3E5F431C2F98A5002AC89C /* TickViewManager.m */; };
+		8A6D44471BB189F500D6A5EB /* MKTouchable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D44461BB189F500D6A5EB /* MKTouchable.m */; };
+		8ABF4CC51BB191C500158736 /* MKTouchableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABF4CC41BB191C500158736 /* MKTouchableManager.m */; };
+		8AD23F3C1B62180200384806 /* UIColor+MKColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD23F3B1B62180200384806 /* UIColor+MKColor.m */; };
+		8AFA09C51C26FD5F00CAAF6E /* TickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFA09C41C26FD5F00CAAF6E /* TickView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8A1B8E751B22E4E300DB45C2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8A0233A71B23127F0030EFCF /* MKUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MKUtils.h; path = RCTMaterialKit/MKUtils.h; sourceTree = "<group>"; };
+		8A1B8E771B22E4E300DB45C2 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTMaterialKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A3E5F431C2F98A5002AC89C /* TickViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TickViewManager.m; sourceTree = "<group>"; };
+		8A6D44451BB189D100D6A5EB /* MKTouchable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MKTouchable.h; path = RCTMaterialKit/MKTouchable.h; sourceTree = "<group>"; };
+		8A6D44461BB189F500D6A5EB /* MKTouchable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKTouchable.m; path = RCTMaterialKit/MKTouchable.m; sourceTree = "<group>"; };
+		8ABF4CC41BB191C500158736 /* MKTouchableManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTouchableManager.m; sourceTree = "<group>"; };
+		8AD23F3A1B62180200384806 /* UIColor+MKColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+MKColor.h"; path = "RCTMaterialKit/UIColor+MKColor.h"; sourceTree = "<group>"; };
+		8AD23F3B1B62180200384806 /* UIColor+MKColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+MKColor.m"; path = "RCTMaterialKit/UIColor+MKColor.m"; sourceTree = "<group>"; };
+		8AFA09C31C26FD4300CAAF6E /* TickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TickView.h; path = RCTMaterialKit/TickView.h; sourceTree = "<group>"; };
+		8AFA09C41C26FD5F00CAAF6E /* TickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TickView.m; path = RCTMaterialKit/TickView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8A1B8E741B22E4E300DB45C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8A1B8E6E1B22E4E300DB45C2 = {
+			isa = PBXGroup;
+			children = (
+				8A1B8EAE1B22E7D100DB45C2 /* MaterialKit */,
+				8A1B8E791B22E4E300DB45C2 /* RCTMaterialKit */,
+				8A1B8E781B22E4E300DB45C2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8A1B8E781B22E4E300DB45C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8A1B8E771B22E4E300DB45C2 /* libRCTMaterialKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8A1B8E791B22E4E300DB45C2 /* RCTMaterialKit */ = {
+			isa = PBXGroup;
+			children = (
+				8ABF4CC41BB191C500158736 /* MKTouchableManager.m */,
+				8A3E5F431C2F98A5002AC89C /* TickViewManager.m */,
+			);
+			path = RCTMaterialKit;
+			sourceTree = "<group>";
+		};
+		8A1B8EAE1B22E7D100DB45C2 /* MaterialKit */ = {
+			isa = PBXGroup;
+			children = (
+				8A0233A71B23127F0030EFCF /* MKUtils.h */,
+				8AD23F3A1B62180200384806 /* UIColor+MKColor.h */,
+				8AD23F3B1B62180200384806 /* UIColor+MKColor.m */,
+				8A6D44451BB189D100D6A5EB /* MKTouchable.h */,
+				8A6D44461BB189F500D6A5EB /* MKTouchable.m */,
+				8AFA09C31C26FD4300CAAF6E /* TickView.h */,
+				8AFA09C41C26FD5F00CAAF6E /* TickView.m */,
+			);
+			name = MaterialKit;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8A1B8E761B22E4E300DB45C2 /* RCTMaterialKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A1B8E8B1B22E4E300DB45C2 /* Build configuration list for PBXNativeTarget "RCTMaterialKit" */;
+			buildPhases = (
+				8A1B8E731B22E4E300DB45C2 /* Sources */,
+				8A1B8E741B22E4E300DB45C2 /* Frameworks */,
+				8A1B8E751B22E4E300DB45C2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RCTMaterialKit;
+			productName = RCTMaterialKit;
+			productReference = 8A1B8E771B22E4E300DB45C2 /* libRCTMaterialKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8A1B8E6F1B22E4E300DB45C2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "https://github.com/xinthink";
+				TargetAttributes = {
+					8A1B8E761B22E4E300DB45C2 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+				};
+			};
+			buildConfigurationList = 8A1B8E721B22E4E300DB45C2 /* Build configuration list for PBXProject "RCTMaterialKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8A1B8E6E1B22E4E300DB45C2;
+			productRefGroup = 8A1B8E781B22E4E300DB45C2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8A1B8E761B22E4E300DB45C2 /* RCTMaterialKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8A1B8E731B22E4E300DB45C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AD23F3C1B62180200384806 /* UIColor+MKColor.m in Sources */,
+				8A3E5F441C2F98A5002AC89C /* TickViewManager.m in Sources */,
+				8AFA09C51C26FD5F00CAAF6E /* TickView.m in Sources */,
+				8ABF4CC51BB191C500158736 /* MKTouchableManager.m in Sources */,
+				8A6D44471BB189F500D6A5EB /* MKTouchable.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8A1B8E891B22E4E300DB45C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8A1B8E8A1B22E4E300DB45C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8A1B8E8C1B22E4E300DB45C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../../rnmk-demo/node_modules/react-native/React/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8A1B8E8D1B22E4E300DB45C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../../rnmk-demo/node_modules/react-native/React/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8A1B8E721B22E4E300DB45C2 /* Build configuration list for PBXProject "RCTMaterialKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A1B8E891B22E4E300DB45C2 /* Debug */,
+				8A1B8E8A1B22E4E300DB45C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A1B8E8B1B22E4E300DB45C2 /* Build configuration list for PBXNativeTarget "RCTMaterialKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A1B8E8C1B22E4E300DB45C2 /* Debug */,
+				8A1B8E8D1B22E4E300DB45C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8A1B8E6F1B22E4E300DB45C2 /* Project object */;
+}

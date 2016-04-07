@@ -1,5 +1,6 @@
 var React = require('react-native');
 var mapStyles = require('../stylesheets/mapStyle.ios');
+var snapDropPage = require('./snapDropPage.ios')
 
 var {
   Image,
@@ -16,6 +17,7 @@ var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
+var RequestMade = require('./requestMade.ios')
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -38,6 +40,15 @@ var MapDisplay = React.createClass({
       request: {},
       userData: {},
     };
+  },
+
+  goToSnapDropPage() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+    this.props.navigator.push({
+      navigationBarHidden: true,
+      component: snapDropPage,
+    });
   },
 
   grabUserRequests(inputUID) {
@@ -63,6 +74,7 @@ var MapDisplay = React.createClass({
   },
 
   updateUserLocationInFirebase() {
+    console.log(this.state.userData.key)
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users/" + this.state.userData.key)
     userRef.update({
       lat: this.state.lastPosition.lat,
@@ -201,8 +213,6 @@ var MapDisplay = React.createClass({
         },
       ],
     })
-    console.log(this.state.markers[0].key)
-    console.log(this.state.markers)
   },
 
   saveResponse(promptValue) {
@@ -225,13 +235,19 @@ var MapDisplay = React.createClass({
   },
 
   sendRequest() {
-    //if no pin we need to make a pop up
-    // if description is empty we should just pass empty string
-    // this.sendRequestToFireBase();
-    // this.props.navigator.push({
-    //   title: 'REQUESTS MADE',
-    //   component: RequestMade
-    // });
+    if(this.state.markers.length < 1) {
+      AlertIOS.alert(
+       'NO PINS ON MAP'
+      );
+    } else {
+      this.sendRequestToFireBase();
+      this.state.markers.pop();
+      this.props.navigator.push({
+        title: 'REQUESTS MADE',
+        navigationBarHidden: true,
+        component: RequestMade
+      });
+    }
   },
 
   goToUserPage() {

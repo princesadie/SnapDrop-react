@@ -10,7 +10,15 @@ module.exports = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(236,64,122,1)'
+    backgroundColor: 'rgba(236,64,122,1)',
+  },
+  logo: {
+    marginLeft: 60,
+  },
+  form: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bubble: {
     width: 200,
@@ -26,7 +34,7 @@ module.exports = StyleSheet.create({
     borderWidth: 3 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 75,
+    marginLeft: 85,
   },
   avatar: {
     borderRadius: 75,
