@@ -37,6 +37,23 @@ module.exports = StyleSheet.create({
       width: 0,
     },
   },
+  container2: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    backgroundColor: '#EC4074',
+    padding: 10,
+    height: 100,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
+  },
   rightContainer: {
     flex: 1,
   },

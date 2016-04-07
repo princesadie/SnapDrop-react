@@ -195,7 +195,7 @@ class UserAuthentication extends React.Component {
         <TouchableHighlight style={userAuthenticationStyles.button} underlayColor='#F8BBD0' onPress={() => this.userLoginMethod()}>
             <Text style={userAuthenticationStyles.buttonText}>LOGIN</Text>
         </TouchableHighlight>
-        <Text style={userAuthenticationStyles.logQuestion}>{"\n"}{"\n"}Not a user?</Text>
+        <Text style={userAuthenticationStyles.logQuestion}>{"\n"}{"\n"}NOT A USER?</Text>
         <TouchableHighlight
           style={userAuthenticationStyles.button}
           underlayColor='#F8BBD0'
