@@ -29,6 +29,7 @@ class UserPage extends Component {
   }
 
   componentDidMount() {
+    // this.grabUserRequests(this.currentUser().uid);
     this.grabUserRequests(this.currentUser().uid);
   }
 

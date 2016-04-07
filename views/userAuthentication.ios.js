@@ -15,9 +15,12 @@ const {
   ScrollView,
   Image,
   AlertIOS,
+  TouchableWithoutFeedback,
   DeviceEventEmitter,
   Dimensions,
 } = React;
+
+const dismissKeyboard = require('dismissKeyboard')
 
 class UserAuthentication extends React.Component {
   constructor(props){
@@ -239,24 +242,24 @@ class UserAuthentication extends React.Component {
   render() {
     if(this.state.registerType === 'login') {
       return (
-        <ScrollView scrollEnabled={false}>
+        <TouchableWithoutFeedback onPress={()=> dismissKeyboard()}>
           <View style={{height: this.state.visibleHeight}}>
             <View style={userAuthenticationStyles.container}>
               {this.renderLogin()}
             </View>
           </View>
-        </ScrollView>
+        </TouchableWithoutFeedback>
       )
     } else {
       return (
-        <ScrollView scrollEnabled={false}>
+        <TouchableWithoutFeedback onPress={()=> dismissKeyboard()}>
           <View style={{height: this.state.visibleHeight}}>
             <View style={userAuthenticationStyles.container}>
               {this.renderRegister()}
             </View>
           </View>
-        </ScrollView>
-    )
+        </TouchableWithoutFeedback>
+      )
     }
   }
 }

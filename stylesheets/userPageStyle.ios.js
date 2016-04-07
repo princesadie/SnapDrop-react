@@ -52,7 +52,7 @@ module.exports = StyleSheet.create({
    borderRadius: 100,
    width: 200,
    height: 200,
-   marginLeft: 85,
+   marginLeft: 95,
    borderWidth: 3 / PixelRatio.get(),
    borderColor: '#FFF',
  },
