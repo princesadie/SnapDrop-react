@@ -2,6 +2,7 @@ var React = require('react-native');
 var requestMapStyles = require('../stylesheets/requestMapStyle.ios');
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var FulfillmentViewPage = require('./fulfillmentViewPage.ios');
+var snapDropPage = require('./snapDropPage.ios')
 
 var {
   Image,
@@ -44,6 +45,15 @@ var RequestMapDisplay = React.createClass({
       fulfillments: [],
       userData: {},
     };
+  },
+
+  goToSnapDropPage() {
+    var ref = new Firebase("https://snapdrop.firebaseio.com");
+    var authData = ref.getAuth();
+    this.props.navigator.push({
+      navigationBarHidden: true,
+      component: snapDropPage,
+    });
   },
 
   goNext2(imageData, sourceIm, marker) {
@@ -275,7 +285,7 @@ var RequestMapDisplay = React.createClass({
           </TouchableOpacity>
         </View>
         <View style={requestMapStyles.avatar2}>
-          <TouchableOpacity onPress={this.goToSnapDropPage}>
+          <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
             <Image style = {requestMapStyles.avatar} source = {require('../images/snapdrop.png')} />
           </TouchableOpacity>
         </View>

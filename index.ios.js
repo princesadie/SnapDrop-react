@@ -1,5 +1,6 @@
 var HomeSplash = require('./views/homeSplash.ios')
 var indexStyles = require('./stylesheets/indexStyle.ios')
+var SnapDropPage = require('./views/snapDropPage.ios')
 
 import React, {
   AppRegistry,

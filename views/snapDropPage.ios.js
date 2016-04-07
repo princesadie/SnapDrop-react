@@ -17,6 +17,7 @@ import React, {
 } from 'react-native';
 
 var FulfillmentViewPage = require('./fulfillmentViewPage.ios')
+var ViewImage = require('./viewImage.ios')
 
 class SnapDropPage extends Component {
   constructor(props) {
@@ -68,11 +69,28 @@ class SnapDropPage extends Component {
     );
   }
 
+  goToImage(image) {
+    this.props.navigator.push({
+      component: ViewImage,
+      navigationBarHidden: true,
+      passProps: {image: image}
+    });
+  }
+
   renderRequest(userFulfillment) {
     return (
       <View>
-          <Image style = {snapDropPageStyles.avatar} source = {userFulfillment.requestImage} />
-          <Text>{userFulfillment.caption}</Text>
+        <View style={snapDropPageStyles.container}>
+          <TouchableHighlight onPress={() => this.goToImage(userFulfillment.requestImage.uri)}>
+          <Image
+            source={{uri: userFulfillment.requestImage.uri}}
+            style={snapDropPageStyles.thumbnail}
+          />
+          </TouchableHighlight>
+        </View>
+        <View style={snapDropPageStyles.pad}>
+          <Text style={snapDropPageStyles.description}>{userFulfillment.caption}</Text>
+        </View>
       </View>
     );
   }
