@@ -58,12 +58,7 @@ class FulfillRequest extends Component {
                   <Image style = {fulfillmentsForUserMadeRequestsStyles.avatar} source = {this.state.userData.profileImage}/>
                 </TouchableOpacity>
               </View>
-              <View style={fulfillmentsForUserMadeRequestsStyles.avatar2}>
-                <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
-                  <Image style = {fulfillmentsForUserMadeRequestsStyles.avatar} source = {require('../images/snapdrop.png')} />
-                </TouchableOpacity>
-              </View>
-            <Text style={fulfillmentsForUserMadeRequestsStyles.notice}>NO FULFILLMENTS YET :(</Text>
+            <Text style={fulfillmentsForUserMadeRequestsStyles.notice}>NO FULFILLMENTS YET</Text>
           </View>
         )
       } else {

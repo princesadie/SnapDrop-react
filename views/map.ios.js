@@ -190,6 +190,15 @@ var MapDisplay = React.createClass({
   sendRequestToFireBase() {
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
+    console.log(this.state.request)
+    if(this.state.request.description === undefined) {
+      this.setState({
+        request: {
+          description: "I wasn't described :("
+        }
+      });
+    }
+    console.log(this.state.request)
 
     var requestsRef = new Firebase("https://snapdrop.firebaseio.com/requests");
     requestsRef.push({

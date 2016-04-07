@@ -90,11 +90,6 @@ class RequestViewPage extends Component {
                   <Image style = {styles.avatar} source = {require('../images/backArrow.png')}/>
                 </TouchableOpacity>
               </View>
-              <View style={styles.avatar2}>
-                <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
-                  <Image style = {styles.avatar} source = {require('../images/snapdrop.png')} />
-                </TouchableOpacity>
-              </View>
             <Text style={styles.notice}>NO FULFILLMENTS YET</Text>
           </View>
         )

@@ -110,9 +110,9 @@ class RequestMade extends Component {
   }
 
   renderLoadingView() {
-    if(this.state.userRequests.length === 0) {
+    if(this.state.userRequests.length < 1) {
       return (
-        <View style={requestMadeStyles.container}>
+        <View style={requestMadeStyles.container2}>
             <View style={requestMadeStyles.avatar1}>
               <TouchableOpacity onPress={() => this.goBack()}>
                 <Image style = {requestMadeStyles.avatar} source = {require('../images/backArrow.png')}/>
