@@ -36,11 +36,17 @@ class RequestViewPage extends Component {
   }
 
   grabFulfillmentsBelongingToRequest(inputKey) {
+    console.log('----------------------input request key -------------------')
+    console.log(inputKey)
+    console.log('----------------------input request key -------------------')
     var that = this;
     var ref = new Firebase("https://snapdrop.firebaseio.com/fulfillments");
     ref.once("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         var requestKey = childSnapshot.val().requestKey;
+            console.log('----------------------looping request key -------------------')
+    console.log(requestKey)
+    console.log('----------------------input request key -------------------')
         var childData = childSnapshot.val();
         if (requestKey === inputKey) {
           var fulfillment = {
