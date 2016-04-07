@@ -94,9 +94,12 @@ class FulfillmentViewPage extends Component {
       <View style={{height: this.state.visibleHeight}}>
       <View style={styles.container}>
         <View style={styles.container}>
-          <Image style={styles.canvas} source={this.props.sourceIm} />
+          // <Image style={styles.canvas} source={this.props.sourceIm} />
+          <Image style={styles.canvas} source={require('../images/tiger.jpg')} />
         </View>
         <View style={styles.captionContainer}>
+          <Text style={styles.buttonText2}>{this.props.requestCoordinate.latitude}</Text>
+          <Image style={styles.canvas2} source={this.props.sourceIm}/>
           <TextInput style={styles.textEdit} placeholderTextColor={'#FFF'} placeholder="CAPTION" ref='caption' onFocus={() => this.inputFocused.bind(this, 'caption')} onChangeText={(captionText) => this.setState({captionText})}/>
         </View>
         <View style={styles.buttonContainer}>
@@ -104,13 +107,13 @@ class FulfillmentViewPage extends Component {
             style={styles.button}
             underlayColor='#9FA8DA'
             onPress={() => this.sendImage()}>
-            <Text style={styles.buttonText}>Send</Text>
+            <Text style={styles.buttonText}>SEND</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.button}
             underlayColor='#9FA8DA'
             onPress={() => this.cancelImage()}>
-            <Text style={styles.buttonText}>Cancel</Text>
+            <Text style={styles.buttonText}>CANCEL</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -147,6 +150,12 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'rgba(236,64,122,1)',
+    textAlign: 'center',
+    // marginTop: 10,
+    fontWeight: 'bold',
+  },
+  buttonText: {
+    color: '#FFF',
     textAlign: 'center',
     // marginTop: 10,
     fontWeight: 'bold',
