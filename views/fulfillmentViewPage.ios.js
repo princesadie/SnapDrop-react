@@ -68,6 +68,7 @@ class FulfillmentViewPage extends Component {
     this.state = {
       captionText: '',
       visibleHeight: Dimensions.get('window').height,
+      image: this.props.sourceIm,
     };
   }
 
@@ -87,19 +88,20 @@ class FulfillmentViewPage extends Component {
     console.log('------------------------------------------')
     console.log('entered Image View Page')
     console.log(this.props.imageData)
-    console.log(this.props.cat)
+    console.log(this.props.sourceIm)
     console.log('------------------------------------------')
+    console.log('------------------------------------------')
+    console.log('------------------------------------------')
+    console.log('------------------------------------------')
+    console.log(this.state.image)
     return (
       <TouchableWithoutFeedback onPress={()=> dismissKeyboard()}>
       <View style={{height: this.state.visibleHeight}}>
       <View style={styles.container}>
         <View style={styles.container}>
-          // <Image style={styles.canvas} source={this.props.sourceIm} />
-          <Image style={styles.canvas} source={require('../images/tiger.jpg')} />
+          <Image style={styles.canvas} source={this.state.image} />
         </View>
         <View style={styles.captionContainer}>
-          <Text style={styles.buttonText2}>{this.props.requestCoordinate.latitude}</Text>
-          <Image style={styles.canvas2} source={this.props.sourceIm}/>
           <TextInput style={styles.textEdit} placeholderTextColor={'#FFF'} placeholder="CAPTION" ref='caption' onFocus={() => this.inputFocused.bind(this, 'caption')} onChangeText={(captionText) => this.setState({captionText})}/>
         </View>
         <View style={styles.buttonContainer}>
@@ -155,7 +157,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonText: {
-    color: '#FFF',
+    color: 'rgba(236,64,122,1)',
     textAlign: 'center',
     // marginTop: 10,
     fontWeight: 'bold',

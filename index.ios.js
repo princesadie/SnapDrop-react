@@ -14,6 +14,7 @@ class SnapDrop extends Component {
       <NavigatorIOS
         style={indexStyles.container}
         initialRoute={{
+          title: 'SnapDrop',
           navigationBarHidden: true,
           component: HomeSplash
       }}/>
