@@ -18,7 +18,6 @@ var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
 var RequestMade = require('./requestMade.ios')
 
-
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
 const LONGITUDE = -87.637604;
@@ -150,7 +149,7 @@ var MapDisplay = React.createClass({
             coordinate: e.nativeEvent.coordinate,
             key: id++,
             title: 'PIN',
-            description: 'YOUR DESCRIPTION',
+            description: 'ENTER A DESCRIPTION',
             color: 'rgba(236,64,122,1)',
           },
         ],
@@ -169,7 +168,7 @@ var MapDisplay = React.createClass({
             coordinate: e.nativeEvent.coordinate,
             key: id++,
             title: 'PIN',
-            description: 'FILL YOUR WITH DETAILS',
+            description: 'ENTER A DESCRIPTION',
             color: 'rgba(236,64,122,1)',
           },
         ],
@@ -198,6 +197,8 @@ var MapDisplay = React.createClass({
         {
           coordinate: e.nativeEvent.coordinate,
           key: id++,
+          title: 'PIN',
+          description: 'ENTER A DESCRIPTION',
           color: 'rgba(236,64,122,1)',
         },
       ],
@@ -248,7 +249,6 @@ var MapDisplay = React.createClass({
       component: UserPage,
       passProps: {userUID: authData.uid}
     });
-
   },
 
   prompt() {
@@ -306,10 +306,7 @@ var MapDisplay = React.createClass({
           </TouchableOpacity>
         </View>
       </View>
-
-
     );
   },
 });
-
 module.exports = MapDisplay;

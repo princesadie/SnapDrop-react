@@ -99,7 +99,6 @@ class RequestMade extends Component {
       component: UserPage,
       passProps: {userUID: authData.uid}
     });
-
   }
 
   goToRequestPage(userRequest) {
@@ -108,7 +107,7 @@ class RequestMade extends Component {
       navigationBarHidden: true,
       passProps: {description: userRequest.description, long: userRequest.long, lat: userRequest.lat, requestKey: userRequest.requestKey}
     });
-  };
+  }
 
   renderLoadingView() {
     if(this.state.userRequests.length === 0) {
@@ -141,25 +140,24 @@ class RequestMade extends Component {
   renderRequest(userRequest) {
     return (
       <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
-      <View style={requestMadeStyles.container}>
-        <View style={requestMadeStyles.avatar}>
+        <View style={requestMadeStyles.container}>
           <View style={requestMadeStyles.avatar}>
-            <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
-              <Image style = {requestMadeStyles.avatar} source = {require('../images/photoIcon.png')} />
-            </TouchableOpacity>
+            <View style={requestMadeStyles.avatar}>
+              <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
+                <Image style = {requestMadeStyles.avatar} source = {require('../images/photoIcon.png')} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={requestMadeStyles.rightContainer}>
+            <Text style={requestMadeStyles.description}>{userRequest.description}</Text>
           </View>
         </View>
-        <View style={requestMadeStyles.rightContainer}>
-          <Text style={requestMadeStyles.description}>{userRequest.description}</Text>
-        </View>
-      </View>
       </TouchableOpacity>
     );
   }
 
   goToUserPage() {
     this.props.navigator.pop({
-      title: 'User Page',
       navigationBarHidden: true,
       component: UserPage,
     });
@@ -175,7 +173,6 @@ class RequestMade extends Component {
     }
 
     return (
-
       <View style={requestMadeStyles.main}>
         <View style={requestMadeStyles.navBar}>
           <View style={requestMadeStyles.avatar1}>
@@ -195,9 +192,7 @@ class RequestMade extends Component {
           style={requestMadeStyles.listView}
         />
       </View>
-
     );
   }
 }
-
 module.exports = RequestMade;
