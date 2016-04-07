@@ -5,16 +5,15 @@
 import Firebase from 'firebase';
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
 var FulfillmentViewPage = require('./fulfillmentViewPage.ios');
+var requestDetailStyles = require('../stylesheets/requestDetailStyle.ios')
 
 import React, {
   Component,
-  StyleSheet,
   Dimensions,
   View,
   Image,
   TouchableHighlight,
   Text,
-  PixelRatio,
   TouchableOpacity,
 
 } from 'react-native';
@@ -24,6 +23,10 @@ class RequestDetail extends Component {
     avatarSource: null,
     videoSource: null
   };
+
+  componentDidMount() {
+    this.selectPhotoTapped.bind(this)
+  }
 
   goNext2(imageData, sourceIm) {
     this.props.navigator.push({
@@ -46,7 +49,7 @@ class RequestDetail extends Component {
         skipBackup: true
       },
       allowsEditing: true
-    };
+  };
 
     ImagePickerManager.launchCamera(options, (response) => {
       console.log('Response = ', response);
@@ -96,48 +99,14 @@ class RequestDetail extends Component {
     });
   }
 
-  selectVideoTapped() {
-    const options = {
-      title: 'Video Picker',
-      takePhotoButtonTitle: 'Take Video...',
-      mediaType: 'video',
-      videoQuality: 'medium'
-    };
-
-    ImagePickerManager.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled video picker');
-      }
-      else if (response.error) {
-        console.log('ImagePickerManager Error: ', response.error);
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      }
-      else {
-        this.setState({
-          videoSource: response.uri
-        });
-      }
-    });
-  }
-
   render() {
     return (
-      <View style={styles.container}>
+      <View style={requestDetailStyles.container}>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-          { this.state.avatarSource === null ? <Text style={styles.text}>TAKE PHOTO</Text> :
-            <Image style={styles.avatar} source={this.state.avatarSource} />
+          <View style={[requestDetailStyles.avatar, requestDetailStyles.avatarContainer, {marginBottom: 20}]}>
+          { this.state.avatarSource === null ? <Text style={requestDetailStyles.text}>TAKE PHOTO</Text> :
+            <Image style={requestDetailStyles.avatar} source={this.state.avatarSource} />
           }
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.selectVideoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer]}>
-            <Text style={styles.text} >TAKE VIDEO</Text>
           </View>
         </TouchableOpacity>
 
@@ -148,58 +117,4 @@ class RequestDetail extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'pink'
-  },
-  avatarContainer: {
-    borderColor: '#9B9B9B',
-    borderWidth: 1 / PixelRatio.get(),
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150
-  },
-  content: {
-    flex: 1,
-    height: 50,
-    flexDirection: 'column',
-    marginTop: 200,
-  },
-  welcome: {
-    textAlign: 'center',
-  },
-  button: {
-    flex: 1,
-    flexDirection: 'row',
-    height: 36,
-    width: 300,
-    marginTop: 100,
-    marginLeft: 42,
-    borderRadius: 10,
-    justifyContent: 'center',
-    backgroundColor: '#7986CB',
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
-    marginTop: 10,
-    fontWeight: 'bold',
-  },
-  buttonContainer:{
-    marginTop: 60,
-    paddingTop:30,
-    paddingBottom:10,
-    flexDirection:'column',
-    backgroundColor: '#fff',
-  },
-});
-
 module.exports = RequestDetail;

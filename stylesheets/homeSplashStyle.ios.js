@@ -5,14 +5,16 @@ const { StyleSheet } = React;
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
     // remove width and height to override fixed static size
     width: null,
     height: null,
+    backgroundColor: '#EC4074',
   },
 
   strech2: {
     flex: 1,
+    marginLeft: 20,
+    marginBottom: 120,
     // remove width and height to override fixed static size
     width: null,
     height: null,

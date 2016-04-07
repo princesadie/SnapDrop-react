@@ -12,14 +12,17 @@ var {
   ScrollView,
   TouchableHighlight,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   TextInput,
+  DeviceEventEmitter,
+  Dimensions,
   NativeModules: {
     ImagePickerManager
   }
 } = React;
 
 var currentView = 'start'
-
+const dismissKeyboard = require('dismissKeyboard')
 class FulfillmentViewPage extends Component {
 
   sendImage() {
@@ -40,12 +43,45 @@ class FulfillmentViewPage extends Component {
     this.props.navigator.popN(1);
   }
 
+  keyboardWillShow (e) {
+    let newSize = Dimensions.get('window').height - e.endCoordinates.height;
+    this.setState({visibleHeight: newSize});
+  }
+
+  keyboardWillHide (e) {
+    this.setState({visibleHeight: Dimensions.get('window').height});
+  }
+  // Scroll a component into view. Just pass the component ref string.
+  inputFocused (refName) {
+    setTimeout(() => {
+      let scrollResponder = this.refs.scrollView.getScrollResponder();
+      scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+        React.findNodeHandle(this.refs[refName]),
+        110, //additionalOffset
+        true
+      );
+    }, 50);
+  }
+
   constructor(props) {
     super(props)
     this.state = {
-      captionText: ''
+      captionText: '',
+      visibleHeight: Dimensions.get('window').height,
     };
   }
+
+  componentDidMount() {
+  let self = this;
+
+  DeviceEventEmitter.addListener('keyboardWillShow', function(e: Event) {
+    self.keyboardWillShow(e);
+  });
+
+  DeviceEventEmitter.addListener('keyboardWillHide', function(e: Event) {
+      self.keyboardWillHide(e);
+  });
+}
 
   render() {
     console.log('------------------------------------------')
@@ -54,29 +90,35 @@ class FulfillmentViewPage extends Component {
     console.log(this.props.cat)
     console.log('------------------------------------------')
     return (
+      <TouchableWithoutFeedback onPress={()=> dismissKeyboard()}>
+      <View style={{height: this.state.visibleHeight}}>
       <View style={styles.container}>
-
-        <View style={styles.avatar}>
-          <Image style={styles.avatar} source={this.props.sourceIm} />
+        <View style={styles.container}>
+          // <Image style={styles.canvas} source={this.props.sourceIm} />
+          <Image style={styles.canvas} source={require('../images/tiger.jpg')} />
         </View>
         <View style={styles.captionContainer}>
-          <TextInput style={styles.textEdit} placeholder="add a caption" onChangeText={(captionText) => this.setState({captionText})}/>
+          <Text style={styles.buttonText2}>{this.props.requestCoordinate.latitude}</Text>
+          <Image style={styles.canvas2} source={this.props.sourceIm}/>
+          <TextInput style={styles.textEdit} placeholderTextColor={'#FFF'} placeholder="CAPTION" ref='caption' onFocus={() => this.inputFocused.bind(this, 'caption')} onChangeText={(captionText) => this.setState({captionText})}/>
         </View>
-        <View style={styles.buttonContainer3}>
+        <View style={styles.buttonContainer}>
           <TouchableHighlight
-            style={styles.button3}
+            style={styles.button}
             underlayColor='#9FA8DA'
             onPress={() => this.sendImage()}>
-            <Text style={styles.buttonText3}>Send</Text>
+            <Text style={styles.buttonText}>SEND</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            style={styles.button3}
+            style={styles.button}
             underlayColor='#9FA8DA'
             onPress={() => this.cancelImage()}>
-            <Text style={styles.buttonText3}>Cancel</Text>
+            <Text style={styles.buttonText}>CANCEL</Text>
           </TouchableHighlight>
         </View>
       </View>
+      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -84,41 +126,55 @@ class FulfillmentViewPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
-    backgroundColor: 'pink',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(236,64,122,1)',
   },
-  avatar: {
-    borderRadius: 5,
-    flex: 1
+  canvas: {
+    resizeMode: 'cover'
   },
-  button3: {
-    flex: 1,
-    width: 150,
-    height: 40,
+  buttonContainer: {
+    marginBottom: 40,
+  },
+  captionContainer: {
+    position: 'absolute',
+    top: 240,
+  },
+  button: {
+    height: 36,
+    width: 300,
+    marginTop: 20,
     borderRadius: 10,
-    flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: '#7986CB',
+    backgroundColor: '#FFF',
   },
-  buttonText3: {
-    color: 'white',
-    justifyContent: 'center',
+  buttonText: {
+    color: 'rgba(236,64,122,1)',
     textAlign: 'center',
+    // marginTop: 10,
     fontWeight: 'bold',
   },
-  buttonContainer3:{
-    flexDirection:'row',
-    backgroundColor: '#fff',
-    marginTop: 0
+  buttonText: {
+    color: '#FFF',
+    textAlign: 'center',
+    // marginTop: 10,
+    fontWeight: 'bold',
+  },
+  text: {
+    color: '#FFF'
   },
   textEdit: {
+    fontWeight: 'bold',
     height: 40,
-    marginBottom: 0,
-    borderColor: 'green',
-    backgroundColor: 'orange',
+    width: 400,
+    color: '#FFF',
+    borderColor: 'rgba(255,255,255,0.7)',
+    backgroundColor: 'rgba(236,64,122,0.3)',
     borderWidth: 2,
     borderRadius: 5,
+    marginLeft: -10,
     textAlign: 'center',
+    alignItems: 'center',
   },
 });
 

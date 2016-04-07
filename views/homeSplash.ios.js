@@ -6,16 +6,14 @@ import React, {
   Image,
   Component,
   Text,
-  TextInput,
   View
-
 } from 'react-native';
 
 var HomeSplash = React.createClass({
 
   selectRoute() {
+    console.log('---------------------homespl----------------')
     this.props.navigator.push({
-      title: 'User Page',
       navigationBarHidden: true,
       component: UserAuthentication,
     });
@@ -23,19 +21,14 @@ var HomeSplash = React.createClass({
 
   render() {
     return (
-
       <View style = {homeSplashStyles.container}>
         <Image style = {homeSplashStyles.strech2} source = {require('../images/splash.png')} />
-              <View style = {homeSplashStyles.enterView}>
-        <Text style = {homeSplashStyles.enterText} onPress={() => this.selectRoute()}> [ ENTER ] </Text>
+        <View style = {homeSplashStyles.enterView}>
+          <Text style = {homeSplashStyles.enterText} onPress={() => this.selectRoute()}> [ ENTER ]
+          </Text>
+        </View>
       </View>
-      </View>
-
     );
-
-
   }
-
-
 });
 module.exports = HomeSplash;

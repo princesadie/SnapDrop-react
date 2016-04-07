@@ -16,8 +16,7 @@ var MapView = require('react-native-maps');
 var { width, height } = Dimensions.get('window');
 var CustomCallout = require('./customCallout.ios');
 var UserPage = require('./userPage.ios');
-// var RequestMade = require('./requestMade.ios')
-
+var RequestMade = require('./requestMade.ios')
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 41.889357;
@@ -65,6 +64,7 @@ var MapDisplay = React.createClass({
   },
 
   updateUserLocationInFirebase() {
+    console.log(this.state.userData.key)
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users/" + this.state.userData.key)
     userRef.update({
       lat: this.state.lastPosition.lat,
@@ -80,16 +80,12 @@ var MapDisplay = React.createClass({
       console.log("Authenticated user with uid:", authData.password.email);
       console.log("Authenticated user with uid:", authData.uid);
     }
-
   },
 
   componentDidMount() {
-    // var ref = new Firebase("https://snapdrop.firebaseio.com");
-    // var authData = ref.getAuth();
-    // this.grabUserRequests(authData.uid);
     var ref = new Firebase("https://snapdrop.firebaseio.com");
     var authData = ref.getAuth();
-    this.grabUserRequests("add76d65-b7ce-4fb9-b832-868a14c287da");
+    this.grabUserRequests(authData.uid);
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -153,7 +149,7 @@ var MapDisplay = React.createClass({
             coordinate: e.nativeEvent.coordinate,
             key: id++,
             title: 'PIN',
-            description: 'YOUR DESCRIPTION',
+            description: 'ENTER A DESCRIPTION',
             color: 'rgba(236,64,122,1)',
           },
         ],
@@ -172,7 +168,7 @@ var MapDisplay = React.createClass({
             coordinate: e.nativeEvent.coordinate,
             key: id++,
             title: 'PIN',
-            description: 'FILL YOUR WITH DETAILS',
+            description: 'ENTER A DESCRIPTION',
             color: 'rgba(236,64,122,1)',
           },
         ],
@@ -201,12 +197,12 @@ var MapDisplay = React.createClass({
         {
           coordinate: e.nativeEvent.coordinate,
           key: id++,
+          title: 'PIN',
+          description: 'ENTER A DESCRIPTION',
           color: 'rgba(236,64,122,1)',
         },
       ],
     })
-    console.log(this.state.markers[0].key)
-    console.log(this.state.markers)
   },
 
   saveResponse(promptValue) {
@@ -229,14 +225,19 @@ var MapDisplay = React.createClass({
   },
 
   sendRequest() {
-    //if no pin we need to make a pop up
-    // if description is empty we should just pass empty string
-    // this.sendRequestToFireBase();
-    // this.props.navigator.push({
-    //   title: 'REQUESTS MADE',
-    //   component: RequestMade
-    // });
-
+    if(this.state.markers.length < 1) {
+      AlertIOS.alert(
+       'NO PINS ON MAP'
+      );
+    } else {
+      this.sendRequestToFireBase();
+      this.state.markers.pop();
+      this.props.navigator.push({
+        title: 'REQUESTS MADE',
+        navigationBarHidden: true,
+        component: RequestMade
+      });
+    }
   },
 
   goToUserPage() {
@@ -248,7 +249,6 @@ var MapDisplay = React.createClass({
       component: UserPage,
       passProps: {userUID: authData.uid}
     });
-
   },
 
   prompt() {
@@ -306,10 +306,7 @@ var MapDisplay = React.createClass({
           </TouchableOpacity>
         </View>
       </View>
-
-
     );
   },
 });
-
 module.exports = MapDisplay;

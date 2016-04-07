@@ -12,19 +12,18 @@ module.exports = StyleSheet.create(
     borderRadius: 5,
     flex: 1
   },
-  button3: {
-    flex: 1,
-    width: 150,
-    height: 40,
+  button: {
+    height: 36,
+    width: 300,
+    marginTop: 20,
     borderRadius: 10,
-    flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: '#7986CB',
+    backgroundColor: '#FFF',
   },
-  buttonText3: {
-    color: 'white',
-    justifyContent: 'center',
+  buttonText: {
+    color: 'rgba(236,64,122,1)',
     textAlign: 'center',
+    // marginTop: 10,
     fontWeight: 'bold',
   },
   buttonContainer3:{
@@ -33,12 +32,16 @@ module.exports = StyleSheet.create(
     marginTop: 0
   },
   textEdit: {
+    fontWeight: 'bold',
     height: 40,
-    marginBottom: 0,
-    borderColor: 'green',
-    backgroundColor: 'orange',
+    width: 300,
+    color: 'rgba(236,64,122,1)',
+    borderColor: '#FFF',
+    backgroundColor: '#f6f6f6',
     borderWidth: 2,
     borderRadius: 5,
+    marginTop: 10,
     textAlign: 'center',
+    alignItems: 'center',
   },
 });

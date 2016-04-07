@@ -66,25 +66,22 @@ class RequestMade extends Component {
       });
     });
   }
-grabUsers(inputUID) {
-    console.log('------------please god-------------------')
-    var that = this;
-    var userRef = new Firebase("https://snapdrop.firebaseio.com/users");
-    userRef.once("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var userUID = childSnapshot.val().userUID;
-        var childData = childSnapshot.val();
-        console.log('------------outside-------------------')
-        if (userUID === inputUID) {
-          console.log('-------------------------------')
-          console.log(childData)
-          that.setState({
-            userData: childData
-          });
-        };
+
+  grabUsers(inputUID) {
+      var that = this;
+      var userRef = new Firebase("https://snapdrop.firebaseio.com/users");
+      userRef.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var userUID = childSnapshot.val().userUID;
+          var childData = childSnapshot.val();
+          if (userUID === inputUID) {
+            that.setState({
+              userData: childData
+            });
+          };
+        });
       });
-    });
-  }
+    }
 
   updateUserLocationInFirebase() {
     var userRef = new Firebase("https://snapdrop.firebaseio.com/users/0")
@@ -102,48 +99,65 @@ grabUsers(inputUID) {
       component: UserPage,
       passProps: {userUID: authData.uid}
     });
-
   }
 
   goToRequestPage(userRequest) {
     this.props.navigator.push({
       component: RequestViewPage,
+      navigationBarHidden: true,
       passProps: {description: userRequest.description, long: userRequest.long, lat: userRequest.lat, requestKey: userRequest.requestKey}
     });
-  };
+  }
 
   renderLoadingView() {
+    if(this.state.userRequests.length === 0) {
+      return (
+        <View style={requestMadeStyles.container}>
+            <View style={requestMadeStyles.avatar1}>
+              <TouchableOpacity onPress={() => this.goBack()}>
+                <Image style = {requestMadeStyles.avatar} source = {this.state.userData.profileImage}/>
+              </TouchableOpacity>
+            </View>
+            <View style={requestMadeStyles.avatar2}>
+              <TouchableOpacity onPress={() => this.goToSnapDropPage()}>
+                <Image style = {requestMadeStyles.avatar} source = {require('../images/snapdrop.png')} />
+              </TouchableOpacity>
+            </View>
+          <Text style={requestMadeStyles.notice}>NO REQUESTS MADE</Text>
+        </View>
+      )
+    } else {
     return (
-      <View style={requestMadeStyles.container}>
-        <Text>
-          LOADING REQUESTS...
-        </Text>
-      </View>
-    );
+        <View style={requestMadeStyles.container}>
+          <Text style={requestMadeStyles.notice}>
+            LOADING REQUESTS...
+          </Text>
+        </View>
+      );
+    }
   }
 
   renderRequest(userRequest) {
     return (
       <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
-      <View style={requestMadeStyles.container}>
-        <View style={requestMadeStyles.avatar}>
+        <View style={requestMadeStyles.container}>
           <View style={requestMadeStyles.avatar}>
-            <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
-              <Image style = {requestMadeStyles.avatar} source = {require('../images/photoIcon.png')} />
-            </TouchableOpacity>
+            <View style={requestMadeStyles.avatar}>
+              <TouchableOpacity onPress={() => this.goToRequestPage(userRequest)}>
+                <Image style = {requestMadeStyles.avatar} source = {require('../images/photoIcon.png')} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={requestMadeStyles.rightContainer}>
+            <Text style={requestMadeStyles.description}>{userRequest.description}</Text>
           </View>
         </View>
-        <View style={requestMadeStyles.rightContainer}>
-          <Text style={requestMadeStyles.description}>{userRequest.description}</Text>
-        </View>
-      </View>
       </TouchableOpacity>
     );
   }
 
   goToUserPage() {
     this.props.navigator.pop({
-      title: 'User Page',
       navigationBarHidden: true,
       component: UserPage,
     });
@@ -159,12 +173,11 @@ grabUsers(inputUID) {
     }
 
     return (
-
       <View style={requestMadeStyles.main}>
         <View style={requestMadeStyles.navBar}>
           <View style={requestMadeStyles.avatar1}>
             <TouchableOpacity onPress={() => this.goBack()}>
-              <Image style = {requestMadeStyles.avatar} source = {this.state.userData.profileImage}/>
+              <Image style = {requestMadeStyles.avatar} source = {require('../images/backArrow.png')}/>
             </TouchableOpacity>
           </View>
           <View style={requestMadeStyles.avatar2}>
@@ -179,9 +192,7 @@ grabUsers(inputUID) {
           style={requestMadeStyles.listView}
         />
       </View>
-
     );
   }
 }
-
 module.exports = RequestMade;
