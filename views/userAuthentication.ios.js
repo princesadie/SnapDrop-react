@@ -78,66 +78,74 @@ class UserAuthentication extends React.Component {
   userLoginMethod() {
     var that = this;
     var ref = new Firebase("https://snapdrop.firebaseio.com");
-    ref.authWithPassword({
-      email: this.state.email,
-      password: this.state.password
-    }, function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-        AlertIOS.prompt("fail",null);
+    if(this.state.email === null || this.state.password === null) {
+        AlertIOS.alert("ENTER YOUR DETAILS")
       } else {
-        that.props.navigator.push({
-          title: 'Map',
-          navigationBarHidden: true,
-          component: Map
-        });
-      }
-    })
-  }
-
-  addUser() {
-    if (this.state.password !== this.state.confirmPassword ) {
-      console.log(this.setState({errorMessage: 'Your passwords do not match'}));
-    }
-    else {
-      var that = this;
-      var usersRef = new Firebase("https://snapdrop.firebaseio.com/users");
-      var ref = new Firebase("https://snapdrop.firebaseio.com");
-
-      ref.createUser({
+      ref.authWithPassword({
         email: this.state.email,
         password: this.state.password
       }, function(error, authData) {
         if (error) {
-          console.log("Error creating user:", error);
+          console.log("Login Failed!", error);
+          AlertIOS.alert("WRONG EMAIL OR PASSWORD");
         } else {
-
-          usersRef.push({
-            username: that.state.username,
-            profileImage: that.state.avatarSource,
-            userUID: authData.uid,
-            lat: '0',
-            long: '0',
-          }),
-
-          ref.authWithPassword({
-            email: that.state.email,
-            password: that.state.password
-          }, function(error, authData) {
-            if (error) {
-              console.log("Login Failed!", error);
-              AlertIOS.prompt("fail",null);
-            } else {
-              that.setState({registerType: 'login'})
-              that.props.navigator.push({
-                title: 'Map',
-                navigationBarHidden: true,
-                component: Map
-              });
-            }
-          })
+          that.props.navigator.push({
+            title: 'Map',
+            navigationBarHidden: true,
+            component: Map
+          });
         }
       })
+    }
+  }
+
+  addUser() {
+    if(this.state.username === null || this.state.email === null || this.state.password === null || this.state.confirmPassword === null) {
+        AlertIOS.alert("PLEASE FILL ALL FIELDS")
+      } else {
+      if (this.state.password !== this.state.confirmPassword ) {
+        console.log(this.setState({errorMessage: 'Your passwords do not match'}));
+      }
+      else {
+        var that = this;
+        var usersRef = new Firebase("https://snapdrop.firebaseio.com/users");
+        var ref = new Firebase("https://snapdrop.firebaseio.com");
+
+        ref.createUser({
+          email: this.state.email,
+          password: this.state.password
+        }, function(error, authData) {
+          if (error) {
+            console.log("Error creating user:", error);
+          } else {
+
+            usersRef.push({
+              username: that.state.username,
+              profileImage: that.state.avatarSource,
+              userUID: authData.uid,
+              lat: '0',
+              long: '0',
+            }),
+
+            ref.authWithPassword({
+              email: that.state.email,
+              password: that.state.password
+            }, function(error, authData) {
+              if (error) {
+                console.log("Login Failed!", error);
+                AlertIOS.prompt("fail",null);
+              } else {
+                that.setState({registerType: 'login'})
+                that.props.navigator.push({
+                  title: 'Map',
+                  navigationBarHidden: true,
+                  component: Map
+                });
+              }
+            })
+          }
+        })
+      }
     }
   }
 
@@ -179,6 +187,7 @@ class UserAuthentication extends React.Component {
   renderLogin() {
     return (
       <View style={userAuthenticationStyles.textInputContainer}>
+        <Image style={userAuthenticationStyles.logo} source={require('../images/snapdrop.png')}/>
         <TextInput style={userAuthenticationStyles.textEdit} ref='email' onFocus={() => this.inputFocused.bind(this, 'email')} autoCapitalize={'none'} placeholder="EMAIL" onChangeText={(email) => this.setState({email})}/>
         <TextInput style={userAuthenticationStyles.textEdit} ref='password' onFocus={() => this.inputFocused.bind(this, 'password')} autoCapitalize={'none'} secureTextEntry={true} placeholder="PASSWORD" onChangeText={(password) => this.setState({password})}/>
         <TouchableHighlight style={userAuthenticationStyles.button} underlayColor='#F8BBD0' onPress={() => this.userLoginMethod()}>
@@ -230,19 +239,23 @@ class UserAuthentication extends React.Component {
   render() {
     if(this.state.registerType === 'login') {
       return (
-        <View style={{height: this.state.visibleHeight}}>
-          <View style={userAuthenticationStyles.container}>
-            {this.renderLogin()}
+        <ScrollView scrollEnabled={false}>
+          <View style={{height: this.state.visibleHeight}}>
+            <View style={userAuthenticationStyles.container}>
+              {this.renderLogin()}
+            </View>
           </View>
-        </View>
+        </ScrollView>
       )
     } else {
       return (
-      <View style={{height: this.state.visibleHeight}}>
-        <View style={userAuthenticationStyles.container}>
-          {this.renderRegister()}
-        </View>
-      </View>
+        <ScrollView scrollEnabled={false}>
+          <View style={{height: this.state.visibleHeight}}>
+            <View style={userAuthenticationStyles.container}>
+              {this.renderRegister()}
+            </View>
+          </View>
+        </ScrollView>
     )
     }
   }

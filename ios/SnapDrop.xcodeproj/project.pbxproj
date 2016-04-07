@@ -157,9 +157,6 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SnapDrop/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		353A1F4A1CB5811500D4D559 /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
-		353A1F601CB5A1BE00D4D559 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Bold.ttf"; path = "../../../../Library/Fonts/Raleway-Bold.ttf"; sourceTree = "<group>"; };
-		353A1F611CB5A1BE00D4D559 /* Raleway-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Light.ttf"; path = "../../../../Library/Fonts/Raleway-Light.ttf"; sourceTree = "<group>"; };
-		353A1F621CB5A1BE00D4D559 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Regular.ttf"; path = "../../../../Library/Fonts/Raleway-Regular.ttf"; sourceTree = "<group>"; };
 		3552F63D1CB14FAF00DC1E9C /* ls.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ls.storyboard; path = SnapDrop/ls.storyboard; sourceTree = "<group>"; };
 		3552F6691CB1553100DC1E9C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = SnapDrop/LaunchScreen.xib; sourceTree = "<group>"; };
 		35EE9E8A1CB1EB3600B46EA9 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
@@ -305,16 +302,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		353A1F5F1CB5A02900D4D559 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				353A1F601CB5A1BE00D4D559 /* Raleway-Bold.ttf */,
-				353A1F611CB5A1BE00D4D559 /* Raleway-Light.ttf */,
-				353A1F621CB5A1BE00D4D559 /* Raleway-Regular.ttf */,
-			);
-			name = Fonts;
-			sourceTree = "<group>";
-		};
 		35B9890C1CB17B8E00746EFC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,7 +366,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				353A1F5F1CB5A02900D4D559 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* SnapDrop */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SnapDropTests */,
