@@ -1,11 +1,8 @@
 import React from 'react-native';
 import Firebase from 'firebase';
-import GeoFire from 'geofire';
 var Map = require('./map.ios')
 var userAuthenticationStyles = require('../stylesheets/userAuthenticationStyle.ios');
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
-var firebaseRef = new Firebase("https://snapdrop.firebaseio.com/geofire/");
-var geoFireRef = firebaseRef.child("_geofire");
 
 const {
   Text,
@@ -41,15 +38,8 @@ class UserAuthentication extends React.Component {
   }
 
   userLoginMethod() {
-    console.log('------------------------------------')
     var that = this;
-    var geoFire = new GeoFire(firebaseRef);
-
     var ref = new Firebase("https://snapdrop.firebaseio.com");
-    console.log("******************______________________--------");
-    console.log(geoFire);
-    console.log();
-    console.log(ref.getAuth());
     ref.authWithPassword({
       email: this.state.email,
       password: this.state.password
