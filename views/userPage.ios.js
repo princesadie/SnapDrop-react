@@ -12,6 +12,7 @@ var {
 } = React;
 
 import Firebase from 'firebase';
+const dismissKeyboard = require('dismissKeyboard')
 
 var FulfillRequest = require('./fulfillRequest.ios');
 var MadeRequest = require('./requestMade.ios');
@@ -28,6 +29,7 @@ class UserPage extends Component {
 
   componentDidMount() {
     this.grabUsers(this.currentUser().uid);
+    dismissKeyboard();
   }
 
   currentUser() {

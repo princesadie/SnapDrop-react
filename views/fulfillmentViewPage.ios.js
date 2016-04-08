@@ -37,7 +37,6 @@ class FulfillmentViewPage extends Component {
       caption: this.state.captionText,
       userUID: authData.uid
     })
-    AlertIOS.alert("YOUR PHOTO WAS SENT SUCCESSFULLY!")
     this.props.navigator.popN(2);
   }
 
@@ -52,17 +51,6 @@ class FulfillmentViewPage extends Component {
 
   keyboardWillHide (e) {
     this.setState({visibleHeight: Dimensions.get('window').height});
-  }
-  // Scroll a component into view. Just pass the component ref string.
-  inputFocused (refName) {
-    setTimeout(() => {
-      let scrollResponder = this.refs.scrollView.getScrollResponder();
-      scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
-        React.findNodeHandle(this.refs[refName]),
-        110, //additionalOffset
-        true
-      );
-    }, 50);
   }
 
   constructor(props) {
@@ -81,9 +69,18 @@ class FulfillmentViewPage extends Component {
   });
 
   DeviceEventEmitter.addListener('keyboardWillHide', function(e: Event) {
-      self.keyboardWillHide(e);
-  });
-}
+        self.keyboardWillHide(e);
+    });
+  }
+
+  dismiss() {
+    dismissKeyboard();
+    this.sendImage();
+  }
+
+  twoEvents() {
+    Alert.alert("CONFIRMATION", "YOUR PHOTO WAS SENT", () => this.dismiss());
+  }
 
   render() {
     return (
@@ -94,13 +91,13 @@ class FulfillmentViewPage extends Component {
             <Image style={styles.canvas} source={this.props.sourceIm} />
           </View>
           <View style={styles.captionContainer}>
-            <TextInput style={styles.textEdit} placeholderTextColor={'#FFF'} placeholder="CAPTION" ref='caption' onFocus={() => this.inputFocused.bind(this, 'caption')} onChangeText={(captionText) => this.setState({captionText})}/>
+            <TextInput style={styles.textEdit} placeholderTextColor={'#FFF'} placeholder="CAPTION" onChangeText={(captionText) => this.setState({captionText})}/>
           </View>
           <View style={styles.buttonContainer}>
             <TouchableHighlight
               style={styles.button}
               underlayColor='#9FA8DA'
-              onPress={() => this.sendImage()}>
+              onPress={()=> this.twoEvents()}>
               <Text style={styles.buttonText}>SEND</Text>
             </TouchableHighlight>
             <TouchableHighlight
